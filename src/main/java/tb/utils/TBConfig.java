@@ -103,7 +103,7 @@ public class TBConfig implements IDummyConfig{
 		*/
 		
 		enableEntityDecon = cfg.getBoolean("enableEntityDecon", "General", false,
-				"Enables the Entity Deconstructor. Warning: Buggy piece of shit that crashes if you go too far from it.");
+				"Enables the Entity Deconstructor. Warning: Buggy piece of shit that WILL crash you.");
 		
 		//pyrofluid
 		minBlazePowderFromPyrofluid = cfg.getInt("minBlazePowderFromPyrofluid", "Pyrofluid", 5, 0, Integer.MAX_VALUE, "");

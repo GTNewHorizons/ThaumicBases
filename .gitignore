@@ -67,6 +67,8 @@ MinecraftForge*
 README.txt
 *.psd
 *.pdn
+basesNodes*
+basesNew*
 
 ##API
 /src/api

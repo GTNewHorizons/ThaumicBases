@@ -6,6 +6,8 @@ import tb.init.TBBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
@@ -38,17 +40,29 @@ public class BlockAureliaPlant extends Block{
     {
     	return icons[meta];
     }
+    
+    protected boolean canPlaceBlockOn(Block b)
+    {
+    	return b != null && (b == Blocks.grass || b == Blocks.dirt || b instanceof BlockGrass || b instanceof BlockDirt);
+    }
 	
 	public void updateTick(World w, int x, int y, int z, Random rnd) 
 	{
 		checkForMoonlight(w,x,y,z);
 		if(w.getBlockMetadata(x, y, z) == 1)
 		{
-			int rndX = x + rnd.nextInt(8) - rnd.nextInt(8);
-			int rndZ = z + rnd.nextInt(8) - rnd.nextInt(8);
-			int rndY = findSutableGround(w,rndX,y+2,rndZ)+1;
-			if(rndY > 2)
-				w.setBlock(rndX, rndY, rndZ, TBBlocks.aureliaPetal,0,3);
+			int rndX = x + rnd.nextInt(5) - rnd.nextInt(5);
+			int rndZ = z + rnd.nextInt(5) - rnd.nextInt(5);
+			//int rndY = findSutableGround(w,rndX,y+2,rndZ)+1;
+			//if(rndY > 2)
+				//w.setBlock(rndX, rndY, rndZ, TBBlocks.aureliaPetal,0,3);
+			
+        	ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[2+w.rand.nextInt(4)];
+        	//int newX = x+dir.offsetX;
+        	//int newZ = z+dir.offsetZ;
+        	int newY = findSutableY(w,rndX,y,rndZ);
+        	if(canPlaceBlockOn(w.getBlock(rndX, newY-1, rndZ)) && w.isAirBlock(rndX, newY, rndZ)) //fix for the Sweeds destroying blocks. Totally not copy-pasted code...
+        		w.setBlock(rndX, newY, rndZ, TBBlocks.aureliaPetal, 0, 3);
 		}
 	}
 	
@@ -59,6 +73,16 @@ public class BlockAureliaPlant extends Block{
 		
 		return y;
 	}
+	
+    public int findSutableY(World w, int x, int y, int z)
+    {
+    	int bY = y;
+    	y += 1;
+    	while(!canPlaceBlockOn(w.getBlock(x, y, z)) && y > bY - 2)
+    		--y;
+    	
+    	return y+1;
+    }
 	
     public int tickRate(World w)
     {
