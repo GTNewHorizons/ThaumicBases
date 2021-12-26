@@ -74,7 +74,6 @@ public class BlockHalfSlab extends BlockSlab implements IInfusionStabiliser{
 	@Override
 	public boolean canStabaliseInfusion(World world, int x, int y, int z) {
 		int meta = world.getBlockMetadata(x, y, z) & 7;
-		return parents[meta] instanceof IInfusionStabiliser ? IInfusionStabiliser.class.cast(parents[meta]).canStabaliseInfusion(world, x, y, z) : false;
+		return parents[meta] instanceof IInfusionStabiliser && ((IInfusionStabiliser) parents[meta]).canStabaliseInfusion(world, x, y, z);
 	}
-
 }
