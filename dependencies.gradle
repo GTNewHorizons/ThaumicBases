@@ -1,9 +1,10 @@
 // Add your dependencies here
 
 dependencies {
-    compile("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
-    compile("curse.maven:dummycore-230103:2244260")
+    compile('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
+    compile('curse.maven:dummycore-230103:2244260')
+    compile('com.github.GTNewHorizons:CodeChickenLib:1.1.5.3:dev')
 
-    runtime("com.github.GTNewHorizons:Baubles:master-SNAPSHOT:dev")
-    runtime("com.github.GTNewHorizons:CodeChickenCore:master-SNAPSHOT:dev")  // Required to allow dummycore to run in dev
+    runtime('com.github.GTNewHorizons:Baubles:1.0.1.14:dev')
+    runtime('com.github.GTNewHorizons:CodeChickenCore:1.1.3:dev') // Required to allow dummycore to run in dev
 }
