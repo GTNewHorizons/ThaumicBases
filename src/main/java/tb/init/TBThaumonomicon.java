@@ -1,6 +1,7 @@
 package tb.init;
 
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import tb.api.RevolverUpgrade;
 import tb.utils.RevolverInfusionRecipe;
 import tb.utils.TBConfig;
@@ -13,7 +14,6 @@ import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
 import thaumcraft.api.crafting.ShapelessArcaneRecipe;
 import thaumcraft.api.research.ResearchCategories;
-import thaumcraft.api.research.ResearchCategoryList;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
 import thaumcraft.common.config.ConfigBlocks;
@@ -220,10 +220,30 @@ public class TBThaumonomicon {
 		
 
 		CrucibleRecipe[] shards = new CrucibleRecipe[6];
-		
-		for(int i = 0; i < 6; ++i)
-			shards[i] = new CrucibleRecipe("TB.OreDestruction",new ItemStack(ConfigItems.itemShard,TBConfig.shardsFromOre,i),new ItemStack(ConfigBlocks.blockCustomOre,1,1+i),new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(getPrimalForLoop(i),3));
-		
+		if (Loader.isModLoaded("gregtech")){
+
+			shards[0] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gretech","gt.blockores"), 1, 540),
+			new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(Aspect.AIR, 3));
+
+			shards[1] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gretech","gt.blockores"), 1, 541),
+			new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(Aspect.FIRE, 3));
+
+			shards[2] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gretech","gt.blockores"), 1, 542),
+			new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(Aspect.WATER, 3));
+
+			shards[3] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gretech","gt.blockores"), 1, 543),
+			new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(Aspect.EARTH, 3));
+
+			shards[4] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gretech","gt.blockores"), 1, 544),
+			new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(Aspect.ORDER, 3));
+
+			shards[5] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gretech","gt.blockores"), 1, 545),
+			new AspectList().add(Aspect.MAGIC, 1).add(Aspect.ENTROPY, 5));
+		}else{
+
+			for (int i = 0; i < 6; ++i)
+			shards[i] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, i), new ItemStack(ConfigBlocks.blockCustomOre, 1, 1 + i), new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(getPrimalForLoop(i), 3));
+		}
 		CrucibleRecipe[] cBlocks = new CrucibleRecipe[7];
 		
 		for(int i = 0; i < 7; ++i)
