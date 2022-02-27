@@ -225,19 +225,19 @@ public class TBThaumonomicon {
 			shards[0] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 540),
 			new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(Aspect.AIR, 3));
 
-			shards[1] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 541),
+			shards[1] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 1), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 541),
 			new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(Aspect.FIRE, 3));
 
-			shards[2] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 542),
+			shards[2] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 2), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 542),
 			new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(Aspect.WATER, 3));
 
-			shards[3] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 543),
+			shards[3] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 3), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 543),
 			new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(Aspect.EARTH, 3));
 
-			shards[4] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 544),
+			shards[4] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 4), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 544),
 			new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.MAGIC, 1).add(Aspect.ORDER, 3));
 
-			shards[5] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 545),
+			shards[5] = new CrucibleRecipe("TB.OreDestruction", new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 5), new ItemStack(GameRegistry.findBlock("gregtech","gt.blockores"), 1, 545),
 			new AspectList().add(Aspect.MAGIC, 1).add(Aspect.ENTROPY, 5));
 		}else{
 
