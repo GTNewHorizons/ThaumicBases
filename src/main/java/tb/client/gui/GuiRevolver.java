@@ -1,5 +1,6 @@
 package tb.client.gui;
 
+import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 
 import tb.common.inventory.ContainerRevolver;
@@ -43,8 +44,9 @@ public class GuiRevolver extends GuiContainer
 	
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseZ)
 	{
-		 if (Minecraft.getMinecraft().thePlayer.inventory.mainInventory[this.blockedSlot] == null)
-			 Minecraft.getMinecraft().thePlayer.closeScreen();
+		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
+		 if (p.inventory.mainInventory.length > this.blockedSlot && p.inventory.mainInventory[this.blockedSlot] == null)
+			 p.closeScreen();
 		 
 		 Minecraft.getMinecraft().renderEngine.bindTexture(revolverTextures);
 		 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
