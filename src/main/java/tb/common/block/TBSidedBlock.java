@@ -8,22 +8,20 @@ import net.minecraft.util.IIcon;
 
 public class TBSidedBlock extends TBBlock {
 
-	public IIcon sideIcon;
-	
-	public TBSidedBlock(Material m, boolean b) {
-		super(m, b);
-	}
-	
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int meta)
-    {
-    	return side == 0 || side == 1 ? super.getIcon(side, meta) : sideIcon;
+    public IIcon sideIcon;
+
+    public TBSidedBlock(Material m, boolean b) {
+        super(m, b);
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister reg)
-    {
-    	super.registerBlockIcons(reg);
-    	sideIcon = reg.registerIcon(getTextureName()+"_side");
+    public IIcon getIcon(int side, int meta) {
+        return side == 0 || side == 1 ? super.getIcon(side, meta) : sideIcon;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister reg) {
+        super.registerBlockIcons(reg);
+        sideIcon = reg.registerIcon(getTextureName() + "_side");
     }
 }

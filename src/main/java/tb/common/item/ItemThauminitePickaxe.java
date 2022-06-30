@@ -1,12 +1,11 @@
 package tb.common.item;
 
-import thaumcraft.api.IRepairable;
 import net.minecraft.item.ItemPickaxe;
+import thaumcraft.api.IRepairable;
 
-public class ItemThauminitePickaxe extends ItemPickaxe implements IRepairable{
+public class ItemThauminitePickaxe extends ItemPickaxe implements IRepairable {
 
-	public ItemThauminitePickaxe(ToolMaterial mat) {
-		super(mat);
-	}
-
+    public ItemThauminitePickaxe(ToolMaterial mat) {
+        super(mat);
+    }
 }

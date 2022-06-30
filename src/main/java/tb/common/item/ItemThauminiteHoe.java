@@ -1,12 +1,11 @@
 package tb.common.item;
 
-import thaumcraft.api.IRepairable;
 import net.minecraft.item.ItemHoe;
+import thaumcraft.api.IRepairable;
 
-public class ItemThauminiteHoe extends ItemHoe implements IRepairable{
+public class ItemThauminiteHoe extends ItemHoe implements IRepairable {
 
-	public ItemThauminiteHoe(ToolMaterial mat) {
-		super(mat);
-	}
-
+    public ItemThauminiteHoe(ToolMaterial mat) {
+        super(mat);
+    }
 }

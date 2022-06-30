@@ -1,12 +1,11 @@
 package tb.common.item;
 
-import thaumcraft.api.IRepairable;
 import net.minecraft.item.ItemSword;
+import thaumcraft.api.IRepairable;
 
-public class ItemThauminiteSword extends ItemSword implements IRepairable{
+public class ItemThauminiteSword extends ItemSword implements IRepairable {
 
-	public ItemThauminiteSword(ToolMaterial mat) {
-		super(mat);
-	}
-
+    public ItemThauminiteSword(ToolMaterial mat) {
+        super(mat);
+    }
 }
