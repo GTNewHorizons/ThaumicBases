@@ -7,9 +7,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import tb.init.TBBlocks;
+import thaumcraft.api.crafting.IInfusionStabiliser;
 
-public class TBBlockDeco extends Block {
+public class TBBlockDeco extends Block implements IInfusionStabiliser {
 
     boolean isGlass;
 
@@ -35,5 +37,10 @@ public class TBBlockDeco extends Block {
     @SideOnly(Side.CLIENT)
     public int getRenderBlockPass() {
         return isGlass ? 1 : 0;
+    }
+
+    @Override
+    public boolean canStabaliseInfusion(World var1, int var2, int var3, int var4) {
+        return true;
     }
 }
