@@ -63,7 +63,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
             // renderedLightning = null;
         } else {
             if (this.isEnchantingStarted) {
-                if (this.worldObj.getWorldTime() % 20 == 0) {
+                if (this.worldObj.getTotalWorldTime() % 20 == 0) {
                     // renderedLightning = new Lightning(this.worldObj.rand, new Coord3D(0,0,0), new
                     // Coord3D(MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50), 0.3F, 1,0,1);
                     this.worldObj.playSoundEffect(

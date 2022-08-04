@@ -147,7 +147,7 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
 
                     } else {
                         ++workTime;
-                        if (this.worldObj.getWorldTime() % 10 == 0) {
+                        if (this.worldObj.getTotalWorldTime() % 10 == 0) {
                             Aspect a = node.getAspects()
                                     .getAspects()[
                                     this.worldObj.rand.nextInt(node.getAspects().getAspects().length)];
