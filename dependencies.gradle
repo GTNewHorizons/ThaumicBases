@@ -1,6 +1,8 @@
 // Add your dependencies here
 
 dependencies {
+	compileOnly('com.github.GTNewHorizons:GT5-Unofficial:5.09.41.264:dev') {transitive=false}
+
 	compile('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
 	compile('curse.maven:dummycore-230103:2244260')
 	compile('com.github.GTNewHorizons:CodeChickenLib:1.1.5.3:dev')
