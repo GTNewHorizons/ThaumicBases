@@ -286,4 +286,8 @@ public class TBBlocks {
         // Ent Decon
         BlocksRegistry.registerBlock(entityDeconstructor, "entityDeconstructor", core, ItemBlock.class);
     }
+
+    public static void afterSetup() {
+        BlockRainbowCactus.loadColors();
+    }
 }

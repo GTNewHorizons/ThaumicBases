@@ -78,6 +78,7 @@ public class TBCore {
         TBFociUpgrades.init();
         proxy.registerRenderInformation();
         RevolverUpgrade.initConflictingMappings();
+        TBBlocks.afterSetup();
 
         network = NetworkRegistry.INSTANCE.newSimpleChannel("thaumbases");
         network.registerMessage(TBNetworkManager.class, PacketTB.class, 0, Side.SERVER);

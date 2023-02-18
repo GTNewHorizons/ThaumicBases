@@ -44,24 +44,29 @@ public class BlockRainbowCactus extends BlockCactus {
         }
 
         for (int i = 0; i < 3 + world.rand.nextInt(8); ++i) {
-            if (Loader.isModLoaded("gregtech")) {
-                if (colors == null) colors = addGTColors();
-                ret.add(colors[world.rand.nextInt(colors.length)]);
-            } else ret.add(new ItemStack(Items.dye, 1, allowedDyes[world.rand.nextInt(allowedDyes.length)]));
+            ret.add(allowedDyes[world.rand.nextInt(allowedDyes.length)].copy());
         }
         return ret;
     }
 
-    public static final int[] allowedDyes = new int[] { 1, 2, 5, 2, 6, 7, 2, 8, 9, 10, 2, 11, 12, 13, 14, 2 };
-    private ItemStack[] colors;
+    public static ItemStack[] allowedDyes;
 
-    private ItemStack[] addGTColors() {
-        colors = new ItemStack[] { ItemList.Color_00.get(1), ItemList.Color_01.get(1), ItemList.Color_02.get(1),
-                ItemList.Color_03.get(1), ItemList.Color_04.get(1), ItemList.Color_05.get(1), ItemList.Color_06.get(1),
-                ItemList.Color_07.get(1), ItemList.Color_08.get(1), ItemList.Color_09.get(1), ItemList.Color_10.get(1),
-                ItemList.Color_11.get(1), ItemList.Color_12.get(1), ItemList.Color_13.get(1), ItemList.Color_14.get(1),
-                ItemList.Color_15.get(1), };
-        return colors;
+    public static void loadColors() {
+        if (Loader.isModLoaded("gregtech")) {
+            allowedDyes = new ItemStack[] { ItemList.Color_00.get(1), ItemList.Color_01.get(1),
+                    ItemList.Color_02.get(1), ItemList.Color_03.get(1), ItemList.Color_04.get(1),
+                    ItemList.Color_05.get(1), ItemList.Color_06.get(1), ItemList.Color_07.get(1),
+                    ItemList.Color_08.get(1), ItemList.Color_09.get(1), ItemList.Color_10.get(1),
+                    ItemList.Color_11.get(1), ItemList.Color_12.get(1), ItemList.Color_13.get(1),
+                    ItemList.Color_14.get(1), ItemList.Color_15.get(1), };
+        } else {
+            allowedDyes = new ItemStack[] { new ItemStack(Items.dye, 1, 1), new ItemStack(Items.dye, 1, 2),
+                    new ItemStack(Items.dye, 1, 5), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.dye, 1, 6),
+                    new ItemStack(Items.dye, 1, 7), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.dye, 1, 8),
+                    new ItemStack(Items.dye, 1, 9), new ItemStack(Items.dye, 1, 10), new ItemStack(Items.dye, 1, 2),
+                    new ItemStack(Items.dye, 1, 11), new ItemStack(Items.dye, 1, 12), new ItemStack(Items.dye, 1, 13),
+                    new ItemStack(Items.dye, 1, 14), new ItemStack(Items.dye, 1, 2) };
+        }
     }
 
     @SideOnly(Side.CLIENT)
