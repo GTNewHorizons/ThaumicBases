@@ -437,7 +437,7 @@ tb.rec.foci.speed.page.0=Speed foci increases the speed at which node restores i
 
 tc.research_name.TB.NodeFoci.Sinister=Manipulator Foci: Sinister
 tc.research_text.TB.NodeFoci.Sinister=A tiny mob spawner
-tb.rec.foci.sinister.page.0=Sinister foci will make the Manipulator slowly turn the node into a Sinister Node. Will only work with normal nodes. Takes 6 minutes to finish.
+tb.rec.foci.sinister.page.0=Sinister foci will make the Manipulator slowly turn the node into a Sinister Node. Removing the Pure modifier takes 30 minutes. Takes 6 minutes to turn a normal node into Sinister.
 
 tc.research_name.TB.NodeFoci.Unstable=Manipulator Foci: Instability
 tc.research_text.TB.NodeFoci.Unstable=Shaterring the node
@@ -461,11 +461,11 @@ tb.rec.foci.hunger.page.0=Hunger foci will make the Manipulator slowly turn the 
 
 tc.research_name.TB.NodeFoci.Purity=Manipulator Foci: Purity
 tc.research_text.TB.NodeFoci.Purity=Node purification
-tb.rec.foci.pure.page.0=Purity foci will make the Manipulator slowly turn the node into a Pure Node. Will only work with normal or tainted nodes. Takes 3 minutes to finish with a normal node or 33 minutes with a tainted node. Note, that the node will not recieve aspects that pure nodes usually have in them, but will still turn the biome around to Magical Forest.
+tb.rec.foci.pure.page.0=Purity foci will make the Manipulator slowly turn a Tainted node into normal and a Normal node into Pure Node. Will only work with normal or tainted nodes. Takes 3 minutes to finish with a normal node or 33 minutes with a tainted node. Note, that the node will not recieve aspects that pure nodes usually have in them, but will still turn the biome around to Magical Forest.
 
 tc.research_name.TB.NodeFoci.Stability=Manipulator Foci: Stability
 tc.research_text.TB.NodeFoci.Stability=Saving the dying nodes
-tb.rec.foci.stability.page.0=Stability foci will make the Manipulator slowly restore nodes. It will convert nodes into different types, using time. Converting a Fading node into Pale takes 5 minutes. Converting a Pale node into normal takes 10 minutes. Removing the Sinister modifier takes 2 minutes. Removing the Unstable modifier takes 7 minutes. Removing the Hunger modifier takes 30 seconds. Removing the Taint or Pure modifier takes 30 minutes.
+tb.rec.foci.stability.page.0=Stability foci will make the Manipulator slowly restore nodes. It will convert nodes into different types, using time. Converting a Fading node into Pale takes 5 minutes. Converting a Pale node into normal takes 10 minutes. Removing the Sinister modifier takes 2 minutes. Removing the Unstable modifier takes 7 minutes. Removing the Hunger modifier takes 30 seconds. Removing the Taint modifier takes 30 minutes.
 
 tc.research_name.TB.NodeFoci.Taint=Manipulator Foci: Taint
 tc.research_text.TB.NodeFoci.Taint=Why make everything worse?
