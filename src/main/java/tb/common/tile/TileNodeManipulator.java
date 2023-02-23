@@ -1,8 +1,6 @@
 package tb.common.tile;
 
-import static tb.common.tile.Effect.*;
-
-import java.util.Hashtable;
+import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,54 +18,14 @@ import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.entities.EntityAspectOrb;
 import DummyCore.Utils.MiscUtils;
 
-enum Effect {
-    BRIGHTNESS,
-    DESTRUCTION,
-    EFFICIENCY,
-    HUNGER,
-    INSTABILITY,
-    PURITY,
-    SINISTER,
-    SPEED,
-    STABILITY,
-    TAINT,
-    EMPTY
-}
-
 public class TileNodeManipulator extends TileEntity implements IWandable {
 
+    private static final int ticksInWorkCycle = 20;
     private int workTime = 0;
     private int maxTimeRequired = 0;
-    public Hashtable<String, Integer> nodeAspectsOldState = new Hashtable<String, Integer>();
+    private final HashMap<Aspect, Integer> previousNodeAspects = new HashMap<>();
     private NodeType nodeType;
     private INode node;
-
-    private Effect castEffectToEnum(int effectNum) {
-        switch (effectNum) {
-            case 0:
-                return BRIGHTNESS;
-            case 1:
-                return DESTRUCTION;
-            case 2:
-                return EFFICIENCY;
-            case 3:
-                return HUNGER;
-            case 4:
-                return INSTABILITY;
-            case 5:
-                return PURITY;
-            case 6:
-                return SINISTER;
-            case 7:
-                return SPEED;
-            case 8:
-                return STABILITY;
-            case 9:
-                return TAINT;
-            default:
-                return EMPTY;
-        }
-    }
 
     private int getColor(int effect) {
         int color;
@@ -109,10 +67,10 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
         workTime = 0;
         maxTimeRequired = 0;
         node = null;
-        nodeAspectsOldState.clear();
+        previousNodeAspects.clear();
     }
 
-    private void applyEffectDESTRUCTION() {
+    private void applyDestructionEffect() {
         NodeModifier nodeModifier = node.getNodeModifier();
 
         if (maxTimeRequired == 0) {
@@ -153,51 +111,44 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
             }
 
             node.setNodeModifier(newNodeModifier);
-
-        } else {
-            increaseWorkTime();
-            if (!this.worldObj.isRemote && workTime % 200 == 0) {
-                Aspect a = node.getAspects().getAspects()[this.worldObj.rand
-                        .nextInt(node.getAspects().getAspects().length)];
-                EntityAspectOrb aspect = new EntityAspectOrb(
-                        worldObj,
-                        xCoord + 0.5D,
-                        yCoord - 0.5D,
-                        zCoord + 0.5D,
-                        a,
-                        1);
-                this.worldObj.spawnEntityInWorld(aspect);
-            }
+            return;
+        }
+        increaseWorkTime();
+        if (!this.worldObj.isRemote && workTime % 200 == 0) {
+            Aspect[] aspects = node.getAspects().getAspects();
+            Aspect aspect = aspects[this.worldObj.rand.nextInt(aspects.length)];
+            EntityAspectOrb aspectOrb = new EntityAspectOrb(
+                    worldObj,
+                    xCoord + 0.5D,
+                    yCoord - 0.5D,
+                    zCoord + 0.5D,
+                    aspect,
+                    1);
+            this.worldObj.spawnEntityInWorld(aspectOrb);
         }
     }
 
-    private void applyEffectEFFICIENCY() {
+    private void applyEfficiencyEffect() {
         if (workTime == 0) workTime = -1;
         if (!worldObj.isRemote) {
             AspectList aspectList = node.getAspects();
             Aspect[] aspects = aspectList.getAspects();
 
-            for (Aspect a : aspects) {
-                if (nodeAspectsOldState.containsKey(a.getTag())) {
-                    int current = aspectList.getAmount(a);
-                    int prev = nodeAspectsOldState.get(a.getTag());
+            for (Aspect aspect : aspects) {
+                if (previousNodeAspects.containsKey(aspect)) {
+                    int currentAmount = aspectList.getAmount(aspect);
+                    int previousAmount = previousNodeAspects.get(aspect);
 
-                    if (current < prev && this.worldObj.rand.nextInt(2) == 1) {
-                        aspectList.add(a, prev - current);
+                    if (currentAmount < previousAmount && this.worldObj.rand.nextInt(2) == 1) {
+                        node.addToContainer(aspect, previousAmount - currentAmount);
                     }
                 }
-            }
-
-            // save node state to array
-            for (int i = 0; i < node.getAspects().size(); ++i) {
-                nodeAspectsOldState.put(
-                        node.getAspects().getAspects()[i].getTag(),
-                        node.getAspects().getAmount(node.getAspects().getAspects()[i]));
+                previousNodeAspects.put(aspect, node.getAspects().getAmount(aspect));
             }
         }
     }
 
-    private void applyEffectSPEED() {
+    private void applySpeedEffect() {
         if (workTime == 0) workTime = -1;
 
         if (!this.worldObj.isRemote && this.worldObj.rand.nextInt(5) == 1) {
@@ -205,12 +156,12 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
             AspectList aspectList = node.getAspects();
             Aspect[] aspects = aspectList.getAspects();
 
-            for (Aspect a : aspects) {
-                int max = node.getNodeVisBase(a);
-                int currentAmount = aspectList.getAmount(a);
+            for (Aspect aspect : aspects) {
+                int maximum = node.getNodeVisBase(aspect);
+                int currentAmount = aspectList.getAmount(aspect);
 
-                if (currentAmount < max) {
-                    node.getAspects().add(a, 1);
+                if (currentAmount < maximum) {
+                    node.addToContainer(aspect, 1);
                     isNodeChanged = true;
                 }
             }
@@ -228,33 +179,33 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
         }
     }
 
-    private void applyEffectSTABILITY() {
+    private void applyStabilityEffect() {
         NodeModifier nodeModifier = node.getNodeModifier();
         if (nodeModifier == null) {
-            nodeModifierManipulation(null, NodeModifier.BRIGHT, 5 * 60 * 20);
+            changeNodeModifier(null, NodeModifier.BRIGHT, 5 * 60 * 20);
             return;
         }
 
         switch (nodeModifier) {
             case FADING:
-                nodeModifierManipulation(NodeModifier.FADING, NodeModifier.PALE, 5 * 60 * 20);
+                changeNodeModifier(NodeModifier.FADING, NodeModifier.PALE, 5 * 60 * 20);
                 break;
             case PALE:
-                nodeModifierManipulation(NodeModifier.PALE, null, 10 * 60 * 20);
+                changeNodeModifier(NodeModifier.PALE, null, 10 * 60 * 20);
                 break;
             default: {
                 switch (nodeType) {
                     case DARK:
-                        nodeTypeManipulation(NodeType.DARK, NodeType.NORMAL, 2 * 60 * 20);
+                        changeNodeType(NodeType.DARK, NodeType.NORMAL, 2 * 60 * 20);
                         break;
                     case HUNGRY:
-                        nodeTypeManipulation(NodeType.HUNGRY, NodeType.NORMAL, 30 * 20);
+                        changeNodeType(NodeType.HUNGRY, NodeType.NORMAL, 30 * 20);
                         break;
                     case UNSTABLE:
-                        nodeTypeManipulation(NodeType.UNSTABLE, NodeType.NORMAL, 7 * 30 * 20);
+                        changeNodeType(NodeType.UNSTABLE, NodeType.NORMAL, 7 * 30 * 20);
                         break;
                     case TAINTED:
-                        nodeTypeManipulation(NodeType.TAINTED, NodeType.NORMAL, 30 * 30 * 20);
+                        changeNodeType(NodeType.TAINTED, NodeType.NORMAL, 30 * 30 * 20);
                         break;
                     default:
                         break;
@@ -264,10 +215,10 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
     }
 
     private void increaseWorkTime() {
-        workTime += 20;
+        workTime += ticksInWorkCycle;
     }
 
-    private void nodeModifierManipulation(NodeModifier fromNodeModifier, NodeModifier toModifierNode, int time) {
+    private void changeNodeModifier(NodeModifier fromNodeModifier, NodeModifier toModifierNode, int time) {
         if (node.getNodeModifier() == fromNodeModifier) {
             if (maxTimeRequired == 0) maxTimeRequired = time;
 
@@ -278,7 +229,7 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
         }
     }
 
-    private void nodeTypeManipulation(NodeType fromNodeType, NodeType toTypeNode, int time) {
+    private void changeNodeType(NodeType fromNodeType, NodeType toTypeNode, int time) {
         if (nodeType == fromNodeType) {
             if (maxTimeRequired == 0) maxTimeRequired = time;
 
@@ -291,8 +242,8 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
 
     @Override
     public void updateEntity() {
-        int effectId = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord) - 1;
-        long tics = worldObj.getWorldTime() + 7;
+        int effect = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord) - 1;
+        long ticks = worldObj.getWorldTime() + 7;
 
         // Graphic
         if (this.worldObj.isRemote && workTime != 0) {
@@ -305,63 +256,59 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
                     yCoord - 0.5D,
                     zCoord + 0.5D,
                     2,
-                    getColor(effectId),
+                    getColor(effect),
                     false,
                     0.5F,
                     2);
         }
 
         // Logic
-        if (tics % 2 == 0) {
+        if (ticks % 2 == 0) {
             node = getNode();
 
             if (node == null || this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
                 if (workTime != 0) stopManipulator();
                 return;
             }
-
-            Effect effect = castEffectToEnum(effectId);
             nodeType = node.getNodeType();
 
-            if (effect == EFFICIENCY) {
-                applyEffectEFFICIENCY();
+            if (effect == 2) {
+                applyEfficiencyEffect();
             }
 
-            if (tics % 20 == 0) {
+            if (ticks % ticksInWorkCycle == 0) {
 
                 switch (effect) {
-                    case EMPTY:
-                        return;
-                    case BRIGHTNESS:
-                        nodeModifierManipulation(null, NodeModifier.BRIGHT, 24000);
+                    case 0: // Brightness
+                        changeNodeModifier(null, NodeModifier.BRIGHT, 24000);
                         break;
-                    case DESTRUCTION:
-                        applyEffectDESTRUCTION();
+                    case 1: // Destruction
+                        applyDestructionEffect();
                         break;
-                    case EFFICIENCY:
+                    case 2: // Efficiency
                         break;
-                    case HUNGER:
-                        nodeTypeManipulation(NodeType.NORMAL, NodeType.HUNGRY, 6000);
+                    case 3: // Hunger
+                        changeNodeType(NodeType.NORMAL, NodeType.HUNGRY, 6000);
                         break;
-                    case INSTABILITY:
-                        nodeTypeManipulation(NodeType.NORMAL, NodeType.UNSTABLE, 8400);
+                    case 4: // Instability
+                        changeNodeType(NodeType.NORMAL, NodeType.UNSTABLE, 8400);
                         break;
-                    case PURITY:
-                        nodeTypeManipulation(NodeType.NORMAL, NodeType.PURE, 3600);
-                        nodeTypeManipulation(NodeType.TAINTED, NodeType.NORMAL, 39600);
+                    case 5: // Purity
+                        changeNodeType(NodeType.NORMAL, NodeType.PURE, 3600);
+                        changeNodeType(NodeType.TAINTED, NodeType.NORMAL, 39600);
                         break;
-                    case SINISTER:
-                        nodeTypeManipulation(NodeType.NORMAL, NodeType.DARK, 7200);
-                        nodeTypeManipulation(NodeType.PURE, NodeType.NORMAL, 18000);
+                    case 6: // Sinister
+                        changeNodeType(NodeType.NORMAL, NodeType.DARK, 7200);
+                        changeNodeType(NodeType.PURE, NodeType.NORMAL, 18000);
                         break;
-                    case SPEED:
-                        applyEffectSPEED();
+                    case 7: // Speed
+                        applySpeedEffect();
                         break;
-                    case STABILITY:
-                        applyEffectSTABILITY();
+                    case 8: // Stability
+                        applyStabilityEffect();
                         break;
-                    case TAINT:
-                        nodeTypeManipulation(NodeType.NORMAL, NodeType.TAINTED, 7200);
+                    case 9: // Taint
+                        changeNodeType(NodeType.NORMAL, NodeType.TAINTED, 7200);
                         break;
                 }
             }
