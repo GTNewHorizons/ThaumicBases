@@ -461,7 +461,7 @@ tb.rec.foci.hunger.page.0=Hunger foci will make the Manipulator slowly turn the 
 
 tc.research_name.TB.NodeFoci.Purity=Manipulator Foci: Purity
 tc.research_text.TB.NodeFoci.Purity=Node purification
-tb.rec.foci.pure.page.0=Purity foci will make the Manipulator slowly turn a Tainted node into normal and a Normal node into Pure Node. Will only work with normal or tainted nodes. Takes 3 minutes to finish with a normal node or 33 minutes with a tainted node. Note, that the node will not recieve aspects that pure nodes usually have in them, but will still turn the biome around to Magical Forest.
+tb.rec.foci.pure.page.0=Purity foci will make the Manipulator slowly turn a Tainted node into normal and a normal node into Pure Node. Will only work with normal or tainted nodes. Takes 3 minutes to finish with a normal node or 33 minutes with a tainted node. Note that the node will not recieve aspects that pure nodes usually have in them, but will still turn the biome around to Magical Forest.
 
 tc.research_name.TB.NodeFoci.Stability=Manipulator Foci: Stability
 tc.research_text.TB.NodeFoci.Stability=Saving the dying nodes
@@ -469,7 +469,7 @@ tb.rec.foci.stability.page.0=Stability foci will make the Manipulator slowly res
 
 tc.research_name.TB.NodeFoci.Taint=Manipulator Foci: Taint
 tc.research_text.TB.NodeFoci.Taint=Why make everything worse?
-tb.rec.foci.taint.page.0=Taint foci will make the Manipulator slowly turn the node into a tainted node. Will only work with normal nodes. Takes 6 minutes to finish. Note, that the node will not recieve aspects that tainted nodes usually have in them, but will still turn the biome around to tainted Lands.
+tb.rec.foci.taint.page.0=Taint foci will make the Manipulator slowly turn the node into a tainted node. Will only work with normal nodes. Takes 6 minutes to finish. Note that the node will not recieve aspects that tainted nodes usually have in them, but will still turn the biome around to tainted Lands.
 
 tc.research_name.TB.Enchantments=New Enchantments!
 tc.research_text.TB.Enchantments=Magic reborn!
