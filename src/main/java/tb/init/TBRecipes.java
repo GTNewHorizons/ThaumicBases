@@ -67,13 +67,15 @@ public class TBRecipes {
                 new Object[] { new ItemStack(TBBlocks.genLogs, 1, 2) });
 
         ShapedOreRecipe eAr = new ShapedOreRecipe(
-                new ItemStack(TBBlocks.eldritchArk, 5, 0),
-                new Object[] { "@#@", "###", "@#@", '@', "nuggetGold", '#', "obsidian" });
+                new ItemStack(TBBlocks.eldritchArk, 4, 0),
+                new Object[] { "@#@", "#$#", "@#@", '@', "nuggetGold", '#', "obsidian", '$',
+                        new ItemStack(ConfigBlocks.blockCrystal, 1, 4) });
 
         ShapedOreRecipe iGw = new ShapedOreRecipe(
-                new ItemStack(TBBlocks.ironGreatwood, 5, 0),
-                new Object[] { "@#@", "###", "@#@", '@', "nuggetIron", '#',
-                        new ItemStack(ConfigBlocks.blockWoodenDevice, 1, 6) });
+                new ItemStack(TBBlocks.ironGreatwood, 4, 0),
+                new Object[] { "@#@", "#$#", "@#@", '@', "nuggetIron", '#',
+                        new ItemStack(ConfigBlocks.blockWoodenDevice, 1, 6), '$',
+                        new ItemStack(ConfigBlocks.blockCrystal, 1, 4) });
 
         GameRegistry.addSmelting(new ItemStack(TBBlocks.genLogs, 1, 0), new ItemStack(Items.coal, 1, 1), 0.15F);
         GameRegistry.addSmelting(new ItemStack(TBBlocks.genLogs, 1, 1), new ItemStack(Items.coal, 1, 1), 0.15F);
