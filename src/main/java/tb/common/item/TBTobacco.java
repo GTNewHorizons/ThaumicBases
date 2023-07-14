@@ -13,14 +13,14 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import tb.api.ITobacco;
 import tb.core.TBCore;
 import tb.utils.TBUtils;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.entities.monster.EntityWisp;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TBTobacco extends Item implements ITobacco {
 

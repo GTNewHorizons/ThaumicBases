@@ -20,6 +20,9 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import DummyCore.Utils.MiscUtils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import tb.init.TBFociUpgrades;
 import tb.init.TBThaumonomicon;
 import thaumcraft.api.ThaumcraftApi;
@@ -32,9 +35,6 @@ import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.items.ItemCrystalEssence;
 import thaumcraft.common.items.wands.WandManager;
 import thaumcraft.common.lib.crafting.ThaumcraftCraftingManager;
-import DummyCore.Utils.MiscUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class FociExperience extends ItemFocusBasic {
 

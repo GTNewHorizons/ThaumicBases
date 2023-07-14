@@ -3,12 +3,12 @@ package tb.network.proxy;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import tb.core.TBCore;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.channel.ChannelHandler;
+import tb.core.TBCore;
 
 @ChannelHandler.Sharable
 public class TBNetworkManager implements IMessageHandler<PacketTB, IMessage> {

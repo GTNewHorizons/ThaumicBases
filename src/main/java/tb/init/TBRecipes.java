@@ -13,12 +13,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import tb.common.block.BlockHalfSlab;
 import tb.common.block.BlockTBPlant;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.lib.utils.CropUtils;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TBRecipes {
 

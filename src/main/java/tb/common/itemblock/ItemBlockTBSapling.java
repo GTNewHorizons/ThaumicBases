@@ -5,9 +5,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import tb.common.block.BlockTBSapling;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.common.block.BlockTBSapling;
 
 public class ItemBlockTBSapling extends ItemBlock {
 

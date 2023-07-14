@@ -7,13 +7,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
+import DummyCore.Utils.Pair;
 import tb.api.RevolverUpgrade;
 import tb.common.item.ItemRevolver;
 import tb.init.TBItems;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.InfusionRecipe;
-import DummyCore.Utils.Pair;
 
 public class RevolverInfusionRecipe extends InfusionRecipe {
 

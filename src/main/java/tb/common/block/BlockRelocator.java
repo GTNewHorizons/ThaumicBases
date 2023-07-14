@@ -17,11 +17,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import tb.common.tile.TileRelocator;
-import tb.core.TBCore;
 import DummyCore.Utils.MathUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.common.tile.TileRelocator;
+import tb.core.TBCore;
 
 public class BlockRelocator extends BlockContainer {
 

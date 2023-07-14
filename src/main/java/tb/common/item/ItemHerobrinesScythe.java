@@ -28,15 +28,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
-import tb.core.TBCore;
-import thaumcraft.api.IRepairable;
-import thaumcraft.api.IWarpingGear;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.core.TBCore;
+import thaumcraft.api.IRepairable;
+import thaumcraft.api.IWarpingGear;
 
 public class ItemHerobrinesScythe extends ItemSword implements IRepairable, IWarpingGear {
 

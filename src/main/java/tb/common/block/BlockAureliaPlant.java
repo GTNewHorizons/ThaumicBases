@@ -13,9 +13,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import tb.init.TBBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.init.TBBlocks;
 
 public class BlockAureliaPlant extends Block {
 

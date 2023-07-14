@@ -20,14 +20,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 
-import tb.init.TBItems;
-import thaumcraft.common.config.ConfigItems;
-import thaumcraft.common.items.armor.ItemVoidArmor;
-
 import com.mojang.authlib.GameProfile;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.init.TBItems;
+import thaumcraft.common.config.ConfigItems;
+import thaumcraft.common.items.armor.ItemVoidArmor;
 
 public class BlockSpike extends Block {
 

@@ -20,9 +20,9 @@ import net.minecraftforge.common.ForgeHooks;
 
 import org.apache.commons.lang3.StringUtils;
 
-import tb.init.TBBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.init.TBBlocks;
 
 public class ContainerVoidAnvil extends ContainerRepair {
 

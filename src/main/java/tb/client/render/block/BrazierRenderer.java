@@ -8,10 +8,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import tb.common.tile.TileBrazier;
 import thaumcraft.client.renderers.block.BlockRenderer;
 import thaumcraft.common.config.ConfigBlocks;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class BrazierRenderer extends BlockRenderer implements ISimpleBlockRenderingHandler {
 

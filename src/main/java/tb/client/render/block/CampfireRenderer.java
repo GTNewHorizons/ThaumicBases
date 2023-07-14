@@ -6,9 +6,9 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import thaumcraft.client.renderers.block.BlockRenderer;
 import thaumcraft.common.config.ConfigBlocks;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class CampfireRenderer extends BlockRenderer implements ISimpleBlockRenderingHandler {
 

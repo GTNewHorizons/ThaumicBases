@@ -12,9 +12,9 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
+import DummyCore.Utils.Pair;
 import tb.api.RevolverUpgrade;
 import tb.common.item.ItemRevolver;
-import DummyCore.Utils.Pair;
 
 public class RenderRevolver implements IItemRenderer {
 

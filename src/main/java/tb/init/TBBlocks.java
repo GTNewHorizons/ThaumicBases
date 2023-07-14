@@ -9,6 +9,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import DummyCore.Blocks.BlocksRegistry;
 import tb.common.block.BlockAdvAlchemicalFurnace;
 import tb.common.block.BlockAshroom;
 import tb.common.block.BlockAureliaLeaf;
@@ -55,7 +56,6 @@ import tb.common.itemblock.ItemBlockTBLogs;
 import tb.common.itemblock.ItemBlockTBSapling;
 import tb.core.TBCore;
 import tb.utils.TBConfig;
-import DummyCore.Blocks.BlocksRegistry;
 
 public class TBBlocks {
 

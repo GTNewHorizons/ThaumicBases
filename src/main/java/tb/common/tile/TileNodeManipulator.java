@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import DummyCore.Utils.MiscUtils;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.nodes.INode;
@@ -16,7 +17,6 @@ import thaumcraft.api.nodes.NodeType;
 import thaumcraft.api.wands.IWandable;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.entities.EntityAspectOrb;
-import DummyCore.Utils.MiscUtils;
 
 public class TileNodeManipulator extends TileEntity implements IWandable {
 

@@ -15,9 +15,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import tb.init.TBItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.init.TBItems;
 
 public class BlockBriar extends BlockBush implements IGrowable {
 

@@ -17,6 +17,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import DummyCore.Utils.MathUtils;
+import DummyCore.Utils.MiscUtils;
 import tb.utils.TBUtils;
 import thaumcraft.api.damagesource.DamageSourceThaumcraft;
 import thaumcraft.api.entities.ITaintedMob;
@@ -31,8 +33,6 @@ import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.playerdata.PacketResearchComplete;
 import thaumcraft.common.lib.research.ResearchManager;
 import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
-import DummyCore.Utils.MathUtils;
-import DummyCore.Utils.MiscUtils;
 
 public class ItemConcentratedTaint extends Item {
 

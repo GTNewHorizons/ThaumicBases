@@ -9,11 +9,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import tb.core.TBCore;
 import thaumcraft.api.crafting.IInfusionStabiliser;
 import thaumcraft.common.Thaumcraft;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockVoidAnvil extends BlockAnvil implements IInfusionStabiliser {
 

@@ -20,6 +20,7 @@ import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import tb.init.TBEnchant;
 import tb.utils.TBUtils;
 import thaumcraft.api.ThaumcraftApi;
@@ -38,7 +39,6 @@ import thaumcraft.common.items.ItemCrystalEssence;
 import thaumcraft.common.lib.research.ResearchManager;
 import thaumcraft.common.lib.research.ScanManager;
 import thaumcraft.common.tiles.TileNode;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EnchantmentHandler {
 

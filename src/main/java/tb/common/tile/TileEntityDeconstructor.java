@@ -16,6 +16,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 
+import DummyCore.Utils.MathUtils;
+import DummyCore.Utils.MiscUtils;
 import tb.utils.TBUtils;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -24,8 +26,6 @@ import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.lib.crafting.ThaumcraftCraftingManager;
 import thaumcraft.common.lib.research.ResearchManager;
 import thaumcraft.common.lib.research.ScanManager;
-import DummyCore.Utils.MathUtils;
-import DummyCore.Utils.MiscUtils;
 
 public class TileEntityDeconstructor extends TileEntity {
 

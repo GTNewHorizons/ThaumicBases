@@ -13,8 +13,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import tb.common.tile.TileCampfire;
 import DummyCore.Utils.MathUtils;
+import tb.common.tile.TileCampfire;
 
 public class BlockCampfire extends BlockContainer {
 

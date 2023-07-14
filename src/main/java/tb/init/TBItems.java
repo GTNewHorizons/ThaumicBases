@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
+import DummyCore.Items.ItemRegistry;
 import tb.common.item.ItemBloodyArmor;
 import tb.common.item.ItemCastingBracelet;
 import tb.common.item.ItemConcentratedTaint;
@@ -42,7 +43,6 @@ import thaumcraft.api.wands.StaffRod;
 import thaumcraft.api.wands.WandCap;
 import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.items.wands.WandRodPrimalOnUpdate;
-import DummyCore.Items.ItemRegistry;
 
 public class TBItems {
 

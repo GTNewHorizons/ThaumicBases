@@ -18,6 +18,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 
+import DummyCore.Utils.Coord3D;
+import DummyCore.Utils.MiscUtils;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.nodes.INode;
@@ -29,9 +32,6 @@ import thaumcraft.common.entities.monster.EntityWisp;
 import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.fx.PacketFXBlockZap;
 import thaumcraft.common.tiles.TileNode;
-import DummyCore.Utils.Coord3D;
-import DummyCore.Utils.MiscUtils;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class TileNodeLinker extends TileEntity implements IWandable {
 

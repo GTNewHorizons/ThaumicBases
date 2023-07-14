@@ -17,6 +17,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+import DummyCore.Utils.Pair;
 import tb.api.RevolverUpgrade;
 import tb.common.entity.EntityRevolverBullet;
 import tb.core.TBCore;
@@ -29,10 +33,6 @@ import thaumcraft.codechicken.lib.math.MathHelper;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.blocks.ItemJarFilled;
 import thaumcraft.common.config.ConfigBlocks;
-import DummyCore.Utils.Pair;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 
 public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
 

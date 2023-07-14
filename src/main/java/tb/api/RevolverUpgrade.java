@@ -16,6 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
 import tb.utils.TBUtils;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -23,8 +25,6 @@ import thaumcraft.api.entities.IEldritchMob;
 import thaumcraft.api.entities.ITaintedMob;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.lib.research.ScanManager;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
 
 public class RevolverUpgrade {
 

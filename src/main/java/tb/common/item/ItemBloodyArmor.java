@@ -13,13 +13,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 
 public class ItemBloodyArmor extends ItemArmor implements IRepairable, IVisDiscountGear, IRunicArmor {
 

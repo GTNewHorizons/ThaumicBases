@@ -14,6 +14,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import DummyCore.Utils.MiscUtils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import tb.init.TBFociUpgrades;
 import tb.utils.TBUtils;
 import thaumcraft.api.aspects.Aspect;
@@ -25,9 +28,6 @@ import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.items.ItemCrystalEssence;
 import thaumcraft.common.items.wands.WandManager;
-import DummyCore.Utils.MiscUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class FociFlux extends ItemFocusBasic {
 

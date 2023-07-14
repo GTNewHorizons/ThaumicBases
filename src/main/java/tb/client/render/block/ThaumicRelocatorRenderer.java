@@ -8,9 +8,9 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import tb.common.block.BlockRelocator;
 import tb.common.tile.TileRelocator;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class ThaumicRelocatorRenderer implements ISimpleBlockRenderingHandler {
 

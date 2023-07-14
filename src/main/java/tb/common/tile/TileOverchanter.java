@@ -19,11 +19,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import DummyCore.Utils.MathUtils;
+import DummyCore.Utils.MiscUtils;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.wands.IWandable;
 import thaumcraft.common.lib.events.EssentiaHandler;
-import DummyCore.Utils.MathUtils;
-import DummyCore.Utils.MiscUtils;
 
 public class TileOverchanter extends TileEntity implements IInventory, IWandable {
 

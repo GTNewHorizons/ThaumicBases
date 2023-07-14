@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 
+import cpw.mods.fml.common.Loader;
 import tb.common.enchantment.EnchantmentElderKnowledge;
 import tb.common.enchantment.EnchantmentEldritchBane;
 import tb.common.enchantment.EnchantmentMagicTouch;
@@ -13,7 +14,6 @@ import tb.common.enchantment.EnchantmentVaporising;
 import tb.utils.TBConfig;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-import cpw.mods.fml.common.Loader;
 
 public class TBEnchant {
 

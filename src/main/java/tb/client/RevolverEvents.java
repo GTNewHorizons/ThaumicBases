@@ -5,9 +5,9 @@ import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import tb.api.RevolverUpgrade;
 import tb.common.item.ItemRevolver;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class RevolverEvents {
 

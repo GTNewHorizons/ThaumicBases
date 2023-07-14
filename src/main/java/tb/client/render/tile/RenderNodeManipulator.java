@@ -9,8 +9,8 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
-import tb.common.item.ItemNodeFoci;
 import DummyCore.Utils.MiscUtils;
+import tb.common.item.ItemNodeFoci;
 
 public class RenderNodeManipulator extends TileEntitySpecialRenderer {
 

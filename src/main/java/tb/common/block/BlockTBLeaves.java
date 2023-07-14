@@ -32,12 +32,12 @@ import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 
-import tb.core.TBCore;
-import tb.init.TBBlocks;
 import DummyCore.Utils.MathUtils;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.core.TBCore;
+import tb.init.TBBlocks;
 
 public class BlockTBLeaves extends BlockOldLeaf {
 

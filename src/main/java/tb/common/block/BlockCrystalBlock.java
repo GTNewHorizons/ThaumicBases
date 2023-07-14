@@ -11,10 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import thaumcraft.api.crafting.IInfusionStabiliser;
-import thaumcraft.common.blocks.CustomStepSound;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import thaumcraft.api.crafting.IInfusionStabiliser;
+import thaumcraft.common.blocks.CustomStepSound;
 
 public class BlockCrystalBlock extends Block implements IInfusionStabiliser {
 

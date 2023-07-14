@@ -19,9 +19,9 @@ import org.apache.commons.io.Charsets;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import tb.common.inventory.ContainerVoidAnvil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.common.inventory.ContainerVoidAnvil;
 
 @SideOnly(Side.CLIENT)
 public class GuiVoidAnvil extends GuiContainer implements ICrafting {

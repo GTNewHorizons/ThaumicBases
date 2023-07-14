@@ -8,6 +8,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
+import DummyCore.Client.GuiCommon;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import tb.client.RevolverEvents;
 import tb.client.gui.GuiRevolver;
 import tb.client.gui.GuiThaumicAnvil;
@@ -36,9 +39,6 @@ import tb.init.TBItems;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.bolt.FXLightningBolt;
 import thaumcraft.client.fx.particles.FXSparkle;
-import DummyCore.Client.GuiCommon;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class TBClient extends TBServer {
 

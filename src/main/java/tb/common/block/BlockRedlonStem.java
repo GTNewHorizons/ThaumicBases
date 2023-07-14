@@ -12,9 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import tb.init.TBItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.init.TBItems;
 
 public class BlockRedlonStem extends BlockStem {
 

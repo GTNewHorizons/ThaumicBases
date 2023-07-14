@@ -7,10 +7,10 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import tb.init.TBBlocks;
-import thaumcraft.api.crafting.IInfusionStabiliser;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.init.TBBlocks;
+import thaumcraft.api.crafting.IInfusionStabiliser;
 
 public class TBBlockDeco extends Block implements IInfusionStabiliser {
 

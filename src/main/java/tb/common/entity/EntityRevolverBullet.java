@@ -14,10 +14,10 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
+import DummyCore.Utils.Pair;
 import tb.api.RevolverUpgrade;
 import tb.common.item.ItemRevolver;
 import thaumcraft.common.Thaumcraft;
-import DummyCore.Utils.Pair;
 
 public class EntityRevolverBullet extends EntityThrowable {
 

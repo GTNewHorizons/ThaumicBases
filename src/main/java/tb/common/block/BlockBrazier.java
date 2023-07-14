@@ -11,8 +11,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import tb.common.tile.TileBrazier;
 import DummyCore.Utils.MathUtils;
+import tb.common.tile.TileBrazier;
 
 public class BlockBrazier extends BlockContainer {
 

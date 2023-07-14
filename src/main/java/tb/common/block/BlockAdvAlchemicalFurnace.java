@@ -17,12 +17,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import tb.common.tile.TileAdvAlchemicalFurnace;
-import thaumcraft.common.Thaumcraft;
-import thaumcraft.common.tiles.TileAlchemyFurnace;
 import DummyCore.Utils.MiscUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import tb.common.tile.TileAdvAlchemicalFurnace;
+import thaumcraft.common.Thaumcraft;
+import thaumcraft.common.tiles.TileAlchemyFurnace;
 
 public class BlockAdvAlchemicalFurnace extends BlockContainer {
 

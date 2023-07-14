@@ -4,12 +4,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.network.IGuiHandler;
 import tb.common.inventory.ContainerOverchanter;
 import tb.common.inventory.ContainerRevolver;
 import tb.common.inventory.ContainerThaumicAnvil;
 import tb.common.inventory.ContainerVoidAnvil;
 import tb.common.tile.TileOverchanter;
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class TBServer implements IGuiHandler {
 
