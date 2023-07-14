@@ -42,7 +42,7 @@ public class TBCore {
     public static final String name = "Thaumic Bases";
     public static final String serverProxy = "tb.network.proxy.TBServer";
     public static final String clientProxy = "tb.network.proxy.TBClient";
-    public static final String dependencies = "required-after:Thaumcraft@[4.2.3.5,);required-after:Baubles@[1.0.1.10,);required-after:DummyCore@[1.6,);";
+    public static final String dependencies = "required-after:Thaumcraft@[4.2.3.5,);required-after:Baubles@[1.0.1.10,);required-after:DummyCore@[1.2,);";
 
     public static final TBConfig cfg = new TBConfig();
 
