@@ -362,6 +362,7 @@ try {
     // Produce a version based on the tag, or for branches something like 0.2.2-configurable-maven-and-extras.38+43090270b6-dirty
     if (versionOverride == null) {
         def gitDetails = versionDetails()
+     project.logger.error("gitDetails: {}", gitDetails)
         def isDirty = gitVersion().endsWith(".dirty") // No public API for this, isCleanTag has a different meaning
         String branchName = gitDetails.branchName
         branchName = branchName.replaceAll("[^a-zA-Z0-9-]+", "-") // sanitize branch names for semver
