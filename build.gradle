@@ -379,6 +379,7 @@ try {
     }
 }
 catch (Exception ignored) {
+project.logger.error("detect version failed", ignored)
     out.style(Style.Failure).text(
         'This mod must be version controlled by Git AND the repository must provide at least one tag,\n' +
             'or the VERSION override must be set! ').style(Style.SuccessHeader).text('(Do NOT download from GitHub using the ZIP option, instead\n' +
