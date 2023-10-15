@@ -2,7 +2,6 @@ package tb.core;
 
 import static tb.core.TBCore.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -63,7 +62,7 @@ public class TBCore {
                 event.getModConfigurationDirectory()
                     .getAbsolutePath(),
                 cfg);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         setupModInfo(event.getModMetadata());
