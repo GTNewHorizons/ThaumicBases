@@ -51,7 +51,7 @@ tile.overchanter.name=Overchanting Table
 tile.TBoldCobblestone.name=Ancient Cobblestone
 tile.TBoldGravel.name=Ancient Gravel
 tile.TBoldCobblestoneMossy.name=Ancient Mossy Cobblestone
-tile.advAlchFurnace.name=Advanced Alchemical Furnace
+tile.advAlchFurnace.name=Thaumium Alchemical Furnace
 tile.entityDeconstructor.name=Entity Deconstructor
 tile.TBoldIron.name=Ancient Iron Block
 tile.TBoldDiamond.name=Ancient Diamond Block
@@ -402,7 +402,7 @@ tc.research_text.TB.Foci.Activation=Remote access
 tb.rec.actFoci.page.0=Well, after your research on the ability of mirrors of transporting items it would be logical to continue onwards - what if mirrors could transport simple force and image? Well, it is not that simple, so you had to make a wand foci out of all that mess you were getting yourself into. This wand foci works really simple - once equipped on the wand a thaumaturge must shift-click on the desired block's location, which will store it to the wand. After that a simple click will act like a right click on the stored location. However, the range is limited to 32 blocks. Some mundane inventories are also too heavy for the transmitted force to interact with, should they bee far from a thaumaturge.
 tb.rec.actFoci.page.1=<LINE>§l       Potency Upgrade §r<LINE>Available at all levels, this upgrade will increase the range of interaction up by 10 blocks. Will not work in unloaded chunks!
 
-tc.research_name.TB.AdvAlc=Advanced Alchemical Furnace
+tc.research_name.TB.AdvAlc=Thaumium Alchemical Furnace
 tc.research_text.TB.AdvAlc=Let the flame burn brighter
 tb.rec.advAlc.page.0=You are extremely annoyed about the speed of your Alchemical Furnace. There must be a way to speed that damn thing up! Sure, attaching more bellows helps... A tiny bit. However, what if you could use the Aer to use those bellows right next to the furnace's flame? Well, the furnace burns too hot and quickly becomes a pile of useless smelted construction. However, you have managed to use Thaumium to make the furnace more heat resistant! The result is a furnace, functioning just as a regular Alchemical Furnace, but 2 times faster! However, it is only achievable if the furnace runs on the Alumentum. Bellows can also be attached to achieve even more speed.
 
