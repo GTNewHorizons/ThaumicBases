@@ -55,7 +55,8 @@ public class FociExperience extends ItemFocusBasic {
     }
 
     public AspectList getVisCost(ItemStack focusstack) {
-        return new AspectList().add(Aspect.ORDER, 500).add(Aspect.ENTROPY, 500);
+        return new AspectList().add(Aspect.ORDER, 500)
+            .add(Aspect.ENTROPY, 500);
     }
 
     public WandFocusAnimation getAnimation(ItemStack focusstack) {
@@ -67,16 +68,16 @@ public class FociExperience extends ItemFocusBasic {
         switch (rank) {
             case 3: {
                 return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal,
-                        TBFociUpgrades.vaporizing, TBFociUpgrades.decomposing };
+                    TBFociUpgrades.vaporizing, TBFociUpgrades.decomposing };
             }
             case 5: {
                 if (this.getUpgradeLevel(focusstack, TBFociUpgrades.decomposing) > 0) return new FocusUpgradeType[] {
-                        FocusUpgradeType.potency, FocusUpgradeType.frugal, TBFociUpgrades.decomposing };
+                    FocusUpgradeType.potency, FocusUpgradeType.frugal, TBFociUpgrades.decomposing };
                 else if (this.getUpgradeLevel(focusstack, TBFociUpgrades.vaporizing) > 0)
                     return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal,
-                            TBFociUpgrades.vaporizing };
+                        TBFociUpgrades.vaporizing };
                 else return new FocusUpgradeType[] { FocusUpgradeType.potency, FocusUpgradeType.frugal,
-                        TBFociUpgrades.vaporizing, TBFociUpgrades.decomposing };
+                    TBFociUpgrades.vaporizing, TBFociUpgrades.decomposing };
             }
             default: {
                 return new FocusUpgradeType[] { FocusUpgradeType.frugal, FocusUpgradeType.potency };
@@ -86,9 +87,11 @@ public class FociExperience extends ItemFocusBasic {
 
     @SuppressWarnings("unchecked")
     public ItemStack onFocusRightClick(ItemStack wandstack, World world, EntityPlayer player,
-            MovingObjectPosition movingobjectposition) {
+        MovingObjectPosition movingobjectposition) {
 
-        ItemStack foci = ItemStack.loadItemStackFromNBT(MiscUtils.getStackTag(wandstack).getCompoundTag("focus"));
+        ItemStack foci = ItemStack.loadItemStackFromNBT(
+            MiscUtils.getStackTag(wandstack)
+                .getCompoundTag("focus"));
 
         int vaporisingLevel = this.getUpgradeLevel(foci, TBFociUpgrades.vaporizing);
         int decomposingLevel = this.getUpgradeLevel(foci, TBFociUpgrades.decomposing);
@@ -97,14 +100,14 @@ public class FociExperience extends ItemFocusBasic {
 
             Vec3 vec = player.getLookVec();
             ArrayList<Entity> mobs = (ArrayList<Entity>) world.getEntitiesWithinAABBExcludingEntity(
-                    player,
-                    AxisAlignedBB.getBoundingBox(
-                            player.posX + vec.xCoord - 0.3D,
-                            player.posY + player.getEyeHeight() + vec.yCoord - 0.3D,
-                            player.posZ + vec.zCoord - 0.3D,
-                            player.posX + vec.xCoord + 0.3D,
-                            player.posY + player.getEyeHeight() + vec.yCoord + 0.3D,
-                            player.posZ + vec.zCoord + 0.3D));
+                player,
+                AxisAlignedBB.getBoundingBox(
+                    player.posX + vec.xCoord - 0.3D,
+                    player.posY + player.getEyeHeight() + vec.yCoord - 0.3D,
+                    player.posZ + vec.zCoord - 0.3D,
+                    player.posX + vec.xCoord + 0.3D,
+                    player.posY + player.getEyeHeight() + vec.yCoord + 0.3D,
+                    player.posZ + vec.zCoord + 0.3D));
 
             if (mobs != null && !mobs.isEmpty()) {
                 Entity e = mobs.get(world.rand.nextInt(mobs.size()));
@@ -117,8 +120,8 @@ public class FociExperience extends ItemFocusBasic {
                     double hp = eaten.getHealth();
 
                     if (WandManager.consumeVisFromInventory(
-                            player,
-                            TBThaumonomicon.primals(MathHelper.floor_double(hp * 100 / decomposingLevel)))) {
+                        player,
+                        TBThaumonomicon.primals(MathHelper.floor_double(hp * 100 / decomposingLevel)))) {
                         eaten.attackEntityFrom(DamageSource.outOfWorld, Integer.MAX_VALUE);
                         int xp = MathHelper.floor_double(hp * 3);
 
@@ -133,11 +136,11 @@ public class FociExperience extends ItemFocusBasic {
 
         if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectType.BLOCK) {
             Block b = world
-                    .getBlock(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ);
+                .getBlock(movingobjectposition.blockX, movingobjectposition.blockY, movingobjectposition.blockZ);
             int meta = world.getBlockMetadata(
-                    movingobjectposition.blockX,
-                    movingobjectposition.blockY,
-                    movingobjectposition.blockZ);
+                movingobjectposition.blockX,
+                movingobjectposition.blockY,
+                movingobjectposition.blockZ);
             int xp = b.getExpDrop(world, meta, this.getUpgradeLevel(foci, FocusUpgradeType.potency));
             if (xp <= 0) xp = this.getUpgradeLevel(foci, FocusUpgradeType.potency) + 1;
 
@@ -146,10 +149,9 @@ public class FociExperience extends ItemFocusBasic {
             if (b.getBlockHardness(world, pos.blockX, pos.blockY, pos.blockZ) <= 0) return wandstack;
 
             if (!WandManager.consumeVisFromInventory(
-                    player,
-                    TBThaumonomicon.primals(
-                            MathHelper.floor_double(
-                                    b.getBlockHardness(world, pos.blockX, pos.blockY, pos.blockZ) * 100))))
+                player,
+                TBThaumonomicon.primals(
+                    MathHelper.floor_double(b.getBlockHardness(world, pos.blockX, pos.blockY, pos.blockZ) * 100))))
                 return wandstack;
 
             if (vaporisingLevel > 0) {
@@ -157,7 +159,7 @@ public class FociExperience extends ItemFocusBasic {
                 if (doWork) {
                     if (ThaumcraftApi.exists(Item.getItemFromBlock(b), meta)) {
                         AspectList aspects = ThaumcraftCraftingManager
-                                .getObjectTags(new ItemStack(Item.getItemFromBlock(b), 1, meta));
+                            .getObjectTags(new ItemStack(Item.getItemFromBlock(b), 1, meta));
                         if (aspects != null && aspects.size() > 0) {
                             for (int i = 0; i < aspects.getAspects().length; ++i) {
                                 Aspect a = aspects.getAspects()[i];
@@ -168,11 +170,11 @@ public class FociExperience extends ItemFocusBasic {
                                 cEssence.setAspects(crystalStack, new AspectList().add(a, amount));
 
                                 EntityItem crystal = new EntityItem(
-                                        player.worldObj,
-                                        pos.blockX + 0.5D,
-                                        pos.blockY + 0.5D,
-                                        pos.blockZ + 0.5D,
-                                        crystalStack);
+                                    player.worldObj,
+                                    pos.blockX + 0.5D,
+                                    pos.blockY + 0.5D,
+                                    pos.blockZ + 0.5D,
+                                    crystalStack);
                                 if (!player.worldObj.isRemote) player.worldObj.spawnEntityInWorld(crystal);
                             }
                         }
@@ -181,28 +183,28 @@ public class FociExperience extends ItemFocusBasic {
             }
 
             b.onBlockDestroyedByPlayer(
-                    player.worldObj,
-                    pos.blockX,
-                    pos.blockY,
-                    pos.blockZ,
-                    player.worldObj.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ));
+                player.worldObj,
+                pos.blockX,
+                pos.blockY,
+                pos.blockZ,
+                player.worldObj.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ));
             player.worldObj.setBlock(pos.blockX, pos.blockY, pos.blockZ, Blocks.air, 0, 3);
             player.worldObj.playSound(
-                    pos.blockX + 0.5D,
-                    pos.blockY + 0.5D,
-                    pos.blockZ + 0.5D,
-                    b.stepSound.getBreakSound(),
-                    1,
-                    1,
-                    false);
+                pos.blockX + 0.5D,
+                pos.blockY + 0.5D,
+                pos.blockZ + 0.5D,
+                b.stepSound.getBreakSound(),
+                1,
+                1,
+                false);
             for (int i = 0; i < 100; ++i) player.worldObj.spawnParticle(
-                    "blockcrack_" + Block.getIdFromBlock(b) + "_" + meta,
-                    pos.blockX + player.worldObj.rand.nextDouble(),
-                    pos.blockY + player.worldObj.rand.nextDouble(),
-                    pos.blockZ + player.worldObj.rand.nextDouble(),
-                    0,
-                    0,
-                    0);
+                "blockcrack_" + Block.getIdFromBlock(b) + "_" + meta,
+                pos.blockX + player.worldObj.rand.nextDouble(),
+                pos.blockY + player.worldObj.rand.nextDouble(),
+                pos.blockZ + player.worldObj.rand.nextDouble(),
+                0,
+                0,
+                0);
 
             xp *= 2;
 

@@ -115,15 +115,16 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
         }
         increaseWorkTime();
         if (!this.worldObj.isRemote && workTime % 200 == 0) {
-            Aspect[] aspects = node.getAspects().getAspects();
+            Aspect[] aspects = node.getAspects()
+                .getAspects();
             Aspect aspect = aspects[this.worldObj.rand.nextInt(aspects.length)];
             EntityAspectOrb aspectOrb = new EntityAspectOrb(
-                    worldObj,
-                    xCoord + 0.5D,
-                    yCoord - 0.5D,
-                    zCoord + 0.5D,
-                    aspect,
-                    1);
+                worldObj,
+                xCoord + 0.5D,
+                yCoord - 0.5D,
+                zCoord + 0.5D,
+                aspect,
+                1);
             this.worldObj.spawnEntityInWorld(aspectOrb);
         }
     }
@@ -143,7 +144,10 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
                         node.addToContainer(aspect, previousAmount - currentAmount);
                     }
                 }
-                previousNodeAspects.put(aspect, node.getAspects().getAmount(aspect));
+                previousNodeAspects.put(
+                    aspect,
+                    node.getAspects()
+                        .getAmount(aspect));
             }
         }
     }
@@ -168,13 +172,14 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
 
             if (isNodeChanged) {
                 MiscUtils.sendPacketToAllAround(
-                        worldObj,
-                        this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord).getDescriptionPacket(),
-                        xCoord,
-                        yCoord,
-                        zCoord,
-                        this.worldObj.provider.dimensionId,
-                        6);
+                    worldObj,
+                    this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord)
+                        .getDescriptionPacket(),
+                    xCoord,
+                    yCoord,
+                    zCoord,
+                    this.worldObj.provider.dimensionId,
+                    6);
             }
         }
     }
@@ -248,18 +253,18 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
         // Graphic
         if (this.worldObj.isRemote && workTime != 0) {
             Thaumcraft.proxy.beam(
-                    this.worldObj,
-                    xCoord + 0.5D,
-                    yCoord + 0.5D,
-                    zCoord + 0.5D,
-                    xCoord + 0.5D,
-                    yCoord - 0.5D,
-                    zCoord + 0.5D,
-                    2,
-                    getColor(effect),
-                    false,
-                    0.5F,
-                    2);
+                this.worldObj,
+                xCoord + 0.5D,
+                yCoord + 0.5D,
+                zCoord + 0.5D,
+                xCoord + 0.5D,
+                yCoord - 0.5D,
+                zCoord + 0.5D,
+                2,
+                getColor(effect),
+                false,
+                0.5F,
+                2);
         }
 
         // Logic
@@ -336,7 +341,7 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
 
     @Override
     public int onWandRightClick(World world, ItemStack wandstack, EntityPlayer player, int x, int y, int z, int side,
-            int md) {
+        int md) {
         return 0;
     }
 

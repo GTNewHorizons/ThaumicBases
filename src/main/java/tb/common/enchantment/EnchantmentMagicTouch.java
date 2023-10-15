@@ -15,7 +15,7 @@ public class EnchantmentMagicTouch extends Enchantment {
 
     public boolean canApplyTogether(Enchantment ench) {
         return !(ench instanceof EnchantmentElderKnowledge) && !(ench instanceof EnchantmentMagicTouch)
-                && !(ench instanceof EnchantmentTainted)
-                && !(ench instanceof EnchantmentVaporising);
+            && !(ench instanceof EnchantmentTainted)
+            && !(ench instanceof EnchantmentVaporising);
     }
 }

@@ -20,7 +20,7 @@ public class BlockSweed extends BlockTBPlant {
 
     protected boolean canPlaceBlockOn(Block b) {
         return b != null
-                && (b == Blocks.grass || b == Blocks.dirt || b instanceof BlockGrass || b instanceof BlockDirt);
+            && (b == Blocks.grass || b == Blocks.dirt || b instanceof BlockGrass || b instanceof BlockDirt);
     }
 
     public void updateTick(World w, int x, int y, int z, Random rnd) {

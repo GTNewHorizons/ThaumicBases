@@ -32,7 +32,7 @@ public class BlockRainbowCactus extends BlockCactus {
     }
 
     public void onEntityCollidedWithBlock(World p_149670_1_, int p_149670_2_, int p_149670_3_, int p_149670_4_,
-            Entity p_149670_5_) {}
+        Entity p_149670_5_) {}
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
@@ -54,18 +54,17 @@ public class BlockRainbowCactus extends BlockCactus {
     public static void loadColors() {
         if (Loader.isModLoaded("gregtech")) {
             allowedDyes = new ItemStack[] { ItemList.Color_00.get(1), ItemList.Color_01.get(1),
-                    ItemList.Color_02.get(1), ItemList.Color_03.get(1), ItemList.Color_04.get(1),
-                    ItemList.Color_05.get(1), ItemList.Color_06.get(1), ItemList.Color_07.get(1),
-                    ItemList.Color_08.get(1), ItemList.Color_09.get(1), ItemList.Color_10.get(1),
-                    ItemList.Color_11.get(1), ItemList.Color_12.get(1), ItemList.Color_13.get(1),
-                    ItemList.Color_14.get(1), ItemList.Color_15.get(1), };
+                ItemList.Color_02.get(1), ItemList.Color_03.get(1), ItemList.Color_04.get(1), ItemList.Color_05.get(1),
+                ItemList.Color_06.get(1), ItemList.Color_07.get(1), ItemList.Color_08.get(1), ItemList.Color_09.get(1),
+                ItemList.Color_10.get(1), ItemList.Color_11.get(1), ItemList.Color_12.get(1), ItemList.Color_13.get(1),
+                ItemList.Color_14.get(1), ItemList.Color_15.get(1), };
         } else {
             allowedDyes = new ItemStack[] { new ItemStack(Items.dye, 1, 1), new ItemStack(Items.dye, 1, 2),
-                    new ItemStack(Items.dye, 1, 5), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.dye, 1, 6),
-                    new ItemStack(Items.dye, 1, 7), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.dye, 1, 8),
-                    new ItemStack(Items.dye, 1, 9), new ItemStack(Items.dye, 1, 10), new ItemStack(Items.dye, 1, 2),
-                    new ItemStack(Items.dye, 1, 11), new ItemStack(Items.dye, 1, 12), new ItemStack(Items.dye, 1, 13),
-                    new ItemStack(Items.dye, 1, 14), new ItemStack(Items.dye, 1, 2) };
+                new ItemStack(Items.dye, 1, 5), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.dye, 1, 6),
+                new ItemStack(Items.dye, 1, 7), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.dye, 1, 8),
+                new ItemStack(Items.dye, 1, 9), new ItemStack(Items.dye, 1, 10), new ItemStack(Items.dye, 1, 2),
+                new ItemStack(Items.dye, 1, 11), new ItemStack(Items.dye, 1, 12), new ItemStack(Items.dye, 1, 13),
+                new ItemStack(Items.dye, 1, 14), new ItemStack(Items.dye, 1, 2) };
         }
     }
 
@@ -83,7 +82,7 @@ public class BlockRainbowCactus extends BlockCactus {
 
     @Override
     public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction,
-            IPlantable plantable) {
+        IPlantable plantable) {
         Block plant = plantable.getPlant(world, x, y + 1, z);
 
         if (plant == this) {

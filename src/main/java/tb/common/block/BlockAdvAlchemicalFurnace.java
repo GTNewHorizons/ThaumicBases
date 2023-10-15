@@ -99,7 +99,7 @@ public class BlockAdvAlchemicalFurnace extends BlockContainer {
     }
 
     public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float par7, float par8,
-            float par9) {
+        float par9) {
         if (w.isRemote) return true;
         TileEntity tileEntity = w.getTileEntity(x, y, z);
 

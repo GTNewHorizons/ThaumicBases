@@ -29,8 +29,7 @@ public class TBTobacco extends Item implements ITobacco {
     }
 
     public static final String names[] = new String[] { "tobacco_pile", "tobacco_eldritch", "tobacco_fighting",
-            "tobacco_hunger", "tobacco_knowledge", "tobacco_mining", "tobacco_sanity", "tobacco_tainted",
-            "tobacco_wispy" };
+        "tobacco_hunger", "tobacco_knowledge", "tobacco_mining", "tobacco_sanity", "tobacco_tainted", "tobacco_wispy" };
 
     public void performTobaccoEffect(EntityPlayer smoker, int metadata, boolean isSilverwood) {
         switch (metadata) {
@@ -59,7 +58,8 @@ public class TBTobacco extends Item implements ITobacco {
             }
             case 3: {
                 if (!smoker.worldObj.isRemote) {
-                    smoker.getFoodStats().addStats(3, 3);
+                    smoker.getFoodStats()
+                        .addStats(3, 3);
                     if (!isSilverwood && smoker.worldObj.rand.nextFloat() <= 0.4F)
                         smoker.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 0, true));
                 }
@@ -127,7 +127,9 @@ public class TBTobacco extends Item implements ITobacco {
                 EntityWisp wisp = new EntityWisp(smoker.worldObj);
                 wisp.setPositionAndRotation(smoker.posX, smoker.posY, smoker.posZ, 0, 0);
                 if (!smoker.worldObj.isRemote) {
-                    wisp.setType(aspects.get(smoker.worldObj.rand.nextInt(aspects.size())).getTag());
+                    wisp.setType(
+                        aspects.get(smoker.worldObj.rand.nextInt(aspects.size()))
+                            .getTag());
                     smoker.worldObj.spawnEntityInWorld(wisp);
                 }
                 break;

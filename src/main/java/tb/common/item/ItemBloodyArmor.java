@@ -32,7 +32,7 @@ public class ItemBloodyArmor extends ItemArmor implements IRepairable, IVisDisco
 
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
         return slot == 2 ? "thaumicbases:textures/items/armor/bloody/bloody_2.png"
-                : "thaumicbases:textures/items/armor/bloody/bloody_1.png";
+            : "thaumicbases:textures/items/armor/bloody/bloody_1.png";
     }
 
     @Override
@@ -55,10 +55,10 @@ public class ItemBloodyArmor extends ItemArmor implements IRepairable, IVisDisco
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         list.add(
-                EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount")
-                        + ": "
-                        + getVisDiscount(stack, player, null)
-                        + "%");
+            EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount")
+                + ": "
+                + getVisDiscount(stack, player, null)
+                + "%");
         super.addInformation(stack, player, list, par4);
     }
 
@@ -69,32 +69,32 @@ public class ItemBloodyArmor extends ItemArmor implements IRepairable, IVisDisco
         switch (aType) {
             case 1: {
                 map.put(
-                        SharedMonsterAttributes.maxHealth.getAttributeUnlocalizedName(),
-                        new AttributeModifier(
-                                UUID.fromString("96042c45-dfe3-4366-b93b-84663c4d828d"),
-                                "maxHealth",
-                                0.2F,
-                                2));
+                    SharedMonsterAttributes.maxHealth.getAttributeUnlocalizedName(),
+                    new AttributeModifier(
+                        UUID.fromString("96042c45-dfe3-4366-b93b-84663c4d828d"),
+                        "maxHealth",
+                        0.2F,
+                        2));
                 break;
             }
             case 2: {
                 map.put(
-                        SharedMonsterAttributes.knockbackResistance.getAttributeUnlocalizedName(),
-                        new AttributeModifier(
-                                UUID.fromString("e4e1d8b2-87f2-44f5-8f24-e1876060a04c"),
-                                "knockback",
-                                0.5F,
-                                2));
+                    SharedMonsterAttributes.knockbackResistance.getAttributeUnlocalizedName(),
+                    new AttributeModifier(
+                        UUID.fromString("e4e1d8b2-87f2-44f5-8f24-e1876060a04c"),
+                        "knockback",
+                        0.5F,
+                        2));
                 break;
             }
             case 3: {
                 map.put(
-                        SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),
-                        new AttributeModifier(
-                                UUID.fromString("f6d1384c-74c3-4cce-9a80-11b91dbd4ff4"),
-                                "moveSpeed",
-                                0.1F,
-                                2));
+                    SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),
+                    new AttributeModifier(
+                        UUID.fromString("f6d1384c-74c3-4cce-9a80-11b91dbd4ff4"),
+                        "moveSpeed",
+                        0.1F,
+                        2));
                 break;
             }
         }

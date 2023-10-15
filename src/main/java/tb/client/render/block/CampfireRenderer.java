@@ -17,7 +17,7 @@ public class CampfireRenderer extends BlockRenderer implements ISimpleBlockRende
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-            RenderBlocks renderer) {
+        RenderBlocks renderer) {
         renderer.renderAllFaces = true;
         /*
          * looks like shit renderer.setOverrideBlockTexture(Blocks.cobblestone.getIcon(0, 0)); Random rand = new

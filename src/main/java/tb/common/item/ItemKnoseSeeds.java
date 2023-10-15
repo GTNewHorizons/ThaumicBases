@@ -18,7 +18,7 @@ public class ItemKnoseSeeds extends ItemSeeds {
     }
 
     public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side,
-            float fx, float fy, float fz) {
+        float fx, float fy, float fz) {
         if (side != 1) {
             return false;
         } else

@@ -15,7 +15,8 @@ public class RevolverEvents {
     public void renderCrossharEvent(RenderGameOverlayEvent event) {
         if (event.type == ElementType.CROSSHAIRS && Minecraft.getMinecraft().thePlayer.isSneaking()) {
             if (Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem() != null
-                    && Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem().getItem() instanceof ItemRevolver) {
+                && Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem()
+                    .getItem() instanceof ItemRevolver) {
                 event.setCanceled(true);
             }
         }
@@ -25,10 +26,11 @@ public class RevolverEvents {
     public void renderZoomEvent(FOVUpdateEvent event) {
         if (Minecraft.getMinecraft().thePlayer.isSneaking()) {
             if (Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem() != null
-                    && Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem().getItem() instanceof ItemRevolver) {
+                && Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem()
+                    .getItem() instanceof ItemRevolver) {
                 event.newfov = 0.9F / (ItemRevolver.getUpgradeLevel(
-                        Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem(),
-                        RevolverUpgrade.accuracy) + 1);
+                    Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem(),
+                    RevolverUpgrade.accuracy) + 1);
             }
         }
     }

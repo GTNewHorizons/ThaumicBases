@@ -14,8 +14,8 @@ public class ItemBlockCrystal extends ItemBlock {
     }
 
     public String getUnlocalizedName(ItemStack stk) {
-        return super.getUnlocalizedName(stk) + (stk.getItemDamage() >= 8 ? BlockCrystalBlock.names[7]
-                : BlockCrystalBlock.names[stk.getItemDamage()]);
+        return super.getUnlocalizedName(stk)
+            + (stk.getItemDamage() >= 8 ? BlockCrystalBlock.names[7] : BlockCrystalBlock.names[stk.getItemDamage()]);
     }
 
     public int getMetadata(int meta) {

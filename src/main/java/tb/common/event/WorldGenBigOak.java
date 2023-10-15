@@ -34,7 +34,7 @@ public class WorldGenBigOak extends WorldGenAbstractTree {
     public int trunkMeta;
 
     public WorldGenBigOak(boolean doBlockNotify, int minHeight, int metaWood, int metaLeaves, int treeSize, Block tree,
-            Block leaves) {
+        Block leaves) {
         super(doBlockNotify);
         trunkMeta = metaWood;
         leavesMeta = metaLeaves;
@@ -89,8 +89,8 @@ public class WorldGenBigOak extends WorldGenAbstractTree {
                     if (this.checkBlockLine(aint1, aint2) == -1) {
                         int[] aint3 = new int[] { this.basePos[0], this.basePos[1], this.basePos[2] };
                         double d3 = Math.sqrt(
-                                Math.pow((double) Math.abs(this.basePos[0] - aint1[0]), 2.0D)
-                                        + Math.pow((double) Math.abs(this.basePos[2] - aint1[2]), 2.0D));
+                            Math.pow((double) Math.abs(this.basePos[0] - aint1[0]), 2.0D)
+                                + Math.pow((double) Math.abs(this.basePos[2] - aint1[2]), 2.0D));
                         double d4 = d3 * this.branchSlope;
 
                         if ((double) aint1[1] - d4 > (double) l) {
@@ -119,7 +119,7 @@ public class WorldGenBigOak extends WorldGenAbstractTree {
     }
 
     void func_150529_a(int p_150529_1_, int p_150529_2_, int p_150529_3_, float p_150529_4_, byte p_150529_5_,
-            Block p_150529_6_) {
+        Block p_150529_6_) {
         int l = (int) ((double) p_150529_4_ + 0.618D);
         byte b1 = otherCoordPairs[p_150529_5_];
         byte b2 = otherCoordPairs[p_150529_5_ + 3];
@@ -142,16 +142,16 @@ public class WorldGenBigOak extends WorldGenAbstractTree {
                     Block block1 = this.worldObj.getBlock(aint1[0], aint1[1], aint1[2]);
 
                     if (!block1.isAir(worldObj, aint1[0], aint1[1], aint1[2])
-                            && !block1.isLeaves(worldObj, aint1[0], aint1[1], aint1[2])) {
+                        && !block1.isLeaves(worldObj, aint1[0], aint1[1], aint1[2])) {
                         ++j1;
                     } else {
                         this.setBlockAndNotifyAdequately(
-                                this.worldObj,
-                                aint1[0],
-                                aint1[1],
-                                aint1[2],
-                                p_150529_6_,
-                                this.leavesMeta);
+                            this.worldObj,
+                            aint1[0],
+                            aint1[1],
+                            aint1[2],
+                            p_150529_6_,
+                            this.leavesMeta);
                         ++j1;
                     }
                 }
@@ -185,8 +185,8 @@ public class WorldGenBigOak extends WorldGenAbstractTree {
 
     float leafSize(int p_76495_1_) {
         return p_76495_1_ >= 0 && p_76495_1_ < this.leafDistanceLimit
-                ? (p_76495_1_ != 0 && p_76495_1_ != this.leafDistanceLimit - 1 ? 3.0F : 2.0F)
-                : -1.0F;
+            ? (p_76495_1_ != 0 && p_76495_1_ != this.leafDistanceLimit - 1 ? 3.0F : 2.0F)
+            : -1.0F;
     }
 
     /**
@@ -377,12 +377,12 @@ public class WorldGenBigOak extends WorldGenAbstractTree {
         Block block = this.worldObj.getBlock(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
 
         boolean isSoil = block.canSustainPlant(
-                worldObj,
-                basePos[0],
-                basePos[1] - 1,
-                basePos[2],
-                ForgeDirection.UP,
-                (IPlantable) TBBlocks.sapling);
+            worldObj,
+            basePos[0],
+            basePos[1] - 1,
+            basePos[2],
+            ForgeDirection.UP,
+            (IPlantable) TBBlocks.sapling);
         if (!isSoil) {
             return false;
         } else {

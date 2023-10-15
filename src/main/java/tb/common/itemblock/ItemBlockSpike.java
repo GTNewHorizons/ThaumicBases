@@ -18,7 +18,7 @@ public class ItemBlockSpike extends ItemBlock {
 
     public String getUnlocalizedName(ItemStack stk) {
         return super.getUnlocalizedName(stk)
-                + (stk.getItemDamage() >= 6 ? BlockSpike.spikeNames[5] : BlockSpike.spikeNames[stk.getItemDamage()]);
+            + (stk.getItemDamage() >= 6 ? BlockSpike.spikeNames[5] : BlockSpike.spikeNames[stk.getItemDamage()]);
     }
 
     public int getMetadata(int meta) {

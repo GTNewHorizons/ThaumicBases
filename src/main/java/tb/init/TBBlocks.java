@@ -62,105 +62,159 @@ public class TBBlocks {
     public static final Class<TBCore> core = TBCore.class;
 
     public static Block quicksilverBlock = new TBBlock(Material.iron, false).stabilise()
-            .setBlockName("quicksilverBlock").setBlockTextureName("thaumicbases:quicksilverBlock").setHardness(1F);
-    public static Block quicksilverBrick = new TBBlock(Material.rock, true).stabilise().setBlockName("quicksilverBrick")
-            .setBlockTextureName("thaumicbases:quicksilverBrick").setHardness(1F);
+        .setBlockName("quicksilverBlock")
+        .setBlockTextureName("thaumicbases:quicksilverBlock")
+        .setHardness(1F);
+    public static Block quicksilverBrick = new TBBlock(Material.rock, true).stabilise()
+        .setBlockName("quicksilverBrick")
+        .setBlockTextureName("thaumicbases:quicksilverBrick")
+        .setHardness(1F);
     public static Block crystalBlock = new BlockCrystalBlock().setBlockName("crystalBlock")
-            .setBlockTextureName("thaumicbases:crystal/mixed");
-    public static Block dustBlock = new TBBlock(Material.sand, false).stabilise().setStepSound(Block.soundTypeSand)
-            .setBlockName("salisMundusBlock").setBlockTextureName("thaumicbases:dust_block").setHardness(1F);
-    public static Block pyrofluid = new BlockPyrofluid().setBlockName("pyrofluid").setLightLevel(1);
-    public static Block thauminiteBlock = new TBBlock(Material.iron, false).stabilise().setBlockName("thauminiteBlock")
-            .setBlockTextureName("thaumicbases:thauminiteblock").setHardness(2F);
+        .setBlockTextureName("thaumicbases:crystal/mixed");
+    public static Block dustBlock = new TBBlock(Material.sand, false).stabilise()
+        .setStepSound(Block.soundTypeSand)
+        .setBlockName("salisMundusBlock")
+        .setBlockTextureName("thaumicbases:dust_block")
+        .setHardness(1F);
+    public static Block pyrofluid = new BlockPyrofluid().setBlockName("pyrofluid")
+        .setLightLevel(1);
+    public static Block thauminiteBlock = new TBBlock(Material.iron, false).stabilise()
+        .setBlockName("thauminiteBlock")
+        .setBlockTextureName("thaumicbases:thauminiteblock")
+        .setHardness(2F);
     public static Block eldritchArk = new TBBlockDeco(Material.rock, false).setBlockName("eldritchArk")
-            .setBlockTextureName("thaumicbases:eldritchArk").setHardness(3F);
+        .setBlockTextureName("thaumicbases:eldritchArk")
+        .setHardness(3F);
     public static Block ironGreatwood = new TBBlockDeco(Material.wood, false).setBlockName("ironGreatwood")
-            .setBlockTextureName("thaumicbases:ironGreatwood").setHardness(1F).setStepSound(Block.soundTypeWood);
+        .setBlockTextureName("thaumicbases:ironGreatwood")
+        .setHardness(1F)
+        .setStepSound(Block.soundTypeWood);
 
     public static Block plax = new BlockTBPlant(8, 4, true).setBlockName("plax")
-            .setBlockTextureName("thaumicbases:plax/");
+        .setBlockTextureName("thaumicbases:plax/");
     public static Block aureliaPetal = new BlockAureliaLeaf().setBlockName("aureliaPetal")
-            .setBlockTextureName("thaumicbases:aurelia/petal").setHardness(0).setStepSound(Block.soundTypeGrass);
+        .setBlockTextureName("thaumicbases:aurelia/petal")
+        .setHardness(0)
+        .setStepSound(Block.soundTypeGrass);
     public static Block aurelia = new BlockAureliaPlant().setBlockName("aurelia")
-            .setBlockTextureName("thaumicbases:aurelia/").setHardness(0).setStepSound(Block.soundTypeGrass);
+        .setBlockTextureName("thaumicbases:aurelia/")
+        .setHardness(0)
+        .setStepSound(Block.soundTypeGrass);
     public static Block metalleat = new BlockTBPlant(8, 8, true).setBlockName("metalleat")
-            .setBlockTextureName("thaumicbases:metalleat/");
+        .setBlockTextureName("thaumicbases:metalleat/");
     public static Block lucrite = new BlockLucritePlant(8, 16, true).setBlockName("lucrite")
-            .setBlockTextureName("thaumicbases:lucrite/");
+        .setBlockTextureName("thaumicbases:lucrite/");
     public static Block knose = new BlockKnose(4, 16, false).setBlockName("knose")
-            .setBlockTextureName("thaumicbases:knoze/");
+        .setBlockTextureName("thaumicbases:knoze/");
     public static Block sweed = new BlockSweed(4, 4, false).setBlockName("sweed")
-            .setBlockTextureName("thaumicbases:sweed/");
+        .setBlockTextureName("thaumicbases:sweed/");
     public static Block lazullia = new BlockTBPlant(8, 16, true).setBlockName("lazullia")
-            .setBlockTextureName("thaumicbases:lazullia/");
+        .setBlockTextureName("thaumicbases:lazullia/");
     public static Block rainbowCactus = new BlockRainbowCactus().setBlockName("rainbowCactus")
-            .setBlockTextureName("thaumicbases:rainbowCacti/").setStepSound(Block.soundTypeCloth).setHardness(0.5F);
+        .setBlockTextureName("thaumicbases:rainbowCacti/")
+        .setStepSound(Block.soundTypeCloth)
+        .setHardness(0.5F);
     public static Block redlonStem = new BlockRedlonStem(Blocks.redstone_block).setBlockName("redlonStem")
-            .setBlockTextureName("thaumicbases:redlon/redlon").setStepSound(Block.soundTypeGrass);
+        .setBlockTextureName("thaumicbases:redlon/redlon")
+        .setStepSound(Block.soundTypeGrass);
     public static Block ashroom = new BlockAshroom(4, 8, false).setBlockName("ashroom")
-            .setBlockTextureName("thaumicbases:aspectshroom/");
-    public static Block flaxium = new BlockFlaxium().setBlockName("flaxium").setBlockTextureName("thaumicbases:flaxium")
-            .setStepSound(Block.soundTypeGrass);
+        .setBlockTextureName("thaumicbases:aspectshroom/");
+    public static Block flaxium = new BlockFlaxium().setBlockName("flaxium")
+        .setBlockTextureName("thaumicbases:flaxium")
+        .setStepSound(Block.soundTypeGrass);
     public static Block glieonia = new BlockTBPlant(4, 12, false).setBlockName("glieonia")
-            .setBlockTextureName("thaumicbases:glieonia/");
-    public static Block briar = new BlockBriar(8, 4).setBlockName("briar").setBlockTextureName("thaumicbases:briar/")
-            .setStepSound(Block.soundTypeGrass);
+        .setBlockTextureName("thaumicbases:glieonia/");
+    public static Block briar = new BlockBriar(8, 4).setBlockName("briar")
+        .setBlockTextureName("thaumicbases:briar/")
+        .setStepSound(Block.soundTypeGrass);
     public static Block tobacco = new BlockTBPlant(8, 16, true).setBlockName("tobacco")
-            .setBlockTextureName("thaumicbases:tobacco/");
+        .setBlockTextureName("thaumicbases:tobacco/");
     public static Block voidPlant = new BlockTBPlant(4, 32, true).setBlockName("voidPlant")
-            .setBlockTextureName("thaumicbases:voidPlant/");
+        .setBlockTextureName("thaumicbases:voidPlant/");
 
-    public static Block spike = new BlockSpike().setBlockName("spike").setHardness(3).setResistance(3)
-            .setStepSound(Block.soundTypeMetal);
-    public static Block overchanter = new BlockOverchanter().setBlockName("overchanter").setHardness(5)
-            .setResistance(5);
+    public static Block spike = new BlockSpike().setBlockName("spike")
+        .setHardness(3)
+        .setResistance(3)
+        .setStepSound(Block.soundTypeMetal);
+    public static Block overchanter = new BlockOverchanter().setBlockName("overchanter")
+        .setHardness(5)
+        .setResistance(5);
     public static Block sapling = new BlockTBSapling();
     public static Block genLeaves = new BlockTBLeaves();
     public static Block cryingObsidian = new BlockCryingObelisk().setBlockName("cryingObsidian")
-            .setBlockTextureName("thaumicbases:cryingObelisk/").setHardness(10).setResistance(10);
+        .setBlockTextureName("thaumicbases:cryingObelisk/")
+        .setHardness(10)
+        .setResistance(10);
     public static Block oldCobble = new TBBlockDeco(Material.rock, false).setBlockName("TBoldCobblestone")
-            .setBlockTextureName("thaumicbases:cobblestone").setHardness(1).setResistance(1);
+        .setBlockTextureName("thaumicbases:cobblestone")
+        .setHardness(1)
+        .setResistance(1);
     public static Block oldCobbleMossy = new TBBlockDeco(Material.rock, false).setBlockName("TBoldCobblestoneMossy")
-            .setBlockTextureName("thaumicbases:cobblestone_mossy").setHardness(1).setResistance(1);
+        .setBlockTextureName("thaumicbases:cobblestone_mossy")
+        .setHardness(1)
+        .setResistance(1);
     public static Block oldGravel = new BlockFalling(Material.sand).setBlockName("TBoldGravel")
-            .setBlockTextureName("thaumicbases:gravel").setHardness(0.6F).setResistance(0)
-            .setStepSound(Block.soundTypeGravel);
+        .setBlockTextureName("thaumicbases:gravel")
+        .setHardness(0.6F)
+        .setResistance(0)
+        .setStepSound(Block.soundTypeGravel);
     public static Block advAlchFurnace = new BlockAdvAlchemicalFurnace().setBlockName("advAlchFurnace");
     public static Block entityDeconstructor = new BlockEntityDeconstructor().setBlockName("entityDeconstructor")
-            .setBlockTextureName("thaumicbases:entityDeconstructor/block").setHardness(1);
+        .setBlockTextureName("thaumicbases:entityDeconstructor/block")
+        .setHardness(1);
     public static Block oldBrick = new TBBlockDeco(Material.rock, false).setBlockName("TBoldBricks")
-            .setBlockTextureName("thaumicbases:brick").setHardness(1).setResistance(1);
+        .setBlockTextureName("thaumicbases:brick")
+        .setHardness(1)
+        .setResistance(1);
     public static Block oldLapis = new TBBlockDeco(Material.rock, false).setBlockName("TBoldLapis")
-            .setBlockTextureName("thaumicbases:lapis_block").setHardness(1).setResistance(1);
+        .setBlockTextureName("thaumicbases:lapis_block")
+        .setHardness(1)
+        .setResistance(1);
     public static Block oldIron = new TBSidedBlock(Material.rock, false).setBlockName("TBoldIron")
-            .setBlockTextureName("thaumicbases:iron_block").setHardness(1).setResistance(1);
+        .setBlockTextureName("thaumicbases:iron_block")
+        .setHardness(1)
+        .setResistance(1);
     public static Block oldGold = new TBSidedBlock(Material.rock, false).setBlockName("TBoldGold")
-            .setBlockTextureName("thaumicbases:gold_block").setHardness(1).setResistance(1);
+        .setBlockTextureName("thaumicbases:gold_block")
+        .setHardness(1)
+        .setResistance(1);
     public static Block oldDiamond = new TBSidedBlock(Material.rock, false).setBlockName("TBoldDiamond")
-            .setBlockTextureName("thaumicbases:diamond_block").setHardness(1).setResistance(1);
+        .setBlockTextureName("thaumicbases:diamond_block")
+        .setHardness(1)
+        .setResistance(1);
     public static Block genLogs = new BlockTBLog();
-    public static Block nodeManipulator = new BlockNodeManipulator().setBlockName("nodeManipulator").setHardness(1);
-    public static Block genericSlab = new BlockHalfSlab(false, Material.rock).setHardness(1).setResistance(10)
-            .setBlockName("tb.slab.");
-    public static Block genericSlab_full = new BlockHalfSlab(true, Material.rock).setHardness(1).setResistance(10)
-            .setBlockName("tb.slab.");
+    public static Block nodeManipulator = new BlockNodeManipulator().setBlockName("nodeManipulator")
+        .setHardness(1);
+    public static Block genericSlab = new BlockHalfSlab(false, Material.rock).setHardness(1)
+        .setResistance(10)
+        .setBlockName("tb.slab.");
+    public static Block genericSlab_full = new BlockHalfSlab(true, Material.rock).setHardness(1)
+        .setResistance(10)
+        .setBlockName("tb.slab.");
     public static Block crystalSlab = new BlockCrystalSlab(false, Material.glass).setBlockName("tb.crystalslab.");
     public static Block crystalSlab_full = new BlockCrystalSlab(true, Material.glass).setBlockName("tb.crystalslab.");
     public static Block relocator = new BlockRelocator().setBlockName("thaumicRelocator");
     public static Block voidBlock = new BlockVoid().setBlockName("tb.voidblock");
     public static Block thaumicAnvil = new BlockThaumicAnvil().setBlockName("thaumicAnvil")
-            .setBlockTextureName("thaumicbases:thaumiumAnvil/").setHardness(6).setResistance(16)
-            .setStepSound(Block.soundTypeAnvil);
+        .setBlockTextureName("thaumicbases:thaumiumAnvil/")
+        .setHardness(6)
+        .setResistance(16)
+        .setStepSound(Block.soundTypeAnvil);
     public static Block voidAnvil = new BlockVoidAnvil().setBlockName("voidAnvil")
-            .setBlockTextureName("thaumicbases:voidAnvil/");
+        .setBlockTextureName("thaumicbases:voidAnvil/");
     public static Block enderPlanks = new TBBlockDeco(Material.wood, false).setBlockName("enderPlanks")
-            .setBlockTextureName("thaumicbases:enderTree/planks").setHardness(2).setResistance(45)
-            .setStepSound(Block.soundTypeWood);
-    public static Block nodeLinker = new BlockNodeLinker().setBlockName("nodeLinker").setHardness(1);
+        .setBlockTextureName("thaumicbases:enderTree/planks")
+        .setHardness(2)
+        .setResistance(45)
+        .setStepSound(Block.soundTypeWood);
+    public static Block nodeLinker = new BlockNodeLinker().setBlockName("nodeLinker")
+        .setHardness(1);
     public static Block campfire = new BlockCampfire().setBlockName("tb.campfire")
-            .setBlockTextureName("thaumicbases:campfire").setLightLevel(1);
-    public static Block braizer = new BlockBrazier().setBlockName("tb.brazier").setBlockTextureName("cobblestone")
-            .setLightLevel(1);
+        .setBlockTextureName("thaumicbases:campfire")
+        .setLightLevel(1);
+    public static Block braizer = new BlockBrazier().setBlockName("tb.brazier")
+        .setBlockTextureName("cobblestone")
+        .setLightLevel(1);
 
     public static void setup() {
         // storage blocks

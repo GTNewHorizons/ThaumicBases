@@ -14,7 +14,7 @@ import tb.common.item.ItemNodeFoci;
 public class NodeFociRenderer implements IItemRenderer {
 
     public static final IModelCustom model = AdvancedModelLoader
-            .loadModel(new ResourceLocation("thaumicbases", "models/nodeManipulator/foci.obj"));
+        .loadModel(new ResourceLocation("thaumicbases", "models/nodeManipulator/foci.obj"));
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -36,8 +36,8 @@ public class NodeFociRenderer implements IItemRenderer {
         if (type == ItemRenderType.INVENTORY) GL11.glTranslated(0, -1, 0);
 
         MiscUtils.bindTexture(
-                "thaumicbases",
-                "textures/blocks/nodeManipulator/foci_" + ItemNodeFoci.names[item.getItemDamage()] + ".png");
+            "thaumicbases",
+            "textures/blocks/nodeManipulator/foci_" + ItemNodeFoci.names[item.getItemDamage()] + ".png");
         model.renderAll();
 
         GL11.glPopMatrix();

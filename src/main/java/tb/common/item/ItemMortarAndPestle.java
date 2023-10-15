@@ -16,7 +16,7 @@ public class ItemMortarAndPestle extends Item {
 
     public ItemStack getContainerItem(ItemStack itemStack) {
         return itemStack.getItemDamage() >= itemStack.getMaxDamage() ? null
-                : new ItemStack(itemStack.getItem(), 1, itemStack.getItemDamage() + 1);
+            : new ItemStack(itemStack.getItem(), 1, itemStack.getItemDamage() + 1);
     }
 
     public boolean doesContainerItemLeaveCraftingGrid(ItemStack stack) {

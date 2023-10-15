@@ -17,13 +17,12 @@ public class TBUtils {
         ResearchManager.scheduleSave(player);
         if (player instanceof EntityPlayerMP) if (!(player instanceof FakePlayer)) {
             PacketHandler.INSTANCE.sendTo(
-                    new PacketAspectPool(
-                            aspect.getTag(),
-                            Short.valueOf(amount),
-                            Short.valueOf(
-                                    Thaumcraft.proxy.playerKnowledge
-                                            .getAspectPoolFor(player.getCommandSenderName(), aspect))),
-                    (EntityPlayerMP) player);
+                new PacketAspectPool(
+                    aspect.getTag(),
+                    Short.valueOf(amount),
+                    Short.valueOf(
+                        Thaumcraft.proxy.playerKnowledge.getAspectPoolFor(player.getCommandSenderName(), aspect))),
+                (EntityPlayerMP) player);
         }
     }
 

@@ -37,9 +37,10 @@ public class TileAdvAlchemicalFurnace extends TileAlchemyFurnace {
 
     public void updateEntity() {
         if (this.furnaceBurnTime == 0) {
-            isFuelAlumentum = this.getStackInSlot(1) != null
-                    && this.getStackInSlot(1).getItem() == ConfigItems.itemResource
-                    && this.getStackInSlot(1).getItemDamage() == 0;
+            isFuelAlumentum = this.getStackInSlot(1) != null && this.getStackInSlot(1)
+                .getItem() == ConfigItems.itemResource
+                && this.getStackInSlot(1)
+                    .getItemDamage() == 0;
         }
         try {
             if (fieldCount != null && (this.isFuelAlumentum || !TBConfig.makeRequireAlumentum)) {
@@ -54,7 +55,7 @@ public class TileAdvAlchemicalFurnace extends TileAlchemyFurnace {
                 // making sure to take remainders only from positives since java believes in negative remainders for
                 // negative dividends
                 int maxMeaningfulBonus = (furnaceUpdateStep - (currentCount + 1) % furnaceUpdateStep)
-                        % furnaceUpdateStep;
+                    % furnaceUpdateStep;
                 int bonusCount = TBConfig.speedMultiplierForFurnace - 1;
                 int nextCount = currentCount + Math.min(bonusCount, maxMeaningfulBonus);
 

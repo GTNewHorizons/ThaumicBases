@@ -72,38 +72,40 @@ public class BlockPyrofluid extends Block {
         d5 = (double) ((float) par2 + par5Random.nextFloat());
         d7 = (double) par3 - 0.5D + this.maxY;
         d6 = (double) ((float) par4 + par5Random.nextFloat());
-        if (this.blockMaterial == Material.lava
-                && par1World.getBlock(par2, par3 + 1, par4).getMaterial() == Material.air
-                && !par1World.getBlock(par2, par3 + 1, par4).isOpaqueCube()) {
+        if (this.blockMaterial == Material.lava && par1World.getBlock(par2, par3 + 1, par4)
+            .getMaterial() == Material.air
+            && !par1World.getBlock(par2, par3 + 1, par4)
+                .isOpaqueCube()) {
             if (par5Random.nextInt(100) == 0) {
                 d5 = (double) ((float) par2 + par5Random.nextFloat());
                 d7 = (double) par3 + this.maxY;
                 d6 = (double) ((float) par4 + par5Random.nextFloat());
                 par1World.spawnParticle("lava", d5, d7, d6, 0.0D, 0.0D, 0.0D);
                 par1World.playSound(
-                        d5,
-                        d7,
-                        d6,
-                        "liquid.lavapop",
-                        0.2F + par5Random.nextFloat() * 0.2F,
-                        0.9F + par5Random.nextFloat() * 0.15F,
-                        false);
+                    d5,
+                    d7,
+                    d6,
+                    "liquid.lavapop",
+                    0.2F + par5Random.nextFloat() * 0.2F,
+                    0.9F + par5Random.nextFloat() * 0.15F,
+                    false);
             }
 
             if (par5Random.nextInt(200) == 0) {
                 par1World.playSound(
-                        (double) par2,
-                        (double) par3,
-                        (double) par4,
-                        "liquid.lava",
-                        0.2F + par5Random.nextFloat() * 0.2F,
-                        0.9F + par5Random.nextFloat() * 0.15F,
-                        false);
+                    (double) par2,
+                    (double) par3,
+                    (double) par4,
+                    "liquid.lava",
+                    0.2F + par5Random.nextFloat() * 0.2F,
+                    0.9F + par5Random.nextFloat() * 0.15F,
+                    false);
             }
         }
 
         if (par5Random.nextInt(10) == 0 && World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4)
-                && !par1World.getBlock(par2, par3 - 2, par4).getBlocksMovement(par1World, par2, par3, par4)) {
+            && !par1World.getBlock(par2, par3 - 2, par4)
+                .getBlocksMovement(par1World, par2, par3, par4)) {
             par1World.spawnParticle("dripLava", d5, d7, d6, 0.0D, 0.0D, 0.0D);
         }
     }
@@ -146,11 +148,11 @@ public class BlockPyrofluid extends Block {
         ArrayList<ItemStack> retLst = new ArrayList<ItemStack>();
 
         retLst.add(
-                new ItemStack(
-                        Items.blaze_powder,
-                        TBConfig.minBlazePowderFromPyrofluid + world.rand
-                                .nextInt(TBConfig.maxBlazePowderFromPyrofluid - TBConfig.minBlazePowderFromPyrofluid),
-                        0));
+            new ItemStack(
+                Items.blaze_powder,
+                TBConfig.minBlazePowderFromPyrofluid
+                    + world.rand.nextInt(TBConfig.maxBlazePowderFromPyrofluid - TBConfig.minBlazePowderFromPyrofluid),
+                0));
 
         return retLst;
     }

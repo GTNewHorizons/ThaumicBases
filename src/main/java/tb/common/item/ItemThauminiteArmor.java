@@ -25,7 +25,7 @@ public class ItemThauminiteArmor extends ItemArmor implements IRepairable, IVisD
 
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
         return slot == 2 ? "thaumicbases:textures/items/armor/thauminite/thauminite_2.png"
-                : "thaumicbases:textures/items/armor/thauminite/thauminite_1.png";
+            : "thaumicbases:textures/items/armor/thauminite/thauminite_1.png";
     }
 
     @Override
@@ -43,10 +43,10 @@ public class ItemThauminiteArmor extends ItemArmor implements IRepairable, IVisD
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         list.add(
-                EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount")
-                        + ": "
-                        + getVisDiscount(stack, player, null)
-                        + "%");
+            EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount")
+                + ": "
+                + getVisDiscount(stack, player, null)
+                + "%");
         super.addInformation(stack, player, list, par4);
     }
 }

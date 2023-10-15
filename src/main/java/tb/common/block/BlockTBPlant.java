@@ -92,10 +92,12 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
             for (int i1 = z - 1; i1 <= z + 1; ++i1) {
                 float f1 = 0.0F;
 
-                if (w.getBlock(l, y - 1, i1).canSustainPlant(w, l, y - 1, i1, ForgeDirection.UP, this)) {
+                if (w.getBlock(l, y - 1, i1)
+                    .canSustainPlant(w, l, y - 1, i1, ForgeDirection.UP, this)) {
                     f1 = 1.0F;
 
-                    if (w.getBlock(l, y - 1, i1).isFertile(w, l, y - 1, i1)) {
+                    if (w.getBlock(l, y - 1, i1)
+                        .isFertile(w, l, y - 1, i1)) {
                         f1 = 3.0F;
                     }
                 }
@@ -131,11 +133,11 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
     @Override
     public void func_149853_b(World w, Random r, int x, int y, int z) {
         w.setBlockMetadataWithNotify(
-                x,
-                y,
-                z,
-                Math.min(growthStages - 1, w.getBlockMetadata(x, y, z) + r.nextInt(3) + 1),
-                3);
+            x,
+            y,
+            z,
+            Math.min(growthStages - 1, w.getBlockMetadata(x, y, z) + r.nextInt(3) + 1),
+            3);
     }
 
     @SideOnly(Side.CLIENT)

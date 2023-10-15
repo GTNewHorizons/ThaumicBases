@@ -45,10 +45,10 @@ public class TBServer implements IGuiHandler {
     public void registerRenderInformation() {}
 
     public void lightning(World world, double sx, double sy, double sz, double ex, double ey, double ez, int dur,
-            float curve, int speed, int type) {}
+        float curve, int speed, int type) {}
 
     public void sparkle(World w, double x, double y, double z, double dx, double dy, double dz, int color,
-            float scale) {}
+        float scale) {}
 
     public World clientWorld() {
         return null;

@@ -17,7 +17,7 @@ public class ItemPyrofluidBucket extends Item {
     }
 
     public boolean onItemUse(ItemStack stk, EntityPlayer player, World w, int x, int y, int z, int side, float vecX,
-            float vecY, float vecZ) {
+        float vecY, float vecZ) {
         ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[side];
         w.setBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, TBBlocks.pyrofluid, 0, 3);
         player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.bucket, 1, 0));

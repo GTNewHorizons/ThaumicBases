@@ -65,7 +65,7 @@ public class BlockVoidAnvil extends BlockAnvil implements IInfusionStabiliser {
     }
 
     public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int side, float vecX, float vecY,
-            float vecZ) {
+        float vecZ) {
         if (w.isRemote) return true;
 
         p.openGui(TBCore.instance, 0x421920, w, x, y, z);

@@ -32,30 +32,28 @@ public class ItemCastingBracelet extends ItemWandCasting // <- I hope no one wil
 {
 
     public static String[] names = new String[] { "iron", "gold", "greatwood", "thaumium", "silverwood", "reed", "bone",
-            "obsidian", "blaze", "ice", "quartz", "void", "primal" };
+        "obsidian", "blaze", "ice", "quartz", "void", "primal" };
 
     public static ResourceLocation[] braceletTextures = new ResourceLocation[] {
-            loc("thaumcraft", "textures/blocks/metalbase.png"), loc("thaumcraft", "textures/blocks/goldbase.png"),
-            loc("thaumcraft", "textures/blocks/planks_greatwood.png"),
-            loc("thaumcraft", "textures/blocks/thaumiumblock.png"),
-            loc("thaumcraft", "textures/blocks/planks_silverwood.png"),
-            loc("thaumicbases", "textures/blocks/sugarcaneblock.png"),
-            loc("thaumicbases", "textures/blocks/boneblock.png"), loc("minecraft", "textures/blocks/obsidian.png"),
-            loc("thaumicbases", "textures/blocks/blazeblock.png"), loc("minecraft", "textures/blocks/ice_packed.png"),
-            loc("minecraft", "textures/blocks/quartz_block_bottom.png"),
-            loc("thaumicbases", "textures/blocks/voidblock.png"), loc("thaumcraft", "textures/blocks/deco_3.png") };
+        loc("thaumcraft", "textures/blocks/metalbase.png"), loc("thaumcraft", "textures/blocks/goldbase.png"),
+        loc("thaumcraft", "textures/blocks/planks_greatwood.png"),
+        loc("thaumcraft", "textures/blocks/thaumiumblock.png"),
+        loc("thaumcraft", "textures/blocks/planks_silverwood.png"),
+        loc("thaumicbases", "textures/blocks/sugarcaneblock.png"), loc("thaumicbases", "textures/blocks/boneblock.png"),
+        loc("minecraft", "textures/blocks/obsidian.png"), loc("thaumicbases", "textures/blocks/blazeblock.png"),
+        loc("minecraft", "textures/blocks/ice_packed.png"), loc("minecraft", "textures/blocks/quartz_block_bottom.png"),
+        loc("thaumicbases", "textures/blocks/voidblock.png"), loc("thaumcraft", "textures/blocks/deco_3.png") };
 
     public static WandCap[] caps = new WandCap[] { ConfigItems.WAND_CAP_IRON, ConfigItems.WAND_CAP_GOLD,
-            ConfigItems.WAND_CAP_GOLD, TBItems.WAND_CAP_THAUMINITE, ConfigItems.WAND_CAP_THAUMIUM,
-            ConfigItems.WAND_CAP_THAUMIUM, ConfigItems.WAND_CAP_THAUMIUM, ConfigItems.WAND_CAP_THAUMIUM,
-            ConfigItems.WAND_CAP_THAUMIUM, ConfigItems.WAND_CAP_THAUMIUM, ConfigItems.WAND_CAP_THAUMIUM,
-            ConfigItems.WAND_CAP_THAUMIUM, ConfigItems.WAND_CAP_VOID };
+        ConfigItems.WAND_CAP_GOLD, TBItems.WAND_CAP_THAUMINITE, ConfigItems.WAND_CAP_THAUMIUM,
+        ConfigItems.WAND_CAP_THAUMIUM, ConfigItems.WAND_CAP_THAUMIUM, ConfigItems.WAND_CAP_THAUMIUM,
+        ConfigItems.WAND_CAP_THAUMIUM, ConfigItems.WAND_CAP_THAUMIUM, ConfigItems.WAND_CAP_THAUMIUM,
+        ConfigItems.WAND_CAP_THAUMIUM, ConfigItems.WAND_CAP_VOID };
 
     public static WandRod[] rods = new WandRod[] { ConfigItems.WAND_ROD_WOOD, ConfigItems.WAND_ROD_WOOD,
-            ConfigItems.WAND_ROD_GREATWOOD, TBItems.WAND_ROD_THAUMIUM, ConfigItems.WAND_ROD_SILVERWOOD,
-            ConfigItems.WAND_ROD_REED, ConfigItems.WAND_ROD_BONE, ConfigItems.WAND_ROD_OBSIDIAN,
-            ConfigItems.WAND_ROD_BLAZE, ConfigItems.WAND_ROD_ICE, ConfigItems.WAND_ROD_QUARTZ, TBItems.WAND_ROD_VOID,
-            ConfigItems.STAFF_ROD_PRIMAL };
+        ConfigItems.WAND_ROD_GREATWOOD, TBItems.WAND_ROD_THAUMIUM, ConfigItems.WAND_ROD_SILVERWOOD,
+        ConfigItems.WAND_ROD_REED, ConfigItems.WAND_ROD_BONE, ConfigItems.WAND_ROD_OBSIDIAN, ConfigItems.WAND_ROD_BLAZE,
+        ConfigItems.WAND_ROD_ICE, ConfigItems.WAND_ROD_QUARTZ, TBItems.WAND_ROD_VOID, ConfigItems.STAFF_ROD_PRIMAL };
 
     public static int[] capacity = new int[] { 10, 15, 17, 20, 23, 23, 25, 25, 25, 25, 25, 27, 30 };
 
@@ -135,9 +133,8 @@ public class ItemCastingBracelet extends ItemWandCasting // <- I hope no one wil
     public float getConsumptionModifier(ItemStack is, EntityPlayer player, Aspect aspect, boolean crafting) {
         float consumptionModifier = 0.5F;
 
-        if ((getCap(is).getSpecialCostModifierAspects() != null)
-                && (getCap(is).getSpecialCostModifierAspects().contains(aspect)))
-            consumptionModifier = getCap(is).getSpecialCostModifier() / 1.5F;
+        if ((getCap(is).getSpecialCostModifierAspects() != null) && (getCap(is).getSpecialCostModifierAspects()
+            .contains(aspect))) consumptionModifier = getCap(is).getSpecialCostModifier() / 1.5F;
         else consumptionModifier = getCap(is).getBaseCostModifier() / 1.5F;
 
         if (player != null) consumptionModifier -= WandManager.getTotalVisDiscount(player, aspect);
@@ -150,14 +147,14 @@ public class ItemCastingBracelet extends ItemWandCasting // <- I hope no one wil
     @Override
     public WandRod getRod(ItemStack stack) {
         return stack.getItemDamage() == 3 ? TBItems.WAND_ROD_THAUMIUM
-                : stack.getItemDamage() == 11 ? TBItems.WAND_ROD_VOID
-                        : rods[Math.min(rods.length - 1, stack.getItemDamage())];
+            : stack.getItemDamage() == 11 ? TBItems.WAND_ROD_VOID
+                : rods[Math.min(rods.length - 1, stack.getItemDamage())];
     }
 
     @Override
     public WandCap getCap(ItemStack stack) {
         return stack.getItemDamage() == 3 ? TBItems.WAND_CAP_THAUMINITE
-                : caps[Math.min(caps.length - 1, stack.getItemDamage())];
+            : caps[Math.min(caps.length - 1, stack.getItemDamage())];
     }
 
     public boolean isStaff(ItemStack stack) {

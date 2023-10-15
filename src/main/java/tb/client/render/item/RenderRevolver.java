@@ -19,22 +19,22 @@ import tb.common.item.ItemRevolver;
 public class RenderRevolver implements IItemRenderer {
 
     public static final IModelCustom model = AdvancedModelLoader
-            .loadModel(new ResourceLocation("thaumicbases", "models/revolver/revolver.obj"));
+        .loadModel(new ResourceLocation("thaumicbases", "models/revolver/revolver.obj"));
     public static final ResourceLocation handle = new ResourceLocation(
-            "thaumicbases",
-            "textures/items/revolver/revolverHandleUV.png");
+        "thaumicbases",
+        "textures/items/revolver/revolverHandleUV.png");
     public static final ResourceLocation barrel = new ResourceLocation(
-            "thaumicbases",
-            "textures/items/revolver/revolverBarrelUV.png");
+        "thaumicbases",
+        "textures/items/revolver/revolverBarrelUV.png");
     public static final ResourceLocation metal = new ResourceLocation(
-            "thaumicbases",
-            "textures/items/revolver/revolverDarkMetal.png");
+        "thaumicbases",
+        "textures/items/revolver/revolverDarkMetal.png");
     public static final ResourceLocation gun = new ResourceLocation(
-            "thaumicbases",
-            "textures/items/revolver/revolverGunUV.png");
+        "thaumicbases",
+        "textures/items/revolver/revolverGunUV.png");
     public static final ResourceLocation press = new ResourceLocation(
-            "thaumicbases",
-            "textures/items/revolver/revolverPressUV.png");
+        "thaumicbases",
+        "textures/items/revolver/revolverPressUV.png");
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -101,22 +101,23 @@ public class RenderRevolver implements IItemRenderer {
         for (Pair<RevolverUpgrade, Integer> p : upgrades) {
             RevolverUpgrade ru = p.getFirst();
             handle = ru.getOverridePartTexture(item, 0, p.getSecond()) == null ? handle
-                    : ru.getOverridePartTexture(item, 0, p.getSecond());
+                : ru.getOverridePartTexture(item, 0, p.getSecond());
             barrel = ru.getOverridePartTexture(item, 1, p.getSecond()) == null ? barrel
-                    : ru.getOverridePartTexture(item, 1, p.getSecond());
+                : ru.getOverridePartTexture(item, 1, p.getSecond());
             metal = ru.getOverridePartTexture(item, 2, p.getSecond()) == null ? metal
-                    : ru.getOverridePartTexture(item, 2, p.getSecond());
+                : ru.getOverridePartTexture(item, 2, p.getSecond());
             gun = ru.getOverridePartTexture(item, 3, p.getSecond()) == null ? gun
-                    : ru.getOverridePartTexture(item, 3, p.getSecond());
+                : ru.getOverridePartTexture(item, 3, p.getSecond());
             press = ru.getOverridePartTexture(item, 4, p.getSecond()) == null ? press
-                    : ru.getOverridePartTexture(item, 4, p.getSecond());
+                : ru.getOverridePartTexture(item, 4, p.getSecond());
         }
 
         Minecraft.getMinecraft().renderEngine.bindTexture(handle);
         model.renderPart("Cylinder");
         model.renderPart("Plane");
 
-        double rotation = item.hasTagCompound() ? item.getTagCompound().getDouble("renderedRotation") : 0;
+        double rotation = item.hasTagCompound() ? item.getTagCompound()
+            .getDouble("renderedRotation") : 0;
 
         GL11.glPushMatrix();
         GL11.glTranslated(0, 2.9D, 0);
@@ -140,7 +141,8 @@ public class RenderRevolver implements IItemRenderer {
         model.renderPart("Cube.001_Cube.005");
 
         if (type == ItemRenderType.EQUIPPED_FIRST_PERSON && item.getTagCompound() != null
-                && item.getTagCompound().getBoolean("hasJar")) {
+            && item.getTagCompound()
+                .getBoolean("hasJar")) {
             GL11.glPushMatrix();
 
             GL11.glScaled(1.1, 1.1, 1.1);

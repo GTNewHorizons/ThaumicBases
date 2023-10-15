@@ -32,15 +32,15 @@ public class GuiThaumicAnvil extends GuiContainer implements ICrafting {
     private InventoryPlayer field_147094_x;
 
     public GuiThaumicAnvil(InventoryPlayer p_i1073_1_, World p_i1073_2_, int p_i1073_3_, int p_i1073_4_,
-            int p_i1073_5_) {
+        int p_i1073_5_) {
         super(
-                new ContainerThaumicAnvil(
-                        p_i1073_1_,
-                        p_i1073_2_,
-                        p_i1073_3_,
-                        p_i1073_4_,
-                        p_i1073_5_,
-                        Minecraft.getMinecraft().thePlayer));
+            new ContainerThaumicAnvil(
+                p_i1073_1_,
+                p_i1073_2_,
+                p_i1073_3_,
+                p_i1073_4_,
+                p_i1073_5_,
+                Minecraft.getMinecraft().thePlayer));
         this.field_147094_x = p_i1073_1_;
         this.field_147092_v = (ContainerThaumicAnvil) this.inventorySlots;
     }
@@ -83,16 +83,18 @@ public class GuiThaumicAnvil extends GuiContainer implements ICrafting {
             int k = 8453920;
             boolean flag = true;
             String s = I18n
-                    .format("container.repair.cost", new Object[] { Integer.valueOf(this.field_147092_v.maximumCost) });
+                .format("container.repair.cost", new Object[] { Integer.valueOf(this.field_147092_v.maximumCost) });
 
             if (this.field_147092_v.maximumCost >= 40 && !this.mc.thePlayer.capabilities.isCreativeMode) {
                 s = I18n.format("container.repair.expensive", new Object[0]);
                 k = 16736352;
-            } else if (!this.field_147092_v.getSlot(2).getHasStack()) {
-                flag = false;
-            } else if (!this.field_147092_v.getSlot(2).canTakeStack(this.field_147094_x.player)) {
-                k = 16736352;
-            }
+            } else if (!this.field_147092_v.getSlot(2)
+                .getHasStack()) {
+                    flag = false;
+                } else if (!this.field_147092_v.getSlot(2)
+                    .canTakeStack(this.field_147094_x.player)) {
+                        k = 16736352;
+                    }
 
             if (flag) {
                 int l = -16777216 | (k & 16579836) >> 2 | k & -16777216;
@@ -131,14 +133,17 @@ public class GuiThaumicAnvil extends GuiContainer implements ICrafting {
         Slot slot = this.field_147092_v.getSlot(0);
 
         if (slot != null && slot.getHasStack()
-                && !slot.getStack().hasDisplayName()
-                && s.equals(slot.getStack().getDisplayName())) {
+            && !slot.getStack()
+                .hasDisplayName()
+            && s.equals(
+                slot.getStack()
+                    .getDisplayName())) {
             s = "";
         }
 
         this.field_147092_v.updateItemName(s);
         this.mc.thePlayer.sendQueue
-                .addToSendQueue(new C17PacketCustomPayload("MC|ItemName", s.getBytes(Charsets.UTF_8)));
+            .addToSendQueue(new C17PacketCustomPayload("MC|ItemName", s.getBytes(Charsets.UTF_8)));
     }
 
     /**
@@ -161,27 +166,37 @@ public class GuiThaumicAnvil extends GuiContainer implements ICrafting {
 
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(field_147093_u);
+        this.mc.getTextureManager()
+            .bindTexture(field_147093_u);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
         this.drawTexturedModalRect(
-                k + 59,
-                l + 20,
-                0,
-                this.ySize + (this.field_147092_v.getSlot(0).getHasStack() ? 0 : 16),
-                110,
-                16);
+            k + 59,
+            l + 20,
+            0,
+            this.ySize + (this.field_147092_v.getSlot(0)
+                .getHasStack() ? 0 : 16),
+            110,
+            16);
 
-        if ((this.field_147092_v.getSlot(0).getHasStack() || this.field_147092_v.getSlot(1).getHasStack())
-                && !this.field_147092_v.getSlot(2).getHasStack()) {
+        if ((this.field_147092_v.getSlot(0)
+            .getHasStack()
+            || this.field_147092_v.getSlot(1)
+                .getHasStack())
+            && !this.field_147092_v.getSlot(2)
+                .getHasStack()) {
             this.drawTexturedModalRect(k + 99, l + 45, this.xSize, 0, 28, 21);
         }
     }
 
     @SuppressWarnings("rawtypes")
     public void sendContainerAndContentsToPlayer(Container p_71110_1_, List p_71110_2_) {
-        this.sendSlotContents(p_71110_1_, 0, p_71110_1_.getSlot(0).getStack());
+        this.sendSlotContents(
+            p_71110_1_,
+            0,
+            p_71110_1_.getSlot(0)
+                .getStack());
     }
 
     /**

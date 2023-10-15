@@ -46,29 +46,29 @@ public class TBConfig implements IDummyConfig {
 
         // Adv. alchemy furnace
         speedMultiplierForFurnace = cfg.getInt(
-                "speedMultiplierForFurnace",
-                "Advanced Alchemy Furnace",
-                2,
-                0,
-                Integer.MAX_VALUE,
-                "This is the speed of the Advanced Alchamical Furnace. TC's basic has 1.");
+            "speedMultiplierForFurnace",
+            "Advanced Alchemy Furnace",
+            2,
+            0,
+            Integer.MAX_VALUE,
+            "This is the speed of the Advanced Alchamical Furnace. TC's basic has 1.");
 
         makeRequireAlumentum = cfg.getBoolean(
-                "makeRequireAlumentium",
-                "Advanced Alchemy Furnace",
-                true,
-                "Does the Advanced Alchemical Furnace requires Alumentum to work faster");
+            "makeRequireAlumentium",
+            "Advanced Alchemy Furnace",
+            true,
+            "Does the Advanced Alchemical Furnace requires Alumentum to work faster");
 
         // enchants
         elderKnowledgeID = cfg
-                .getInt("elderKnowledgeEnchantmentID", "Enchantments", 98, 0, Enchantment.enchantmentsList.length, "");
+            .getInt("elderKnowledgeEnchantmentID", "Enchantments", 98, 0, Enchantment.enchantmentsList.length, "");
         eldritchBaneID = cfg
-                .getInt("eldritchBaneEnchantmentID", "Enchantments", 99, 0, Enchantment.enchantmentsList.length, "");
+            .getInt("eldritchBaneEnchantmentID", "Enchantments", 99, 0, Enchantment.enchantmentsList.length, "");
         magicTouchID = cfg
-                .getInt("magicTouchEnchantmentID", "Enchantments", 100, 0, Enchantment.enchantmentsList.length, "");
+            .getInt("magicTouchEnchantmentID", "Enchantments", 100, 0, Enchantment.enchantmentsList.length, "");
         taintedID = cfg.getInt("taintedEnchantmentID", "Enchantments", 101, 0, Enchantment.enchantmentsList.length, "");
         vaporisingID = cfg
-                .getInt("vaporisingEnchantmentID", "Enchantments", 102, 0, Enchantment.enchantmentsList.length, "");
+            .getInt("vaporisingEnchantmentID", "Enchantments", 102, 0, Enchantment.enchantmentsList.length, "");
 
         // focus upgrades
         aquaticFociUID = cfg.getInt("aquaticFociUID", "Foci", 42, 0, Integer.MAX_VALUE, "");
@@ -81,55 +81,55 @@ public class TBConfig implements IDummyConfig {
 
         // general + module disable
         allowTobacco = cfg.getBoolean(
-                "allowTobacco",
-                "General",
-                true,
-                "If set to false the tobacco will be disabled - there will be no recipes/no entries in Thaumonomicon");
+            "allowTobacco",
+            "General",
+            true,
+            "If set to false the tobacco will be disabled - there will be no recipes/no entries in Thaumonomicon");
 
         enableTTCompathability = cfg.getBoolean(
-                "enableTTCompathability",
-                "General",
-                true,
-                "Allow the mod to register it's enchantments in the Thaumic Tinkerer's enchanter? Set to false if Thaumic Tinkerer is crashing you.");
+            "enableTTCompathability",
+            "General",
+            true,
+            "Allow the mod to register it's enchantments in the Thaumic Tinkerer's enchanter? Set to false if Thaumic Tinkerer is crashing you.");
 
         shardsFromOre = cfg
-                .getInt("shardsFromOre", "General", 8, 1, 64, "Amount of shards recieved from crucible ore processing");
+            .getInt("shardsFromOre", "General", 8, 1, 64, "Amount of shards recieved from crucible ore processing");
 
         brightFociRequiresPrimordialPearl = cfg.getBoolean(
-                "brightFociRequiresPrimordialPearl",
-                "General",
-                true,
-                "Does the Brightness Foci for the Node Manipulator requires a Primordial Pearl");
+            "brightFociRequiresPrimordialPearl",
+            "General",
+            true,
+            "Does the Brightness Foci for the Node Manipulator requires a Primordial Pearl");
 
         enableRevolver = cfg.getBoolean(
-                "enableRevolver",
-                "General",
-                true,
-                "If set to false the revolver and upgrades will be disabled - there will be no recipes/no entries in Thaumonomicon");
+            "enableRevolver",
+            "General",
+            true,
+            "If set to false the revolver and upgrades will be disabled - there will be no recipes/no entries in Thaumonomicon");
 
         enableNodeTools = cfg.getBoolean(
-                "enableNodeTools",
-                "General",
-                true,
-                "If set to false, will disable the Node Modifer, focuses, and the Node Linker's entries and recipes");
+            "enableNodeTools",
+            "General",
+            true,
+            "If set to false, will disable the Node Modifer, focuses, and the Node Linker's entries and recipes");
 
         enableBracelets = cfg.getBoolean(
-                "enableBracelets",
-                "General",
-                true,
-                "If set to false the various bracelets will be disabled - there will be no recipes/no entries in Thaumonomicon");
+            "enableBracelets",
+            "General",
+            true,
+            "If set to false the various bracelets will be disabled - there will be no recipes/no entries in Thaumonomicon");
 
         enableFlora = cfg.getBoolean(
-                "enableFlora",
-                "General",
-                true,
-                "If set to false the various plant items will be disabled - there will be no recipes/no entries in Thaumonomicon");
+            "enableFlora",
+            "General",
+            true,
+            "If set to false the various plant items will be disabled - there will be no recipes/no entries in Thaumonomicon");
 
         enableBloodyMess = cfg.getBoolean(
-                "enableBloodyMess",
-                "General",
-                true,
-                "If set to false the spikes and bloody robes will be disabled - there will be no recipes/no entries in Thaumonomicon");
+            "enableBloodyMess",
+            "General",
+            true,
+            "If set to false the spikes and bloody robes will be disabled - there will be no recipes/no entries in Thaumonomicon");
 
         /*
          * enableVoidTools = cfg.getBoolean("enableVoidTools", "General", true,
@@ -139,8 +139,8 @@ public class TBConfig implements IDummyConfig {
 
         // pyrofluid
         minBlazePowderFromPyrofluid = cfg
-                .getInt("minBlazePowderFromPyrofluid", "Pyrofluid", 5, 0, Integer.MAX_VALUE, "");
+            .getInt("minBlazePowderFromPyrofluid", "Pyrofluid", 5, 0, Integer.MAX_VALUE, "");
         maxBlazePowderFromPyrofluid = cfg
-                .getInt("maxBlazePowderFromPyrofluid", "Pyrofluid", 5 + 32, 0, Integer.MAX_VALUE, "");
+            .getInt("maxBlazePowderFromPyrofluid", "Pyrofluid", 5 + 32, 0, Integer.MAX_VALUE, "");
     }
 }

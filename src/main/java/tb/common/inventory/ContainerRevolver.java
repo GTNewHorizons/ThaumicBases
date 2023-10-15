@@ -61,8 +61,7 @@ public class ContainerRevolver extends Container {
 
             if (slot == 0) {
                 if (!this.input.isItemValidForSlot(slot, stackInSlot)
-                        || !mergeItemStack(stackInSlot, 1, this.inventorySlots.size(), true, 64))
-                    return null;
+                    || !mergeItemStack(stackInSlot, 1, this.inventorySlots.size(), true, 64)) return null;
             } else
                 if (!this.input.isItemValidForSlot(slot, stackInSlot) || !mergeItemStack(stackInSlot, 0, 1, false, 1))
                     return null;
@@ -79,7 +78,7 @@ public class ContainerRevolver extends Container {
 
         InventoryPlayer inventoryplayer = par4EntityPlayer.inventory;
         if (par1 != 0 || this.input.isItemValidForSlot(par1, inventoryplayer.getItemStack())
-                || (par1 == 0 && inventoryplayer.getItemStack() == null))
+            || (par1 == 0 && inventoryplayer.getItemStack() == null))
             return super.slotClick(par1, par2, par3, par4EntityPlayer);
 
         return null;
@@ -100,16 +99,18 @@ public class ContainerRevolver extends Container {
                 NBTTagCompound var4 = new NBTTagCompound();
                 var3.writeToNBT(var4);
                 this.stack.setTagInfo("jar", var4);
-                this.stack.getTagCompound().setBoolean("hasJar", true);
+                this.stack.getTagCompound()
+                    .setBoolean("hasJar", true);
             } else {
                 this.stack.setTagInfo("jar", new NBTTagCompound());
-                this.stack.getTagCompound().setBoolean("hasJar", false);
+                this.stack.getTagCompound()
+                    .setBoolean("hasJar", false);
             }
 
             if (this.player == null) return;
 
-            if (this.player.getHeldItem() != null && this.player.getHeldItem().isItemEqual(this.stack))
-                this.player.setCurrentItemOrArmor(0, this.stack);
+            if (this.player.getHeldItem() != null && this.player.getHeldItem()
+                .isItemEqual(this.stack)) this.player.setCurrentItemOrArmor(0, this.stack);
 
             this.player.inventory.markDirty();
         }
@@ -129,8 +130,8 @@ public class ContainerRevolver extends Container {
                 ItemStack var8 = var7.getStack();
 
                 if (var8 != null && var8.getItem() == par1ItemStack.getItem()
-                        && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage())
-                        && ItemStack.areItemStackTagsEqual(par1ItemStack, var8)) {
+                    && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage())
+                    && ItemStack.areItemStackTagsEqual(par1ItemStack, var8)) {
                     int var9 = var8.stackSize + par1ItemStack.stackSize;
 
                     if (var9 <= Math.min(par1ItemStack.getMaxStackSize(), limit)) {

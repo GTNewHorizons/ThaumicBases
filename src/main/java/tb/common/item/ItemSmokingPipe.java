@@ -47,13 +47,13 @@ public class ItemSmokingPipe extends Item {
         double y = player.posY + player.getEyeHeight() + look.yCoord / 5;
         double z = player.posZ + look.zCoord / 5;
         if (count < 32) player.worldObj.spawnParticle(
-                isSilverwood ? "explode" : "smoke",
-                x,
-                y,
-                z,
-                look.xCoord / 10,
-                look.yCoord / 10,
-                look.zCoord / 10);
+            isSilverwood ? "explode" : "smoke",
+            x,
+            y,
+            z,
+            look.xCoord / 10,
+            look.yCoord / 10,
+            look.zCoord / 10);
     }
 
     public ItemStack onEaten(ItemStack stack, World w, EntityPlayer player) {
@@ -77,13 +77,13 @@ public class ItemSmokingPipe extends Item {
             double z = player.posZ + look.zCoord / 5;
 
             player.worldObj.spawnParticle(
-                    isSilverwood ? "explode" : "smoke",
-                    x,
-                    y,
-                    z,
-                    look.xCoord / 10,
-                    look.yCoord / 10,
-                    look.zCoord / 10);
+                isSilverwood ? "explode" : "smoke",
+                x,
+                y,
+                z,
+                look.xCoord / 10,
+                look.yCoord / 10,
+                look.zCoord / 10);
         }
 
         return stack;

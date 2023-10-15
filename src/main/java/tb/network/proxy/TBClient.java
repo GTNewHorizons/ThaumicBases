@@ -72,12 +72,11 @@ public class TBClient extends TBServer {
         ClientRegistry.bindTileEntitySpecialRenderer(TileNodeLinker.class, new RenderNodeLinker());
 
         MinecraftForgeClient.registerItemRenderer(TBItems.nodeFoci, new NodeFociRenderer());
-        MinecraftForgeClient.registerItemRenderer(
-                Item.getItemFromBlock(TBBlocks.nodeManipulator),
-                new NodeManipulatorItemRenderer());
+        MinecraftForgeClient
+            .registerItemRenderer(Item.getItemFromBlock(TBBlocks.nodeManipulator), new NodeManipulatorItemRenderer());
         MinecraftForgeClient.registerItemRenderer(TBItems.revolver, new RenderRevolver());
         MinecraftForgeClient
-                .registerItemRenderer(Item.getItemFromBlock(TBBlocks.nodeLinker), new NodeLinkerItemRenderer());
+            .registerItemRenderer(Item.getItemFromBlock(TBBlocks.nodeLinker), new NodeLinkerItemRenderer());
         MinecraftForgeClient.registerItemRenderer(TBItems.castingBracelet, new CastingBraceletRenderer());
 
         RenderingRegistry.registerBlockHandler(new ThaumicRelocatorRenderer());
@@ -90,19 +89,19 @@ public class TBClient extends TBServer {
 
     @Override
     public void lightning(World world, double sx, double sy, double sz, double ex, double ey, double ez, int dur,
-            float curve, int speed, int type) {
+        float curve, int speed, int type) {
         FXLightningBolt bolt = new FXLightningBolt(
-                world,
-                sx,
-                sy,
-                sz,
-                ex,
-                ey,
-                ez,
-                world.rand.nextLong(),
-                dur,
-                curve,
-                speed);
+            world,
+            sx,
+            sy,
+            sz,
+            ex,
+            ey,
+            ez,
+            world.rand.nextLong(),
+            dur,
+            curve,
+            speed);
 
         bolt.defaultFractal();
         bolt.setType(type);
@@ -111,7 +110,7 @@ public class TBClient extends TBServer {
     }
 
     public void sparkle(World w, double x, double y, double z, double dx, double dy, double dz, int color,
-            float scale) {
+        float scale) {
         FXSparkle fx = new FXSparkle(w, x, y, z, dx, dy, dz, scale, color, 1);
         fx.noClip = true;
         ParticleEngine.instance.addEffect(w, fx);

@@ -22,10 +22,10 @@ public class BlockTBSapling extends BlockSapling {
 
     public IIcon[] icons = new IIcon[8];
     public static final String[] names = new String[] { "goldenOakSapling", "peacefullTreeSapling", "netherTreeSapling",
-            "enderTreeSapling" };
+        "enderTreeSapling" };
 
     public static final String[] textures = new String[] { "thaumicbases:goldenOak/sapling",
-            "thaumicbases:peacefullTree/sapling", "thaumicbases:netherTree/sapling", "thaumicbases:enderTree/sapling" };
+        "thaumicbases:peacefullTree/sapling", "thaumicbases:netherTree/sapling", "thaumicbases:enderTree/sapling" };
 
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {

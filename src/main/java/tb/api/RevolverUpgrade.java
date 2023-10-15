@@ -38,17 +38,17 @@ public class RevolverUpgrade {
     public int instability;
 
     public static final ResourceLocation eldritchTextures = new ResourceLocation(
-            "thaumicbases",
-            "textures/items/revolver/revolverDarkMetalEldritch.png");
+        "thaumicbases",
+        "textures/items/revolver/revolverDarkMetalEldritch.png");
     public static final ResourceLocation primalTextures = new ResourceLocation(
-            "thaumicbases",
-            "textures/items/revolver/revolverGunPrimalUV.png");
+        "thaumicbases",
+        "textures/items/revolver/revolverGunPrimalUV.png");
     public static final ResourceLocation taintedTextures = new ResourceLocation(
-            "thaumicbases",
-            "textures/items/revolver/revolverGunTaintedUV.png");
+        "thaumicbases",
+        "textures/items/revolver/revolverGunTaintedUV.png");
     public static final ResourceLocation voidTextures = new ResourceLocation(
-            "thaumicbases",
-            "textures/items/revolver/revolverHandleVoidUV.png");
+        "thaumicbases",
+        "textures/items/revolver/revolverHandleVoidUV.png");
 
     public final ArrayList<RevolverUpgrade> conflicts = new ArrayList<RevolverUpgrade>();
 
@@ -58,15 +58,15 @@ public class RevolverUpgrade {
 
         if (id < allUpgrades.length && allUpgrades[id] != null) {
             FMLLog.warning(
-                    "[TB]Attempting to register revolver upgrade " + name
-                            + "["
-                            + id
-                            + "], but the ID is already occupied by "
-                            + allUpgrades[id].text_id
-                            + "["
-                            + allUpgrades[id].id
-                            + "], ignoring.",
-                    new Object[0]);
+                "[TB]Attempting to register revolver upgrade " + name
+                    + "["
+                    + id
+                    + "], but the ID is already occupied by "
+                    + allUpgrades[id].text_id
+                    + "["
+                    + allUpgrades[id].id
+                    + "], ignoring.",
+                new Object[0]);
             return;
         }
 
@@ -134,12 +134,12 @@ public class RevolverUpgrade {
      * @return the new damage value
      */
     public float modifyDamage_start(EntityLivingBase base, ItemStack revolver, float currentModification,
-            int modLevel) {
+        int modLevel) {
         if (base != null) {
             if (this == power) return (float) (currentModification * (Math.pow(1.1F, modLevel)));
 
             if (this == silver && (base.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD || isBMEntity(base)
-                    || (base instanceof EntityPlayer && isWerewolf(EntityPlayer.class.cast(base)))))
+                || (base instanceof EntityPlayer && isWerewolf(EntityPlayer.class.cast(base)))))
                 return (float) (currentModification * (Math.pow(1.2F, modLevel)));
 
             if (this == atropodsBane && base.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD)
@@ -193,7 +193,7 @@ public class RevolverUpgrade {
      * @return true to destroy bulled, false otherwise
      */
     public boolean afterhit(EntityLivingBase base, EntityPlayer user, ItemStack revolver, final float damageDealt,
-            int modLevel) {
+        int modLevel) {
         if (this == tainted) if (base.worldObj.rand.nextDouble() <= 0.1D)
             base.addPotionEffect(new PotionEffect(Config.potionTaintPoisonID, 200, 1, true));
 
@@ -307,8 +307,8 @@ public class RevolverUpgrade {
                 IExtendedEntityProperties props = p.getExtendedProperties("WitcheryExtendedPlayer");
                 NBTTagCompound tag = new NBTTagCompound();
                 props.saveNBTData(tag);
-                return tag.getCompoundTag("WitcheryExtendedPlayer").getInteger("WerewolfLevel") > 0
-                        || tag.getInteger("WerewolfLevel") > 0;
+                return tag.getCompoundTag("WitcheryExtendedPlayer")
+                    .getInteger("WerewolfLevel") > 0 || tag.getInteger("WerewolfLevel") > 0;
             }
         }
         return false;
@@ -330,35 +330,35 @@ public class RevolverUpgrade {
     }
 
     public static final RevolverUpgrade power = new RevolverUpgrade(0, "POWER").setMaxLevel(5)
-            .setInstabilityPerLevel(2);
+        .setInstabilityPerLevel(2);
     public static final RevolverUpgrade accuracy = new RevolverUpgrade(1, "ACCURACY").setMaxLevel(3)
-            .setInstabilityPerLevel(1);
+        .setInstabilityPerLevel(1);
     public static final RevolverUpgrade silver = new RevolverUpgrade(2, "SILVER").setMaxLevel(5)
-            .setInstabilityPerLevel(3);
+        .setInstabilityPerLevel(3);
     public static final RevolverUpgrade poisoned = new RevolverUpgrade(3, "POISONED").setMaxLevel(3)
-            .setInstabilityPerLevel(1);
+        .setInstabilityPerLevel(1);
     public static final RevolverUpgrade atropodsBane = new RevolverUpgrade(4, "BANE_OF_ATROPODS").setMaxLevel(5)
-            .setInstabilityPerLevel(3);
+        .setInstabilityPerLevel(3);
     public static final RevolverUpgrade eldritchBane = new RevolverUpgrade(5, "BANE_OF_ELDRITCH").setMaxLevel(5)
-            .setInstabilityPerLevel(3);
+        .setInstabilityPerLevel(3);
     public static final RevolverUpgrade piercig = new RevolverUpgrade(6, "PIERCING").setMaxLevel(1)
-            .setInstabilityPerLevel(12);
+        .setInstabilityPerLevel(12);
     public static final RevolverUpgrade dueling = new RevolverUpgrade(7, "DUELING").setMaxLevel(5)
-            .setInstabilityPerLevel(3);
+        .setInstabilityPerLevel(3);
     public static final RevolverUpgrade tainted = new RevolverUpgrade(8, "TAINTED").setMaxLevel(3)
-            .setInstabilityPerLevel(5);
+        .setInstabilityPerLevel(5);
     public static final RevolverUpgrade primal = new RevolverUpgrade(9, "PRIMAL").setMaxLevel(1)
-            .setInstabilityPerLevel(12);
+        .setInstabilityPerLevel(12);
     public static final RevolverUpgrade speed = new RevolverUpgrade(10, "SPEED").setMaxLevel(5)
-            .setInstabilityPerLevel(2);
+        .setInstabilityPerLevel(2);
     public static final RevolverUpgrade efficiency = new RevolverUpgrade(11, "EFFICIENCY").setMaxLevel(5)
-            .setInstabilityPerLevel(4);
+        .setInstabilityPerLevel(4);
     public static final RevolverUpgrade eldritch = new RevolverUpgrade(12, "ELDRITCH").setMaxLevel(2)
-            .setInstabilityPerLevel(7);
+        .setInstabilityPerLevel(7);
     public static final RevolverUpgrade uvoid = new RevolverUpgrade(13, "VOID").setMaxLevel(3)
-            .setInstabilityPerLevel(4);
+        .setInstabilityPerLevel(4);
     public static final RevolverUpgrade knowledge = new RevolverUpgrade(14, "KNOWLEDGE").setMaxLevel(5)
-            .setInstabilityPerLevel(1);
+        .setInstabilityPerLevel(1);
     public static final RevolverUpgrade heavy = new RevolverUpgrade(15, "HEAVY").setMaxLevel(5)
-            .setInstabilityPerLevel(1);
+        .setInstabilityPerLevel(1);
 }

@@ -31,7 +31,7 @@ import thaumcraft.common.items.armor.ItemVoidArmor;
 public class BlockSpike extends Block {
 
     public static final String[] spikeNames = new String[] { "iron", "iron_bloody", "thaumic", "thaumic_bloody", "void",
-            "void_bloody" };
+        "void_bloody" };
 
     public static IIcon[] icons = new IIcon[spikeNames.length];
 
@@ -119,7 +119,7 @@ public class BlockSpike extends Block {
     }
 
     public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float vecX, float vecY,
-            float vecZ) {
+        float vecZ) {
         int meta = w.getBlockMetadata(x, y, z);
         if (meta != 1 && meta != 3 && meta != 5) return false;
 

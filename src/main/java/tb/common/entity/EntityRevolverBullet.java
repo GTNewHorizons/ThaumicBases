@@ -39,11 +39,11 @@ public class EntityRevolverBullet extends EntityThrowable {
             boolean allowNoclip = false;
             float speedIndex = 1;
             for (Pair<RevolverUpgrade, Integer> p : upgrades) {
-                if (!allowNoclip)
-                    allowNoclip = p.getFirst().bulletNoclip((EntityPlayer) shooter, revolver, p.getSecond());
+                if (!allowNoclip) allowNoclip = p.getFirst()
+                    .bulletNoclip((EntityPlayer) shooter, revolver, p.getSecond());
 
                 speedIndex = (float) p.getFirst()
-                        .modifySpeed((EntityPlayer) shooter, revolver, speedIndex, p.getSecond());
+                    .modifySpeed((EntityPlayer) shooter, revolver, speedIndex, p.getSecond());
 
                 if (p.getFirst() == RevolverUpgrade.primal) isPrimal = true;
             }
@@ -62,11 +62,8 @@ public class EntityRevolverBullet extends EntityThrowable {
     public void onUpdate() {
         if (this.worldObj.isRemote) Thaumcraft.proxy.sparkle((float) posX, (float) posY, (float) posZ, 4);
 
-        if (this.worldObj.isRemote) Thaumcraft.proxy.sparkle(
-                (float) (posX - motionX / 20),
-                (float) (posY - motionY / 20),
-                (float) (posZ - motionZ / 20),
-                4);
+        if (this.worldObj.isRemote) Thaumcraft.proxy
+            .sparkle((float) (posX - motionX / 20), (float) (posY - motionY / 20), (float) (posZ - motionZ / 20), 4);
 
         if (this.ticksExisted >= 200) // <- loop exit for primal
             this.setDead();
@@ -96,22 +93,22 @@ public class EntityRevolverBullet extends EntityThrowable {
                 int meta = this.worldObj.getBlockMetadata(object.blockX, object.blockY, object.blockZ);
 
                 for (int i = 0; i < 100; ++i) this.worldObj.spawnParticle(
-                        "blockcrack_" + Block.getIdFromBlock(b) + "_" + meta,
-                        object.blockX + worldObj.rand.nextDouble(),
-                        object.blockY + worldObj.rand.nextDouble(),
-                        object.blockZ + worldObj.rand.nextDouble(),
-                        0,
-                        0,
-                        0);
+                    "blockcrack_" + Block.getIdFromBlock(b) + "_" + meta,
+                    object.blockX + worldObj.rand.nextDouble(),
+                    object.blockY + worldObj.rand.nextDouble(),
+                    object.blockZ + worldObj.rand.nextDouble(),
+                    0,
+                    0,
+                    0);
 
                 worldObj.playSound(
-                        object.blockX + 0.5D,
-                        object.blockY + 0.5D,
-                        object.blockZ + 0.5D,
-                        b.stepSound.getBreakSound(),
-                        1,
-                        1,
-                        false);
+                    object.blockX + 0.5D,
+                    object.blockY + 0.5D,
+                    object.blockZ + 0.5D,
+                    b.stepSound.getBreakSound(),
+                    1,
+                    1,
+                    false);
             }
         }
         if (object.typeOfHit == MovingObjectType.ENTITY) {
@@ -119,11 +116,11 @@ public class EntityRevolverBullet extends EntityThrowable {
             if (e instanceof EntityLivingBase && e != this.shooter && !(e instanceof EntityRevolverBullet)) {
                 EntityLivingBase elb = (EntityLivingBase) e;
                 float initialDamage = 14;
-                for (Pair<RevolverUpgrade, Integer> p : upgrades)
-                    initialDamage = p.getFirst().modifyDamage_start(elb, revolver, initialDamage, p.getSecond());
+                for (Pair<RevolverUpgrade, Integer> p : upgrades) initialDamage = p.getFirst()
+                    .modifyDamage_start(elb, revolver, initialDamage, p.getSecond());
 
-                for (Pair<RevolverUpgrade, Integer> p : upgrades)
-                    initialDamage = p.getFirst().modifyDamage_end(elb, revolver, initialDamage, p.getSecond());
+                for (Pair<RevolverUpgrade, Integer> p : upgrades) initialDamage = p.getFirst()
+                    .modifyDamage_end(elb, revolver, initialDamage, p.getSecond());
 
                 elb.attackEntityFrom(new RevolverDamage("revolver"), initialDamage);
 
@@ -131,8 +128,9 @@ public class EntityRevolverBullet extends EntityThrowable {
 
                 for (Pair<RevolverUpgrade, Integer> p : upgrades) {
                     if (destroy) destroy = p.getFirst()
-                            .afterhit(elb, (EntityPlayer) shooter, revolver, initialDamage, p.getSecond());
-                    else p.getFirst().afterhit(elb, (EntityPlayer) shooter, revolver, initialDamage, p.getSecond());
+                        .afterhit(elb, (EntityPlayer) shooter, revolver, initialDamage, p.getSecond());
+                    else p.getFirst()
+                        .afterhit(elb, (EntityPlayer) shooter, revolver, initialDamage, p.getSecond());
                 }
 
                 if (destroy) this.setDead();

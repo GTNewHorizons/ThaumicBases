@@ -108,7 +108,7 @@ public class ThaumicRelocatorRenderer implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-            RenderBlocks renderer) {
+        RenderBlocks renderer) {
         int meta = world.getBlockMetadata(x, y, z);
 
         int color = meta < 6 ? 0xffff77 : 0x0077ff;

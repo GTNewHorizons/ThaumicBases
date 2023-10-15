@@ -10,10 +10,10 @@ public class ItemBlockSlab_1 extends ItemSlab {
 
     public ItemBlockSlab_1(Block b) {
         this(
-                b,
-                (BlockSlab) TBBlocks.crystalSlab,
-                (BlockSlab) TBBlocks.crystalSlab_full,
-                b == TBBlocks.crystalSlab_full);
+            b,
+            (BlockSlab) TBBlocks.crystalSlab,
+            (BlockSlab) TBBlocks.crystalSlab_full,
+            b == TBBlocks.crystalSlab_full);
     }
 
     public ItemBlockSlab_1(Block block, BlockSlab slab, BlockSlab doubleSlab, boolean isFullSlab) {

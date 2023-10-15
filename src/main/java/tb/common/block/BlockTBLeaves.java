@@ -42,10 +42,10 @@ import tb.init.TBBlocks;
 public class BlockTBLeaves extends BlockOldLeaf {
 
     public static final String[] names = new String[] { "goldenOakLeaves", "peacefullTreeLeaves", "netherTreeLeaves",
-            "enderTreeLeaves" };
+        "enderTreeLeaves" };
 
     public static final String[] textures = new String[] { "goldenOak/leaves", "peacefullTree/leaves",
-            "netherTree/leaves", "enderTree/leaves" };
+        "netherTree/leaves", "enderTree/leaves" };
 
     public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity) {
         if (world.getBlockMetadata(x, y, z) % 8 == 3) if (entity instanceof EntityDragon) return false;
@@ -116,13 +116,13 @@ public class BlockTBLeaves extends BlockOldLeaf {
         }
 
         if (w.getBlockMetadata(x, y, z) % 8 == 3) w.spawnParticle(
-                "portal",
-                x + rnd.nextDouble(),
-                y + rnd.nextDouble(),
-                z + rnd.nextDouble(),
-                MathUtils.randomDouble(rnd),
-                MathUtils.randomDouble(rnd),
-                MathUtils.randomDouble(rnd));
+            "portal",
+            x + rnd.nextDouble(),
+            y + rnd.nextDouble(),
+            z + rnd.nextDouble(),
+            MathUtils.randomDouble(rnd),
+            MathUtils.randomDouble(rnd),
+            MathUtils.randomDouble(rnd));
     }
 
     public Item getItemDropped(int meta, Random rnd, int fortune) {
@@ -150,7 +150,9 @@ public class BlockTBLeaves extends BlockOldLeaf {
                         Class<?> c = entry.entityClass;
                         if (EntityLiving.class.isAssignableFrom(c)) {
                             try {
-                                EntityLiving el = EntityLiving.class.cast(c.getConstructor(World.class).newInstance(w));
+                                EntityLiving el = EntityLiving.class.cast(
+                                    c.getConstructor(World.class)
+                                        .newInstance(w));
                                 while (--y >= dy - 6) {
                                     el.setPositionAndRotation(x + 0.5D, y, z + 0.5D, 0, 0);
                                     if (el.getCanSpawnHere()) {
@@ -160,9 +162,9 @@ public class BlockTBLeaves extends BlockOldLeaf {
                                 }
                             } catch (Exception e) {
                                 FMLLog.warning(
-                                        "[TB]Tried to create an entity of class " + c
-                                                + " but failed! The exception is listed below:",
-                                        new Object[0]);
+                                    "[TB]Tried to create an entity of class " + c
+                                        + " but failed! The exception is listed below:",
+                                    new Object[0]);
                                 e.printStackTrace();
                             }
                         }
@@ -176,21 +178,22 @@ public class BlockTBLeaves extends BlockOldLeaf {
                 Block b = w.getBlock(x, y, z);
                 if (!b.isAir(w, x, y, z)) {
                     boolean netheric = b instanceof BlockNetherrack || b instanceof BlockSoulSand
-                            || b == Blocks.quartz_ore;
+                        || b == Blocks.quartz_ore;
                     if (netheric && rnd.nextDouble() <= 0.05D) {
                         BiomeGenBase hellBiome = BiomeGenBase.hell;
                         @SuppressWarnings("unchecked")
                         List<SpawnListEntry> l = rnd.nextBoolean()
-                                ? hellBiome.getSpawnableList(EnumCreatureType.creature)
-                                : hellBiome.getSpawnableList(EnumCreatureType.monster);
+                            ? hellBiome.getSpawnableList(EnumCreatureType.creature)
+                            : hellBiome.getSpawnableList(EnumCreatureType.monster);
                         if (l != null && !l.isEmpty()) {
                             SpawnListEntry entry = l.get(rnd.nextInt(l.size()));
                             if (entry != null && entry.entityClass != null) {
                                 Class<?> c = entry.entityClass;
                                 if (EntityLiving.class.isAssignableFrom(c)) {
                                     try {
-                                        EntityLiving el = EntityLiving.class
-                                                .cast(c.getConstructor(World.class).newInstance(w));
+                                        EntityLiving el = EntityLiving.class.cast(
+                                            c.getConstructor(World.class)
+                                                .newInstance(w));
 
                                         el.setPositionAndRotation(x + 0.5D, y + 1, z + 0.5D, 0, 0);
                                         el.onSpawnWithEgg(null);
@@ -202,9 +205,9 @@ public class BlockTBLeaves extends BlockOldLeaf {
 
                                     } catch (Exception e) {
                                         FMLLog.warning(
-                                                "[TB]Tried to create an entity of class " + c
-                                                        + " but failed! The exception is listed below:",
-                                                new Object[0]);
+                                            "[TB]Tried to create an entity of class " + c
+                                                + " but failed! The exception is listed below:",
+                                            new Object[0]);
                                         e.printStackTrace();
                                     }
                                 }
@@ -214,9 +217,9 @@ public class BlockTBLeaves extends BlockOldLeaf {
                         break;
                     } else {
                         boolean flag = b instanceof BlockDirt || b instanceof BlockGrass
-                                || b instanceof BlockGravel
-                                || b instanceof BlockSand
-                                || b instanceof BlockStone;
+                            || b instanceof BlockGravel
+                            || b instanceof BlockSand
+                            || b instanceof BlockStone;
                         if (!flag) {
                             ItemStack stk = new ItemStack(b, 1, w.getBlockMetadata(x, y, z));
                             if (OreDictionary.getOreIDs(stk) != null && OreDictionary.getOreIDs(stk).length > 0) {
@@ -226,9 +229,9 @@ public class BlockTBLeaves extends BlockOldLeaf {
                                         String ore = OreDictionary.getOreName(id);
                                         if (ore != null && !ore.isEmpty()) {
                                             flag = ore.contains("dirt") || ore.contains("grass")
-                                                    || ore.contains("sand")
-                                                    || ore.contains("gravel")
-                                                    || ore.contains("stone");
+                                                || ore.contains("sand")
+                                                || ore.contains("gravel")
+                                                || ore.contains("stone");
                                             if (flag) break OreDict;
                                         }
                                     }
@@ -238,7 +241,7 @@ public class BlockTBLeaves extends BlockOldLeaf {
                         if (flag) {
                             double random = rnd.nextDouble();
                             Block setTo = random <= 0.6D ? Blocks.netherrack
-                                    : random <= 0.9D ? Blocks.soul_sand : Blocks.quartz_ore;
+                                : random <= 0.9D ? Blocks.soul_sand : Blocks.quartz_ore;
                             w.setBlock(x, y, z, setTo, 0, 3);
                             break;
                         }
@@ -256,16 +259,17 @@ public class BlockTBLeaves extends BlockOldLeaf {
                         BiomeGenBase hellBiome = BiomeGenBase.sky;
                         @SuppressWarnings("unchecked")
                         List<SpawnListEntry> l = rnd.nextBoolean()
-                                ? hellBiome.getSpawnableList(EnumCreatureType.creature)
-                                : hellBiome.getSpawnableList(EnumCreatureType.monster);
+                            ? hellBiome.getSpawnableList(EnumCreatureType.creature)
+                            : hellBiome.getSpawnableList(EnumCreatureType.monster);
                         if (l != null && !l.isEmpty()) {
                             SpawnListEntry entry = l.get(rnd.nextInt(l.size()));
                             if (entry != null && entry.entityClass != null) {
                                 Class<?> c = entry.entityClass;
                                 if (EntityLiving.class.isAssignableFrom(c)) {
                                     try {
-                                        EntityLiving el = EntityLiving.class
-                                                .cast(c.getConstructor(World.class).newInstance(w));
+                                        EntityLiving el = EntityLiving.class.cast(
+                                            c.getConstructor(World.class)
+                                                .newInstance(w));
 
                                         el.setPositionAndRotation(x + 0.5D, y + 1, z + 0.5D, 0, 0);
                                         el.onSpawnWithEgg(null);
@@ -277,9 +281,9 @@ public class BlockTBLeaves extends BlockOldLeaf {
 
                                     } catch (Exception e) {
                                         FMLLog.warning(
-                                                "[TB]Tried to create an entity of class " + c
-                                                        + " but failed! The exception is listed below:",
-                                                new Object[0]);
+                                            "[TB]Tried to create an entity of class " + c
+                                                + " but failed! The exception is listed below:",
+                                            new Object[0]);
                                         e.printStackTrace();
                                     }
                                 }
@@ -289,9 +293,9 @@ public class BlockTBLeaves extends BlockOldLeaf {
                         break;
                     } else {
                         boolean flag = b instanceof BlockDirt || b instanceof BlockGrass
-                                || b instanceof BlockGravel
-                                || b instanceof BlockSand
-                                || b instanceof BlockStone && !(b instanceof BlockObsidian) && !(b == Blocks.end_stone);
+                            || b instanceof BlockGravel
+                            || b instanceof BlockSand
+                            || b instanceof BlockStone && !(b instanceof BlockObsidian) && !(b == Blocks.end_stone);
                         if (!flag) {
                             ItemStack stk = new ItemStack(b, 1, w.getBlockMetadata(x, y, z));
                             if (OreDictionary.getOreIDs(stk) != null && OreDictionary.getOreIDs(stk).length > 0) {
@@ -301,9 +305,9 @@ public class BlockTBLeaves extends BlockOldLeaf {
                                         String ore = OreDictionary.getOreName(id);
                                         if (ore != null && !ore.isEmpty()) {
                                             flag = ore.contains("dirt") || ore.contains("grass")
-                                                    || ore.contains("sand")
-                                                    || ore.contains("gravel")
-                                                    || ore.contains("stone");
+                                                || ore.contains("sand")
+                                                || ore.contains("gravel")
+                                                || ore.contains("stone");
                                             if (flag) break OreDict;
                                         }
                                     }

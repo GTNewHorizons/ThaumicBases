@@ -65,7 +65,7 @@ public class ItemRosehipSyrup extends Item {
 
     public static int processPotion(EntityPlayer p, PotionEffect effect) {
         if (effect != null && effect.getPotionID() < Potion.potionTypes.length
-                && Potion.potionTypes[effect.getPotionID()] != null) {
+            && Potion.potionTypes[effect.getPotionID()] != null) {
             if (isBadEffect(Potion.potionTypes[effect.getPotionID()])) return effect.getPotionID();
 
             if (canDecreaseLevel(Potion.potionTypes[effect.getPotionID()])) {
@@ -82,21 +82,21 @@ public class ItemRosehipSyrup extends Item {
 
     public static boolean isBadEffect(Potion p) {
         return p != null && (p == Potion.blindness || p == Potion.confusion
-                || p == Potion.digSlowdown
-                || p == Potion.hunger
-                || p == Potion.moveSlowdown
-                || p == Potion.poison
-                || p == Potion.weakness
-                || p == Potion.wither);
+            || p == Potion.digSlowdown
+            || p == Potion.hunger
+            || p == Potion.moveSlowdown
+            || p == Potion.poison
+            || p == Potion.weakness
+            || p == Potion.wither);
     }
 
     public static boolean canDecreaseLevel(Potion p) {
         int id = p.getId();
         return p != null && (id == Config.potionBlurredID || id == Config.potionInfVisExhaustID
-                || id == Config.potionTaintPoisonID
-                || id == Config.potionThaumarhiaID
-                || id == Config.potionUnHungerID
-                || id == Config.potionVisExhaustID);
+            || id == Config.potionTaintPoisonID
+            || id == Config.potionThaumarhiaID
+            || id == Config.potionUnHungerID
+            || id == Config.potionVisExhaustID);
     }
 
     public static void reflectPotionEffect(EntityPlayer p, PotionEffect effect) {

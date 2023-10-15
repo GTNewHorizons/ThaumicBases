@@ -37,7 +37,7 @@ import thaumcraft.common.items.wands.ItemWandCasting;
 public class CastingBraceletRenderer implements IItemRenderer {
 
     public static final IModelCustom bracelet = AdvancedModelLoader
-            .loadModel(new ResourceLocation("thaumicbases", "models/bracelet/bracelet.obj"));
+        .loadModel(new ResourceLocation("thaumicbases", "models/bracelet/bracelet.obj"));
     public static final RenderBlocks renderBlocks = new RenderBlocks();
     public static final ModelWand wand = new ModelWand();
 
@@ -93,7 +93,9 @@ public class CastingBraceletRenderer implements IItemRenderer {
 
         if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
             GL11.glPushMatrix();
-            Minecraft.getMinecraft().getTextureManager().bindTexture(entityclientplayermp.getLocationSkin());
+            Minecraft.getMinecraft()
+                .getTextureManager()
+                .bindTexture(entityclientplayermp.getLocationSkin());
 
             GL11.glTranslated(0.5D, 1, 1);
 
@@ -140,10 +142,11 @@ public class CastingBraceletRenderer implements IItemRenderer {
         double ds = 0.2D;
         GL11.glScaled(ds, ds, ds);
         Minecraft.getMinecraft().renderEngine.bindTexture(
-                ItemCastingBracelet.braceletTextures[Math
-                        .min(ItemCastingBracelet.braceletTextures.length - 1, item.getItemDamage())]);
+            ItemCastingBracelet.braceletTextures[Math
+                .min(ItemCastingBracelet.braceletTextures.length - 1, item.getItemDamage())]);
         GL11.glPushMatrix();
-        if (wand.getRod(item) != null && wand.getRod(item).isGlowing()) {
+        if (wand.getRod(item) != null && wand.getRod(item)
+            .isGlowing()) {
             int j = (int) (200.0F + MathHelper.sin(entityclientplayermp.ticksExisted) * 5.0F + 5.0F);
             int k = j % 65536;
             int l = j / 65536;
@@ -153,12 +156,14 @@ public class CastingBraceletRenderer implements IItemRenderer {
         GL11.glPopMatrix();
 
         if (focusStack != null) {
-            if (wand.getFocus(item).getOrnament(focusStack) != null) {
+            if (wand.getFocus(item)
+                .getOrnament(focusStack) != null) {
                 GL11.glPushMatrix();
                 GL11.glScaled(5, 5, 5);
                 GL11.glTranslated(0, 0.7D, 0);
                 Tessellator tessellator = Tessellator.instance;
-                IIcon icon = wand.getFocus(item).getOrnament(focusStack);
+                IIcon icon = wand.getFocus(item)
+                    .getOrnament(focusStack);
                 float minU = icon.getMinU();
                 float minV = icon.getMinV();
                 float maxU = icon.getMaxU();
@@ -168,34 +173,35 @@ public class CastingBraceletRenderer implements IItemRenderer {
                 GL11.glTranslatef(-0.25F, -0.1F, 0.0275F);
                 GL11.glScaled(0.5D, 0.5D, 0.5D);
                 ItemRenderer.renderItemIn2D(
-                        tessellator,
-                        maxU,
-                        minV,
-                        minU,
-                        maxV,
-                        icon.getIconWidth(),
-                        icon.getIconHeight(),
-                        0.1F);
+                    tessellator,
+                    maxU,
+                    minV,
+                    minU,
+                    maxV,
+                    icon.getIconWidth(),
+                    icon.getIconHeight(),
+                    0.1F);
                 GL11.glPopMatrix();
                 GL11.glPushMatrix();
                 GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
                 GL11.glTranslatef(-0.25F, -0.1F, 0.0275F);
                 GL11.glScaled(0.5D, 0.5D, 0.5D);
                 ItemRenderer.renderItemIn2D(
-                        tessellator,
-                        maxU,
-                        minV,
-                        minU,
-                        maxV,
-                        icon.getIconWidth(),
-                        icon.getIconHeight(),
-                        0.1F);
+                    tessellator,
+                    maxU,
+                    minV,
+                    minU,
+                    maxV,
+                    icon.getIconWidth(),
+                    icon.getIconHeight(),
+                    0.1F);
                 GL11.glPopMatrix();
                 GL11.glPopMatrix();
             }
 
             float alpha = 0.95F;
-            if (wand.getFocus(item).getFocusDepthLayerIcon(focusStack) != null) {
+            if (wand.getFocus(item)
+                .getFocusDepthLayerIcon(focusStack) != null) {
                 GL11.glPushMatrix();
                 GL11.glScaled(5, 5, 5);
                 GL11.glTranslated(0, 0.87D, 0);
@@ -204,8 +210,12 @@ public class CastingBraceletRenderer implements IItemRenderer {
                                                         // should be identical to his.
                 Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture);
                 renderBlocks.setRenderBoundsFromBlock(Blocks.glass);
-                BlockRenderer
-                        .drawFaces(renderBlocks, null, wand.getFocus(item).getFocusDepthLayerIcon(focusStack), false);
+                BlockRenderer.drawFaces(
+                    renderBlocks,
+                    null,
+                    wand.getFocus(item)
+                        .getFocusDepthLayerIcon(focusStack),
+                    false);
                 alpha = 0.6F;
                 GL11.glPopMatrix();
             }
@@ -223,7 +233,9 @@ public class CastingBraceletRenderer implements IItemRenderer {
             GL11.glTranslated(0, 0.87D, 0);
             GL11.glTranslatef(0.0F, -0.0475F, 0.0F);
             GL11.glScaled(0.525D, 0.5525D, 0.525D);
-            Color c = new Color(wand.getFocus(item).getFocusColor(focusStack));
+            Color c = new Color(
+                wand.getFocus(item)
+                    .getFocusColor(focusStack));
             GL11.glColor4f(c.getRed() / 255.0F, c.getGreen() / 255.0F, c.getBlue() / 255.0F, alpha);
             int j = (int) (195.0F + MathHelper.sin(entityclientplayermp.ticksExisted / 3.0F) * 10.0F + 10.0F);
             int k = j % 65536;

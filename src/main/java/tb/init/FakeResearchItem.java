@@ -15,7 +15,7 @@ public class FakeResearchItem extends ResearchItem {
     public ResearchItem origResearch;
 
     public FakeResearchItem(final String name, final String cat, final String origin, final String originCategory,
-            final int x, final int y, final ResourceLocation icon) {
+        final int x, final int y, final ResourceLocation icon) {
         super(name, cat, new AspectList(), x, y, 1, icon);
         this.origResearch = ResearchCategories.getResearch(origin);
         this.addSiblingToOriginal();
@@ -24,7 +24,7 @@ public class FakeResearchItem extends ResearchItem {
     }
 
     public FakeResearchItem(final String name, final String cat, final String origin, final String originCategory,
-            final int x, final int y, final ItemStack icon) {
+        final int x, final int y, final ItemStack icon) {
         super(name, cat, new AspectList(), x, y, 1, icon);
         this.origResearch = ResearchCategories.getResearch(origin);
         this.addSiblingToOriginal();
@@ -37,7 +37,7 @@ public class FakeResearchItem extends ResearchItem {
             this.origResearch.setSiblings(new String[] { this.key });
         } else {
             final String[] newSiblings = Arrays
-                    .copyOf(this.origResearch.siblings, this.origResearch.siblings.length + 1);
+                .copyOf(this.origResearch.siblings, this.origResearch.siblings.length + 1);
             newSiblings[this.origResearch.siblings.length] = this.key;
             this.origResearch.setSiblings(newSiblings);
         }

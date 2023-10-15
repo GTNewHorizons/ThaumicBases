@@ -37,7 +37,7 @@ import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
 public class ItemConcentratedTaint extends Item {
 
     public boolean onItemUse(ItemStack stk, EntityPlayer user, World w, int x, int y, int z, int side, float vecX,
-            float vecY, float vecZ) {
+        float vecY, float vecZ) {
         --stk.stackSize;
         w.playSound(x, y, z, "break.glass", 1, 1, false);
 
@@ -45,7 +45,8 @@ public class ItemConcentratedTaint extends Item {
         if (b == ConfigBlocks.blockAiry) {
             TileEntity tile = w.getTileEntity(x, y, z);
             if (tile instanceof INode) {
-                INode.class.cast(tile).setNodeType(NodeType.TAINTED);
+                INode.class.cast(tile)
+                    .setNodeType(NodeType.TAINTED);
                 return true;
             }
         }
@@ -55,8 +56,8 @@ public class ItemConcentratedTaint extends Item {
             int dZ = z + MathHelper.floor_double(MathUtils.randomDouble(w.rand) * 16);
             int dY = y + w.rand.nextInt(2) - w.rand.nextInt(2);
             MiscUtils.changeBiome(w, ThaumcraftWorldGenerator.biomeTaint, dX, dZ);
-            if (w.isBlockNormalCubeDefault(dX, dY - 1, dZ, false)
-                    && w.getBlock(dX, dY, dZ).isReplaceable(w, dX, dY, dZ)) {
+            if (w.isBlockNormalCubeDefault(dX, dY - 1, dZ, false) && w.getBlock(dX, dY, dZ)
+                .isReplaceable(w, dX, dY, dZ)) {
                 w.setBlock(dX, dY, dZ, ConfigBlocks.blockTaintFibres, 0, 3);
             }
             Thaumcraft.proxy.bottleTaintBreak(w, dX, dY, dZ);
@@ -79,11 +80,11 @@ public class ItemConcentratedTaint extends Item {
                     if (armor != null) {
                         ItemStack newArmor = armor.copy();
                         EntityItem actualArmor = new EntityItem(
-                                victum.worldObj,
-                                victum.posX,
-                                victum.posY,
-                                victum.posZ,
-                                newArmor);
+                            victum.worldObj,
+                            victum.posX,
+                            victum.posY,
+                            victum.posZ,
+                            newArmor);
                         actualArmor.delayBeforeCanPickup = 1200;
                         if (!victum.worldObj.isRemote) victum.worldObj.spawnEntityInWorld(actualArmor);
 
@@ -135,24 +136,27 @@ public class ItemConcentratedTaint extends Item {
 
             if (player.posY > 6) {
                 player.addChatMessage(
-                        new ChatComponentText(StatCollector.translateToLocal("tb.txt.howlBelow")).setChatStyle(
-                                new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE).setItalic(true)));
+                    new ChatComponentText(StatCollector.translateToLocal("tb.txt.howlBelow")).setChatStyle(
+                        new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE)
+                            .setItalic(true)));
                 TBUtils.addWarpToPlayer(player, 6, 0);
             } else {
                 if (player.worldObj.provider != null && player.worldObj.provider.dimensionId == -1) {
                     player.addChatMessage(
-                            new ChatComponentText(StatCollector.translateToLocal("tb.txt.taintDevelop")).setChatStyle(
-                                    new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE).setItalic(true)));
+                        new ChatComponentText(StatCollector.translateToLocal("tb.txt.taintDevelop")).setChatStyle(
+                            new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE)
+                                .setItalic(true)));
                     TBUtils.addWarpToPlayer(player, 18, 0);
                     TBUtils.addWarpToPlayer(player, 6, 1);
                     TBUtils.addWarpToPlayer(player, 1, 2);
                     if (!ResearchManager.isResearchComplete(player.getCommandSenderName(), "TB.TaintProgress"))
                         PacketHandler.INSTANCE
-                                .sendTo(new PacketResearchComplete("@TB.TaintProgress"), (EntityPlayerMP) player);
+                            .sendTo(new PacketResearchComplete("@TB.TaintProgress"), (EntityPlayerMP) player);
                 } else {
                     player.addChatMessage(
-                            new ChatComponentText(StatCollector.translateToLocal("tb.txt.howlDeeper")).setChatStyle(
-                                    new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE).setItalic(true)));
+                        new ChatComponentText(StatCollector.translateToLocal("tb.txt.howlDeeper")).setChatStyle(
+                            new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE)
+                                .setItalic(true)));
                     TBUtils.addWarpToPlayer(player, 12, 0);
                 }
             }

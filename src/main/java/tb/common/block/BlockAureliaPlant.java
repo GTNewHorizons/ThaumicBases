@@ -41,7 +41,7 @@ public class BlockAureliaPlant extends Block {
 
     protected boolean canPlaceBlockOn(Block b) {
         return b != null
-                && (b == Blocks.grass || b == Blocks.dirt || b instanceof BlockGrass || b instanceof BlockDirt);
+            && (b == Blocks.grass || b == Blocks.dirt || b instanceof BlockGrass || b instanceof BlockDirt);
     }
 
     public void updateTick(World w, int x, int y, int z, Random rnd) {
@@ -95,7 +95,7 @@ public class BlockAureliaPlant extends Block {
     }
 
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_,
-            int p_149668_4_) {
+        int p_149668_4_) {
         return null;
     }
 
@@ -131,7 +131,9 @@ public class BlockAureliaPlant extends Block {
     }
 
     public static boolean canGrowOn(World w, int x, int y, int z) {
-        return !w.isAirBlock(x, y, z) && (w.getBlock(x, y, z).isReplaceableOreGen(w, x, y, z, Blocks.grass)
-                || w.getBlock(x, y, z).isReplaceableOreGen(w, x, y, z, Blocks.dirt));
+        return !w.isAirBlock(x, y, z) && (w.getBlock(x, y, z)
+            .isReplaceableOreGen(w, x, y, z, Blocks.grass)
+            || w.getBlock(x, y, z)
+                .isReplaceableOreGen(w, x, y, z, Blocks.dirt));
     }
 }

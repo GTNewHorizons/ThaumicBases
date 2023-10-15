@@ -12,14 +12,14 @@ import org.lwjgl.opengl.GL11;
 public class RenderNodeLinker extends TileEntitySpecialRenderer {
 
     public static final IModelCustom model = AdvancedModelLoader
-            .loadModel(new ResourceLocation("thaumicbases", "models/nodeLinker/nodeLinker.obj"));
+        .loadModel(new ResourceLocation("thaumicbases", "models/nodeLinker/nodeLinker.obj"));
     public static final ResourceLocation genIcon = new ResourceLocation(
-            "thaumicbases",
-            "textures/blocks/nodeLinker/nodeLinkerUV.png");
+        "thaumicbases",
+        "textures/blocks/nodeLinker/nodeLinkerUV.png");
 
     @Override
     public void renderTileEntityAt(TileEntity tile, double screenX, double screenY, double screenZ,
-            float partialTicks) {
+        float partialTicks) {
         GL11.glPushMatrix();
         GL11.glTranslated(screenX + 0.5D, screenY, screenZ + 0.5D);
         GL11.glScaled(0.5D, 0.5D, 0.5D);

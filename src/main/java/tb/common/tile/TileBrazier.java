@@ -62,9 +62,9 @@ public class TileBrazier extends TileEntity {
 
         if (!this.worldObj.isRemote) {
             List<EntityCreature> creatures = this.worldObj.getEntitiesWithinAABB(
-                    EntityCreature.class,
-                    AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
-                            .expand(12, 6, 12));
+                EntityCreature.class,
+                AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
+                    .expand(12, 6, 12));
 
             for (EntityCreature c : creatures) {
                 if (!(c instanceof IMob)) continue;

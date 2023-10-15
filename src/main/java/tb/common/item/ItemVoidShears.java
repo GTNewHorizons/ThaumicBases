@@ -20,9 +20,8 @@ public class ItemVoidShears extends ItemShears implements IRepairable, IWarpingG
     public void onUpdate(ItemStack stk, World w, Entity entity, int slot, boolean held) {
         super.onUpdate(stk, w, entity, slot, held);
         if ((stk.isItemDamaged()) && (entity != null)
-                && (entity.ticksExisted % 20 == 0)
-                && ((entity instanceof EntityLivingBase)))
-            stk.damageItem(-1, (EntityLivingBase) entity);
+            && (entity.ticksExisted % 20 == 0)
+            && ((entity instanceof EntityLivingBase))) stk.damageItem(-1, (EntityLivingBase) entity);
     }
 
     public int getWarp(ItemStack itemstack, EntityPlayer player) {

@@ -22,7 +22,7 @@ public class TileRelocator extends TileEntity implements IWandable {
     @SuppressWarnings("unchecked")
     public void updateEntity() {
         ForgeDirection orientation = ForgeDirection.values()[this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord)
-                % 6];
+            % 6];
         ForgeDirection opposite = orientation.getOpposite();
 
         if (firstTick || checkCount % 100 == 0) {
@@ -30,26 +30,28 @@ public class TileRelocator extends TileEntity implements IWandable {
             firstTick = false;
             int cont = 0;
             while (worldObj.getBlock(
-                    xCoord + opposite.offsetX * cont,
-                    yCoord + opposite.offsetY * cont,
-                    zCoord + opposite.offsetZ * cont) instanceof BlockRelocator) {
+                xCoord + opposite.offsetX * cont,
+                yCoord + opposite.offsetY * cont,
+                zCoord + opposite.offsetZ * cont) instanceof BlockRelocator) {
                 ++cont;
             }
 
             int cnt = 1;
 
             while (cnt <= cont * 10 && (worldObj.isAirBlock(
-                    xCoord + orientation.offsetX * cnt,
-                    yCoord + orientation.offsetY * cnt,
-                    zCoord + orientation.offsetZ * cnt)
-                    || !worldObj.getBlock(
-                            xCoord + orientation.offsetX * cnt,
-                            yCoord + orientation.offsetY * cnt,
-                            zCoord + orientation.offsetZ * cnt).isNormalCube(
-                                    worldObj,
-                                    xCoord + orientation.offsetX * cnt,
-                                    yCoord + orientation.offsetY * cnt,
-                                    zCoord + orientation.offsetZ * cnt))) {
+                xCoord + orientation.offsetX * cnt,
+                yCoord + orientation.offsetY * cnt,
+                zCoord + orientation.offsetZ * cnt)
+                || !worldObj
+                    .getBlock(
+                        xCoord + orientation.offsetX * cnt,
+                        yCoord + orientation.offsetY * cnt,
+                        zCoord + orientation.offsetZ * cnt)
+                    .isNormalCube(
+                        worldObj,
+                        xCoord + orientation.offsetX * cnt,
+                        yCoord + orientation.offsetY * cnt,
+                        zCoord + orientation.offsetZ * cnt))) {
 
                 ++power;
                 ++cnt;
@@ -58,23 +60,23 @@ public class TileRelocator extends TileEntity implements IWandable {
 
         if (!isBlockPowered()) {
             if (!this.worldObj
-                    .getBlock(xCoord + orientation.offsetX, yCoord + orientation.offsetY, zCoord + orientation.offsetZ)
-                    .isSideSolid(worldObj, xCoord, yCoord, zCoord, opposite)) {
+                .getBlock(xCoord + orientation.offsetX, yCoord + orientation.offsetY, zCoord + orientation.offsetZ)
+                .isSideSolid(worldObj, xCoord, yCoord, zCoord, opposite)) {
                 int meta = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord) % 6;
                 boolean attract = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord) > 5;
                 AxisAlignedBB aabb = null;
                 if (meta == 0) aabb = AxisAlignedBB
-                        .getBoundingBox(xCoord, yCoord - power, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
+                    .getBoundingBox(xCoord, yCoord - power, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
                 if (meta == 1) aabb = AxisAlignedBB
-                        .getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1 + power, zCoord + 1);
+                    .getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1 + power, zCoord + 1);
                 if (meta == 2) aabb = AxisAlignedBB
-                        .getBoundingBox(xCoord, yCoord, zCoord - power, xCoord + 1, yCoord + 1, zCoord + 1);
+                    .getBoundingBox(xCoord, yCoord, zCoord - power, xCoord + 1, yCoord + 1, zCoord + 1);
                 if (meta == 3) aabb = AxisAlignedBB
-                        .getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1 + power);
+                    .getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1 + power);
                 if (meta == 4) aabb = AxisAlignedBB
-                        .getBoundingBox(xCoord - power, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
+                    .getBoundingBox(xCoord - power, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
                 if (meta == 5) aabb = AxisAlignedBB
-                        .getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1 + power, yCoord + 1, zCoord + 1);
+                    .getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1 + power, yCoord + 1, zCoord + 1);
 
                 List<Entity> affected = this.worldObj.getEntitiesWithinAABB(Entity.class, aabb);
 
@@ -130,7 +132,7 @@ public class TileRelocator extends TileEntity implements IWandable {
 
     @Override
     public int onWandRightClick(World paramWorld, ItemStack paramItemStack, EntityPlayer paramEntityPlayer,
-            int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5) {
+        int paramInt1, int paramInt2, int paramInt3, int paramInt4, int paramInt5) {
         paramEntityPlayer.swingItem();
         paramWorld.playSound(xCoord, yCoord, zCoord, "thaumcraft:cameraticks", 1, 1, false);
         if (!paramEntityPlayer.isSneaking()) {
@@ -139,7 +141,7 @@ public class TileRelocator extends TileEntity implements IWandable {
         } else {
             int meta = paramWorld.getBlockMetadata(xCoord, yCoord, zCoord) > 5 ? 6 : 0;
             paramWorld
-                    .setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + ForgeDirection.OPPOSITES[paramInt4], 3);
+                .setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + ForgeDirection.OPPOSITES[paramInt4], 3);
         }
         return 0;
     }
@@ -154,10 +156,10 @@ public class TileRelocator extends TileEntity implements IWandable {
 
     @Override
     public void onWandStoppedUsing(ItemStack paramItemStack, World paramWorld, EntityPlayer paramEntityPlayer,
-            int paramInt) {}
+        int paramInt) {}
 
     public boolean isBlockPowered() {
         return this.worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)
-                || this.worldObj.getBlockPowerInput(xCoord, yCoord, zCoord) > 0;
+            || this.worldObj.getBlockPowerInput(xCoord, yCoord, zCoord) > 0;
     }
 }

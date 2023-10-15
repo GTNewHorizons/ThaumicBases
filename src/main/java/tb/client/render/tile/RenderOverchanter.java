@@ -19,7 +19,7 @@ public class RenderOverchanter extends TileEntitySpecialRenderer {
 
     @Override
     public void renderTileEntityAt(TileEntity tile, double screenX, double screenY, double screenZ,
-            float partialTicks) {
+        float partialTicks) {
         TileOverchanter overchanter = (TileOverchanter) tile;
 
         /*
@@ -44,27 +44,31 @@ public class RenderOverchanter extends TileEntitySpecialRenderer {
 
             int renderPass = 0;
             do {
-                IIcon icon = item.getItem().getIcon(item, renderPass);
+                IIcon icon = item.getItem()
+                    .getIcon(item, renderPass);
                 if (icon != null) {
-                    Color color = new Color(item.getItem().getColorFromItemStack(item, renderPass));
+                    Color color = new Color(
+                        item.getItem()
+                            .getColorFromItemStack(item, renderPass));
                     GL11.glColor3ub((byte) color.getRed(), (byte) color.getGreen(), (byte) color.getBlue());
                     float f = icon.getMinU();
                     float f1 = icon.getMaxU();
                     float f2 = icon.getMinV();
                     float f3 = icon.getMaxV();
                     ItemRenderer.renderItemIn2D(
-                            Tessellator.instance,
-                            f1,
-                            f2,
-                            f,
-                            f3,
-                            icon.getIconWidth(),
-                            icon.getIconHeight(),
-                            1F / 16F);
+                        Tessellator.instance,
+                        f1,
+                        f2,
+                        f,
+                        f3,
+                        icon.getIconWidth(),
+                        icon.getIconHeight(),
+                        1F / 16F);
                     GL11.glColor3f(1F, 1F, 1F);
                 }
                 renderPass++;
-            } while (renderPass < item.getItem().getRenderPasses(item.getItemDamage()));
+            } while (renderPass < item.getItem()
+                .getRenderPasses(item.getItemDamage()));
             GL11.glPopMatrix();
         }
 

@@ -58,7 +58,7 @@ public class BlockOverchanter extends BlockContainer {
     }
 
     public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int side, float vecX, float vecY,
-            float vecZ) {
+        float vecZ) {
         if (!p.isSneaking()) {
             if (!w.isRemote) {
                 p.openGui(TBCore.instance, 0x421922, w, x, y, z);

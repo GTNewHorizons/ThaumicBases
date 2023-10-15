@@ -37,7 +37,7 @@ public class BlockNodeManipulator extends BlockContainer {
     }
 
     public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int side, float vecX, float vecY,
-            float vecZ) {
+        float vecZ) {
         if (p.getCurrentEquippedItem() != null) {
             ItemStack current = p.getCurrentEquippedItem();
             if (current.getItem() instanceof ItemNodeFoci) {

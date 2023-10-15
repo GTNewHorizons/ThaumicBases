@@ -19,19 +19,19 @@ public class TBNetworkManager implements IMessageHandler<PacketTB, IMessage> {
             NBTTagCompound tag = message.sent;
             World w = TBCore.proxy.clientWorld();
             w.playSound(
-                    tag.getDouble("x"),
-                    tag.getDouble("y"),
-                    tag.getDouble("z"),
-                    tag.getString("snd"),
-                    tag.getFloat("v"),
-                    tag.getFloat("p"),
-                    false);
+                tag.getDouble("x"),
+                tag.getDouble("y"),
+                tag.getDouble("z"),
+                tag.getString("snd"),
+                tag.getFloat("v"),
+                tag.getFloat("p"),
+                false);
         }
         return null;
     }
 
     public static void playSoundOnServer(World w, String sound, double x, double y, double z, float volume,
-            float pitch) {
+        float pitch) {
         NBTTagCompound tg = new NBTTagCompound();
         tg.setString("snd", sound);
         tg.setDouble("x", x);

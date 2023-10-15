@@ -12,7 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemNodeFoci extends Item {
 
     public static final String names[] = new String[] { "brightness", "destruction", "efficiency", "hunger",
-            "instability", "purity", "sinister", "speed", "stability", "taint" };
+        "instability", "purity", "sinister", "speed", "stability", "taint" };
 
     public ItemNodeFoci() {
         super();

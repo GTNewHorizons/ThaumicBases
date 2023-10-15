@@ -37,8 +37,10 @@ import thaumcraft.common.config.ConfigBlocks;
 public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
 
     public static void addUpgrade(ItemStack stk, RevolverUpgrade upgrade, int level) {
-        if (stk.hasTagCompound() && stk.getTagCompound().hasKey("tb.upgrades")) {
-            NBTTagList upgrades = stk.getTagCompound().getTagList("tb.upgrades", 10);
+        if (stk.hasTagCompound() && stk.getTagCompound()
+            .hasKey("tb.upgrades")) {
+            NBTTagList upgrades = stk.getTagCompound()
+                .getTagList("tb.upgrades", 10);
             for (int i = 0; i < upgrades.tagCount(); ++i) {
                 NBTTagCompound tag = upgrades.getCompoundTagAt(i);
                 int id = tag.getInteger("id");
@@ -57,23 +59,26 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
         } else {
             if (!stk.hasTagCompound()) stk.setTagCompound(new NBTTagCompound());
 
-            if (!stk.getTagCompound().hasKey("tb.upgrades"))
-                stk.getTagCompound().setTag("tb.upgrades", new NBTTagList());
+            if (!stk.getTagCompound()
+                .hasKey("tb.upgrades"))
+                stk.getTagCompound()
+                    .setTag("tb.upgrades", new NBTTagList());
 
             addUpgrade(stk, upgrade, level);
         }
     }
 
     public static int getUpgradeLevel(ItemStack stk, RevolverUpgrade upgrade) {
-        if (stk.hasTagCompound() && stk.getTagCompound().hasKey("tb.upgrades")) {
-            NBTTagList upgrades = stk.getTagCompound().getTagList("tb.upgrades", 10);
+        if (stk.hasTagCompound() && stk.getTagCompound()
+            .hasKey("tb.upgrades")) {
+            NBTTagList upgrades = stk.getTagCompound()
+                .getTagList("tb.upgrades", 10);
             for (int i = 0; i < upgrades.tagCount(); ++i) {
                 NBTTagCompound tag = upgrades.getCompoundTagAt(i);
                 int id = tag.getInteger("id");
                 int level = tag.getInteger("level");
                 if (id < RevolverUpgrade.allUpgrades.length && RevolverUpgrade.allUpgrades[id] != null
-                        && RevolverUpgrade.allUpgrades[id].equals(upgrade))
-                    return level;
+                    && RevolverUpgrade.allUpgrades[id].equals(upgrade)) return level;
             }
         }
 
@@ -83,8 +88,10 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
     public static ArrayList<Pair<RevolverUpgrade, Integer>> getAllUpgradesFor(ItemStack stk) {
         ArrayList<Pair<RevolverUpgrade, Integer>> retLst = new ArrayList<Pair<RevolverUpgrade, Integer>>();
 
-        if (stk.hasTagCompound() && stk.getTagCompound().hasKey("tb.upgrades")) {
-            NBTTagList upgrades = stk.getTagCompound().getTagList("tb.upgrades", 10);
+        if (stk.hasTagCompound() && stk.getTagCompound()
+            .hasKey("tb.upgrades")) {
+            NBTTagList upgrades = stk.getTagCompound()
+                .getTagList("tb.upgrades", 10);
             for (int i = 0; i < upgrades.tagCount(); ++i) {
                 NBTTagCompound tag = upgrades.getCompoundTagAt(i);
                 int id = tag.getInteger("id");
@@ -107,7 +114,8 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
 
         if (!stk.hasTagCompound()) stk.setTagCompound(new NBTTagCompound());
 
-        if (stk.getTagCompound().getInteger("shots") > 0) {
+        if (stk.getTagCompound()
+            .getInteger("shots") > 0) {
             EntityRevolverBullet b = new EntityRevolverBullet(w, user);
             if (!w.isRemote) w.spawnEntityInWorld(b);
 
@@ -116,24 +124,30 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
 
             TBNetworkManager.playSoundOnServer(w, "thaumicbases:revolver.shot", user.posX, user.posY, user.posZ, 3, 1F);
 
-            stk.getTagCompound().setDouble("barrelRotation", stk.getTagCompound().getDouble("barrelRotation") + 45);
+            stk.getTagCompound()
+                .setDouble(
+                    "barrelRotation",
+                    stk.getTagCompound()
+                        .getDouble("barrelRotation") + 45);
 
-            stk.getTagCompound().setInteger("shots", stk.getTagCompound().getInteger("shots") - 1);
+            stk.getTagCompound()
+                .setInteger(
+                    "shots",
+                    stk.getTagCompound()
+                        .getInteger("shots") - 1);
         } else {
-            if (stk.hasTagCompound() && stk.getTagCompound().hasKey("jar")) {
+            if (stk.hasTagCompound() && stk.getTagCompound()
+                .hasKey("jar")) {
                 ItemStack jar = ItemStack.loadItemStackFromNBT(stk.stackTagCompound.getCompoundTag("jar"));
 
                 if (jar == null) {
-                    TBNetworkManager.playSoundOnServer(
-                            w,
-                            "thaumicbases:revolver.click",
-                            user.posX,
-                            user.posY,
-                            user.posZ,
-                            3,
-                            2F);
+                    TBNetworkManager
+                        .playSoundOnServer(w, "thaumicbases:revolver.click", user.posX, user.posY, user.posZ, 3, 2F);
                     stk.getTagCompound()
-                            .setDouble("barrelRotation", stk.getTagCompound().getDouble("barrelRotation") + 45);
+                        .setDouble(
+                            "barrelRotation",
+                            stk.getTagCompound()
+                                .getDouble("barrelRotation") + 45);
 
                     return super.onItemRightClick(stk, w, user);
                 }
@@ -148,7 +162,8 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
 
                 int addedShots = hasPrimal ? 1 : 2;
                 for (Pair<RevolverUpgrade, Integer> p : upgrades) {
-                    addedShots = p.getFirst().modifyShots(user, stk, p.getSecond(), addedShots, hasPrimal);
+                    addedShots = p.getFirst()
+                        .modifyShots(user, stk, p.getSecond(), addedShots, hasPrimal);
                 }
 
                 boolean addShots = false;
@@ -170,15 +185,10 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
                 }
 
                 if (addShots) {
-                    stk.getTagCompound().setInteger("shots", addedShots < 0 ? 1 : addedShots);
-                    TBNetworkManager.playSoundOnServer(
-                            w,
-                            "thaumicbases:revolver.reload",
-                            user.posX,
-                            user.posY,
-                            user.posZ,
-                            3,
-                            2F);
+                    stk.getTagCompound()
+                        .setInteger("shots", addedShots < 0 ? 1 : addedShots);
+                    TBNetworkManager
+                        .playSoundOnServer(w, "thaumicbases:revolver.reload", user.posX, user.posY, user.posZ, 3, 2F);
                 }
 
                 if (aspects.visSize() > 0) {
@@ -194,7 +204,7 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
                 }
             } else {
                 TBNetworkManager
-                        .playSoundOnServer(w, "thaumicbases:revolver.click", user.posX, user.posY, user.posZ, 3, 2F);
+                    .playSoundOnServer(w, "thaumicbases:revolver.click", user.posX, user.posY, user.posZ, 3, 2F);
             }
         }
         return super.onItemRightClick(stk, w, user);
@@ -204,8 +214,9 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
         if (!entityLiving.worldObj.isRemote) {
             if (entityLiving instanceof EntityPlayer) {
                 if (EntityPlayer.class.cast(entityLiving).openContainer instanceof ContainerPlayer
-                        && entityLiving.isSneaking()) {
-                    EntityPlayer.class.cast(entityLiving).openGui(
+                    && entityLiving.isSneaking()) {
+                    EntityPlayer.class.cast(entityLiving)
+                        .openGui(
                             TBCore.instance,
                             0x421919,
                             entityLiving.worldObj,
@@ -221,7 +232,8 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void addInformation(ItemStack stk, EntityPlayer p, List lst, boolean isCurrentItem) {
         super.addInformation(stk, p, lst, isCurrentItem);
-        iLabel: if (stk.hasTagCompound() && stk.getTagCompound().hasKey("jar")) {
+        iLabel: if (stk.hasTagCompound() && stk.getTagCompound()
+            .hasKey("jar")) {
             ItemStack jar = ItemStack.loadItemStackFromNBT(stk.stackTagCompound.getCompoundTag("jar"));
 
             try {
@@ -237,12 +249,14 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
                 // ...
             }
         }
-        if (stk.hasTagCompound() && stk.getTagCompound().hasKey("tb.upgrades")) {
+        if (stk.hasTagCompound() && stk.getTagCompound()
+            .hasKey("tb.upgrades")) {
             ArrayList<Pair<RevolverUpgrade, Integer>> upgrades = getAllUpgradesFor(stk);
             for (Pair<RevolverUpgrade, Integer> pr : upgrades) {
                 lst.add(
-                        pr.getFirst().getName() + " "
-                                + StatCollector.translateToLocal("enchantment.level." + pr.getSecond()));
+                    pr.getFirst()
+                        .getName() + " "
+                        + StatCollector.translateToLocal("enchantment.level." + pr.getSecond()));
             }
         }
     }
@@ -257,12 +271,12 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
         HashMultimap retMap = HashMultimap.create();
 
         retMap.put(
-                SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
-                new AttributeModifier(
-                        field_111210_e,
-                        "Weapon modifier",
-                        5.0F + (getUpgradeLevel(stack, RevolverUpgrade.heavy) * 2),
-                        0));
+            SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+            new AttributeModifier(
+                field_111210_e,
+                "Weapon modifier",
+                5.0F + (getUpgradeLevel(stack, RevolverUpgrade.heavy) * 2),
+                0));
 
         return retMap;
     }
@@ -271,13 +285,14 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
         super.onUpdate(stk, w, entity, slot, held);
         int u = getUpgradeLevel(stk, RevolverUpgrade.uvoid);
         if (u > 0) if ((stk.isItemDamaged()) && (entity != null)
-                && (entity.ticksExisted % 100 / u == 0)
-                && ((entity instanceof EntityLivingBase)))
-            stk.damageItem(-1, (EntityLivingBase) entity);
+            && (entity.ticksExisted % 100 / u == 0)
+            && ((entity instanceof EntityLivingBase))) stk.damageItem(-1, (EntityLivingBase) entity);
 
         if (stk.getTagCompound() != null) {
-            double rotation = stk.getTagCompound().getDouble("barrelRotation");
-            double renderedRotation = stk.getTagCompound().getDouble("renderedRotation");
+            double rotation = stk.getTagCompound()
+                .getDouble("barrelRotation");
+            double renderedRotation = stk.getTagCompound()
+                .getDouble("renderedRotation");
 
             if (rotation >= 3600000) rotation -= 3600000;
 
@@ -287,8 +302,10 @@ public class ItemRevolver extends Item implements IRepairable, IWarpingGear {
 
             renderedRotation = Math.min(rotation, renderedRotation);
 
-            stk.getTagCompound().setDouble("barrelRotation", rotation);
-            stk.getTagCompound().setDouble("renderedRotation", renderedRotation);
+            stk.getTagCompound()
+                .setDouble("barrelRotation", rotation);
+            stk.getTagCompound()
+                .setDouble("renderedRotation", renderedRotation);
         }
     }
 

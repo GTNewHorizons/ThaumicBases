@@ -35,14 +35,14 @@ public class HerobrinesScytheRenderer implements IItemRenderer {
                 GL11.glRotated(15, 0, 0, 1);
                 IIcon icon = item.getIconIndex();
                 ItemRenderer.renderItemIn2D(
-                        Tessellator.instance,
-                        icon.getMinU(),
-                        icon.getMinV(),
-                        icon.getMaxU(),
-                        icon.getMaxV(),
-                        icon.getIconWidth(),
-                        icon.getIconHeight(),
-                        0.03125F);
+                    Tessellator.instance,
+                    icon.getMinU(),
+                    icon.getMinV(),
+                    icon.getMaxU(),
+                    icon.getMaxV(),
+                    icon.getIconWidth(),
+                    icon.getIconHeight(),
+                    0.03125F);
             }
 
             if (type == ItemRenderType.INVENTORY) {
@@ -55,14 +55,14 @@ public class HerobrinesScytheRenderer implements IItemRenderer {
                 GL11.glRotated(60, 0, 1, 1);
                 IIcon icon = item.getIconIndex();
                 ItemRenderer.renderItemIn2D(
-                        Tessellator.instance,
-                        icon.getMinU(),
-                        icon.getMinV(),
-                        icon.getMaxU(),
-                        icon.getMaxV(),
-                        icon.getIconWidth(),
-                        icon.getIconHeight(),
-                        0.0625F);
+                    Tessellator.instance,
+                    icon.getMinU(),
+                    icon.getMinV(),
+                    icon.getMaxU(),
+                    icon.getMaxV(),
+                    icon.getIconWidth(),
+                    icon.getIconHeight(),
+                    0.0625F);
                 GL11.glDisable(GL11.GL_BLEND);
                 GL11.glEnable(GL11.GL_ALPHA_TEST);
             }
@@ -74,14 +74,14 @@ public class HerobrinesScytheRenderer implements IItemRenderer {
                 GL11.glTranslated(-0.5D, -0.5D, 0.05D);
                 IIcon icon = item.getIconIndex();
                 ItemRenderer.renderItemIn2D(
-                        Tessellator.instance,
-                        icon.getMinU(),
-                        icon.getMinV(),
-                        icon.getMaxU(),
-                        icon.getMaxV(),
-                        icon.getIconWidth(),
-                        icon.getIconHeight(),
-                        0.0625F);
+                    Tessellator.instance,
+                    icon.getMinU(),
+                    icon.getMinV(),
+                    icon.getMaxU(),
+                    icon.getMaxV(),
+                    icon.getIconWidth(),
+                    icon.getIconHeight(),
+                    0.0625F);
             }
 
             if (type == ItemRenderType.EQUIPPED) {
@@ -91,14 +91,14 @@ public class HerobrinesScytheRenderer implements IItemRenderer {
                 GL11.glTranslated(-0.7D, -0.4D, 0.01D);
                 IIcon icon = item.getIconIndex();
                 ItemRenderer.renderItemIn2D(
-                        Tessellator.instance,
-                        icon.getMinU(),
-                        icon.getMinV(),
-                        icon.getMaxU(),
-                        icon.getMaxV(),
-                        icon.getIconWidth(),
-                        icon.getIconHeight(),
-                        0.0225F);
+                    Tessellator.instance,
+                    icon.getMinU(),
+                    icon.getMinV(),
+                    icon.getMaxU(),
+                    icon.getMaxV(),
+                    icon.getIconWidth(),
+                    icon.getIconHeight(),
+                    0.0225F);
             }
 
             GL11.glPopMatrix();

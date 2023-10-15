@@ -99,42 +99,42 @@ public class BlockRelocator extends BlockContainer {
                 double dy = y;
                 double dz = z + 0.5D + MathUtils.randomDouble(r) / 2;
                 TBCore.proxy
-                        .sparkle(w, dx, doColor ? dy - 3 : dy, dz, dx, doColor ? dy : dy - 3, dz, doColor ? 2 : 1, 1F);
+                    .sparkle(w, dx, doColor ? dy - 3 : dy, dz, dx, doColor ? dy : dy - 3, dz, doColor ? 2 : 1, 1F);
             }
             if (meta == 1) {
                 double dx = x + 0.5D + MathUtils.randomDouble(r) / 2;
                 double dy = y + 1;
                 double dz = z + 0.5D + MathUtils.randomDouble(r) / 2;
                 TBCore.proxy
-                        .sparkle(w, dx, doColor ? dy + 3 : dy, dz, dx, doColor ? dy : dy + 3, dz, doColor ? 2 : 1, 1);
+                    .sparkle(w, dx, doColor ? dy + 3 : dy, dz, dx, doColor ? dy : dy + 3, dz, doColor ? 2 : 1, 1);
             }
             if (meta == 2) {
                 double dx = x + 0.5D + MathUtils.randomDouble(r) / 2;
                 double dy = y + 0.5D + MathUtils.randomDouble(r) / 2;
                 double dz = z;
                 TBCore.proxy
-                        .sparkle(w, dx, dy, doColor ? dz - 3 : dz, dx, dy, doColor ? dz : dz - 3, doColor ? 2 : 1, 1);
+                    .sparkle(w, dx, dy, doColor ? dz - 3 : dz, dx, dy, doColor ? dz : dz - 3, doColor ? 2 : 1, 1);
             }
             if (meta == 3) {
                 double dx = x + 0.5D + MathUtils.randomDouble(r) / 2;
                 double dy = y + 0.5D + MathUtils.randomDouble(r) / 2;
                 double dz = z + 1;
                 TBCore.proxy
-                        .sparkle(w, dx, dy, doColor ? dz + 3 : dz, dx, dy, doColor ? dz : dz + 3, doColor ? 2 : 1, 1);
+                    .sparkle(w, dx, dy, doColor ? dz + 3 : dz, dx, dy, doColor ? dz : dz + 3, doColor ? 2 : 1, 1);
             }
             if (meta == 4) {
                 double dx = x;
                 double dy = y + 0.5D + MathUtils.randomDouble(r) / 2;
                 double dz = z + 0.5D + MathUtils.randomDouble(r) / 2;
                 TBCore.proxy
-                        .sparkle(w, doColor ? dx - 3 : dx, dy, dz, doColor ? dx : dx - 3, dy, dz, doColor ? 2 : 1, 1);
+                    .sparkle(w, doColor ? dx - 3 : dx, dy, dz, doColor ? dx : dx - 3, dy, dz, doColor ? 2 : 1, 1);
             }
             if (meta == 5) {
                 double dx = x + 1;
                 double dy = y + 0.5D + MathUtils.randomDouble(r) / 2;
                 double dz = z + 0.5D + MathUtils.randomDouble(r) / 2;
                 TBCore.proxy
-                        .sparkle(w, doColor ? dx + 3 : dx, dy, dz, doColor ? dx : dx + 3, dy, dz, doColor ? 2 : 1, 1);
+                    .sparkle(w, doColor ? dx + 3 : dx, dy, dz, doColor ? dx : dx + 3, dy, dz, doColor ? 2 : 1, 1);
             }
         }
     }
@@ -145,9 +145,9 @@ public class BlockRelocator extends BlockContainer {
     }
 
     public static int determineOrientation(World p_150071_0_, int p_150071_1_, int p_150071_2_, int p_150071_3_,
-            EntityLivingBase p_150071_4_) {
+        EntityLivingBase p_150071_4_) {
         if (MathHelper.abs((float) p_150071_4_.posX - (float) p_150071_1_) < 2.0F
-                && MathHelper.abs((float) p_150071_4_.posZ - (float) p_150071_3_) < 2.0F) {
+            && MathHelper.abs((float) p_150071_4_.posZ - (float) p_150071_3_) < 2.0F) {
             double d0 = p_150071_4_.posY + 1.82D - (double) p_150071_4_.yOffset;
 
             if (d0 - (double) p_150071_2_ > 2.0D) {

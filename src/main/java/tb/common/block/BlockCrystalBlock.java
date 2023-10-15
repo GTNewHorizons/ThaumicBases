@@ -20,7 +20,7 @@ public class BlockCrystalBlock extends Block implements IInfusionStabiliser {
 
     public static IIcon[] icons = new IIcon[8];
     public static final String[] names = new String[] { "air", "fire", "water", "earth", "order", "entropy", "mixed",
-            "tainted" };
+        "tainted" };
 
     public BlockCrystalBlock() {
         super(Material.glass);

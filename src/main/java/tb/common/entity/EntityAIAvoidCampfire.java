@@ -39,10 +39,10 @@ public class EntityAIAvoidCampfire extends EntityAIBase {
     public boolean shouldExecute() {
         if (isScared) {
             Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(
-                    this.entityObj,
-                    16,
-                    10,
-                    Vec3.createVectorHelper(campfireX + 0.5D, campfireY, campfireZ + 0.5D));
+                this.entityObj,
+                16,
+                10,
+                Vec3.createVectorHelper(campfireX + 0.5D, campfireY, campfireZ + 0.5D));
 
             if (vec3 == null) return false;
 
@@ -53,14 +53,15 @@ public class EntityAIAvoidCampfire extends EntityAIBase {
     }
 
     public boolean continueExecuting() {
-        return !this.entityObj.getNavigator().noPath() && scareTimer > 0;
+        return !this.entityObj.getNavigator()
+            .noPath() && scareTimer > 0;
     }
 
     public void resetTask() {}
 
     public void updateTask() {
         if (entityPathNavigate != null
-                && (entityPathNavigate.getPath() == null || entityPathNavigate.getPath() != entityPathEntity)) {
+            && (entityPathNavigate.getPath() == null || entityPathNavigate.getPath() != entityPathEntity)) {
             this.entityPathNavigate.setPath(this.entityPathEntity, nearSpeed);
         }
 
@@ -68,9 +69,11 @@ public class EntityAIAvoidCampfire extends EntityAIBase {
         if (scareTimer <= 0) isScared = false;
 
         if (this.entityObj.getDistanceSq(campfireX + 0.5D, campfireY, campfireZ + 0.5D) < 49.0D) {
-            this.entityObj.getNavigator().setSpeed(this.nearSpeed);
+            this.entityObj.getNavigator()
+                .setSpeed(this.nearSpeed);
         } else {
-            this.entityObj.getNavigator().setSpeed(this.farSpeed);
+            this.entityObj.getNavigator()
+                .setSpeed(this.farSpeed);
         }
     }
 

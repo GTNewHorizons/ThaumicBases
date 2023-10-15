@@ -51,39 +51,40 @@ public class BlockCryingObelisk extends Block {
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World w, int x, int y, int z, Random rnd) {
         if ((w.getBlock(x, y + 1, z) == this && w.getBlock(x, y + 2, z) != this && w.getBlock(x, y - 1, z) != this)
-                || (w.getBlock(x, y - 1, z) == this && w.getBlock(x, y - 2, z) != this
-                        && w.getBlock(x, y + 1, z) != this)) {
+            || (w.getBlock(x, y - 1, z) == this && w.getBlock(x, y - 2, z) != this
+                && w.getBlock(x, y + 1, z) != this)) {
             for (int i = 0; i < 10; ++i) {
                 double rndY = rnd.nextDouble() * 3;
                 w.spawnParticle(
-                        "portal",
-                        x + 0.5D + MathUtils.randomDouble(rnd),
-                        y - 3 + rndY,
-                        z + 0.5D + MathUtils.randomDouble(rnd),
-                        0,
-                        rndY,
-                        0);
+                    "portal",
+                    x + 0.5D + MathUtils.randomDouble(rnd),
+                    y - 3 + rndY,
+                    z + 0.5D + MathUtils.randomDouble(rnd),
+                    0,
+                    rndY,
+                    0);
             }
         }
     }
 
     public boolean isBed(IBlockAccess world, int x, int y, int z, EntityLivingBase player) {
         return ((world.getBlock(x, y + 1, z) == this && world.getBlock(x, y + 2, z) != this
-                && world.getBlock(x, y - 1, z) != this)
-                || (world.getBlock(x, y - 1, z) == this && world.getBlock(x, y - 2, z) != this
-                        && world.getBlock(x, y + 1, z) != this));
+            && world.getBlock(x, y - 1, z) != this)
+            || (world.getBlock(x, y - 1, z) == this && world.getBlock(x, y - 2, z) != this
+                && world.getBlock(x, y + 1, z) != this));
     }
 
     public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int side, float vecX, float vecY,
-            float vecZ) {
+        float vecZ) {
         if ((w.getBlock(x, y + 1, z) == this && w.getBlock(x, y + 2, z) != this && w.getBlock(x, y - 1, z) != this)
-                || (w.getBlock(x, y - 1, z) == this && w.getBlock(x, y - 2, z) != this
-                        && w.getBlock(x, y + 1, z) != this)) {
+            || (w.getBlock(x, y - 1, z) == this && w.getBlock(x, y - 2, z) != this
+                && w.getBlock(x, y + 1, z) != this)) {
             w.playSound(x + 0.5D, y + 0.5D, z + 0.5D, "portal.travel", 1, 2, false);
             p.setSpawnChunk(new ChunkCoordinates(x, y, z), false, p.dimension);
             if (p.worldObj.isRemote) p.addChatMessage(
-                    new ChatComponentText(StatCollector.translateToLocal("tb.txt.spawnSet"))
-                            .setChatStyle(new ChatStyle().setItalic(true).setColor(EnumChatFormatting.AQUA)));
+                new ChatComponentText(StatCollector.translateToLocal("tb.txt.spawnSet")).setChatStyle(
+                    new ChatStyle().setItalic(true)
+                        .setColor(EnumChatFormatting.AQUA)));
             return true;
         }
         return false;
@@ -93,8 +94,12 @@ public class BlockCryingObelisk extends Block {
         for (int dy = 0; dy > -3; --dy) for (int dx = -2; dx <= 2; ++dx) {
             for (int dz = -2; dz <= 2; ++dz) {
                 if (World.doesBlockHaveSolidTopSurface(world, x + dx, y + dy, z + dz)
-                        && !world.getBlock(x + dx, y + dy, z + dz).getMaterial().isOpaque()
-                        && !world.getBlock(x + dx, y + dy + 1, z + dz).getMaterial().isOpaque()) {
+                    && !world.getBlock(x + dx, y + dy, z + dz)
+                        .getMaterial()
+                        .isOpaque()
+                    && !world.getBlock(x + dx, y + dy + 1, z + dz)
+                        .getMaterial()
+                        .isOpaque()) {
                     return new ChunkCoordinates(x + dx, y + dy + 1, z + dz);
                 }
             }

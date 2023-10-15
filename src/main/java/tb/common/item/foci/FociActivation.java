@@ -38,7 +38,8 @@ public class FociActivation extends ItemFocusBasic {
     }
 
     public AspectList getVisCost(ItemStack focusstack) {
-        return new AspectList().add(Aspect.ORDER, 5).add(Aspect.EARTH, 10);
+        return new AspectList().add(Aspect.ORDER, 5)
+            .add(Aspect.EARTH, 10);
     }
 
     public int getActivationCooldown(ItemStack focusstack) {
@@ -50,7 +51,7 @@ public class FociActivation extends ItemFocusBasic {
     }
 
     public ItemStack onFocusRightClick(ItemStack wandstack, World world, EntityPlayer player,
-            MovingObjectPosition movingobjectposition) {
+        MovingObjectPosition movingobjectposition) {
 
         if (wandstack == null) return wandstack;
 
@@ -58,24 +59,30 @@ public class FociActivation extends ItemFocusBasic {
 
         if (player.isSneaking()) {
             if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectType.BLOCK) {
-                NBTTagCompound fociTag = MiscUtils.getStackTag(wandstack).getCompoundTag("focus").getCompoundTag("tag");
+                NBTTagCompound fociTag = MiscUtils.getStackTag(wandstack)
+                    .getCompoundTag("focus")
+                    .getCompoundTag("tag");
                 fociTag.setInteger("blockX", movingobjectposition.blockX);
                 fociTag.setInteger("blockY", movingobjectposition.blockY);
                 fociTag.setInteger("blockZ", movingobjectposition.blockZ);
                 fociTag.setInteger("dim", player.dimension);
-                ((NBTTagCompound) (MiscUtils.getStackTag(wandstack).getTag("focus"))).setTag("tag", fociTag);
+                ((NBTTagCompound) (MiscUtils.getStackTag(wandstack)
+                    .getTag("focus"))).setTag("tag", fociTag);
                 player.swingItem();
                 WandManager.consumeVisFromInventory(player, new AspectList().add(Aspect.ORDER, 100));
             }
         } else {
-            NBTTagCompound fociTag = MiscUtils.getStackTag(wandstack).getCompoundTag("focus").getCompoundTag("tag");
+            NBTTagCompound fociTag = MiscUtils.getStackTag(wandstack)
+                .getCompoundTag("focus")
+                .getCompoundTag("tag");
             if (fociTag.hasKey("blockX")) {
                 int x = fociTag.getInteger("blockX");
                 int y = fociTag.getInteger("blockY");
                 int z = fociTag.getInteger("blockZ");
 
-                ItemStack foci = ItemStack
-                        .loadItemStackFromNBT(MiscUtils.getStackTag(wandstack).getCompoundTag("focus"));
+                ItemStack foci = ItemStack.loadItemStackFromNBT(
+                    MiscUtils.getStackTag(wandstack)
+                        .getCompoundTag("focus"));
 
                 int potencyLevel = this.getUpgradeLevel(foci, FocusUpgradeType.potency);
 
@@ -86,8 +93,9 @@ public class FociActivation extends ItemFocusBasic {
                 int aspectCost = 10;
 
                 if (!WandManager.consumeVisFromInventory(
-                        player,
-                        new AspectList().add(Aspect.EARTH, aspectCost).add(Aspect.ORDER, aspectCost / 2)))
+                    player,
+                    new AspectList().add(Aspect.EARTH, aspectCost)
+                        .add(Aspect.ORDER, aspectCost / 2)))
                     return wandstack;
 
                 if (range > maxRange) {
@@ -99,8 +107,8 @@ public class FociActivation extends ItemFocusBasic {
                 int dim = fociTag.getInteger("dim");
 
                 if (dim != player.dimension) {
-                    if (player.worldObj.isRemote) player.addChatMessage(
-                            new ChatComponentText(StatCollector.translateToLocal("tb.txt.wrongDimension")));
+                    if (player.worldObj.isRemote) player
+                        .addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tb.txt.wrongDimension")));
                     return wandstack;
                 } else {
                     if (world.checkChunksExist(x - 1, y - 1, z - 1, x + 1, y + 1, z + 1)) {
@@ -108,15 +116,15 @@ public class FociActivation extends ItemFocusBasic {
                             Block b = world.getBlock(x, y, z);
                             Vec3 vec = player.getLookVec();
                             b.onBlockActivated(
-                                    world,
-                                    x,
-                                    y,
-                                    z,
-                                    player,
-                                    0,
-                                    (float) vec.xCoord,
-                                    (float) vec.yCoord,
-                                    (float) vec.zCoord);
+                                world,
+                                x,
+                                y,
+                                z,
+                                player,
+                                0,
+                                (float) vec.xCoord,
+                                (float) vec.yCoord,
+                                (float) vec.zCoord);
                         }
                     }
                 }

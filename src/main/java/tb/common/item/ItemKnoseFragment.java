@@ -21,11 +21,11 @@ import thaumcraft.api.aspects.AspectList;
 public class ItemKnoseFragment extends Item {
 
     public static final String names[] = new String[] { "air", "fire", "aqua", "terra", "order", "entropy", "mixed",
-            "tainted" };
+        "tainted" };
 
     public static final AspectList[] addedAspects = new AspectList[] { lst(8, Aspect.AIR), lst(8, Aspect.FIRE),
-            lst(8, Aspect.WATER), lst(8, Aspect.EARTH), lst(8, Aspect.ORDER), lst(8, Aspect.ENTROPY),
-            lst(2, Aspect.FIRE, Aspect.WATER, Aspect.EARTH, Aspect.AIR, Aspect.ORDER, Aspect.ENTROPY) };
+        lst(8, Aspect.WATER), lst(8, Aspect.EARTH), lst(8, Aspect.ORDER), lst(8, Aspect.ENTROPY),
+        lst(2, Aspect.FIRE, Aspect.WATER, Aspect.EARTH, Aspect.AIR, Aspect.ORDER, Aspect.ENTROPY) };
 
     public static IIcon[] icons = new IIcon[names.length];
 
@@ -69,15 +69,17 @@ public class ItemKnoseFragment extends Item {
         int meta = stk.getItemDamage();
         if (!player.worldObj.isRemote) if (meta < 7) {
             for (int i = 0; i < addedAspects[meta].size(); ++i) TBUtils.addAspectToKnowledgePool(
-                    player,
-                    addedAspects[meta].getAspects()[i],
-                    (short) addedAspects[meta].getAmount(addedAspects[meta].getAspects()[i]));
+                player,
+                addedAspects[meta].getAspects()[i],
+                (short) addedAspects[meta].getAmount(addedAspects[meta].getAspects()[i]));
         } else {
             // if(!ResearchManager.isResearchComplete(player.getCommandSenderName(), "TB.TaintMinor"))
             // PacketHandler.INSTANCE.sendTo(new PacketResearchComplete("@TB.TaintMinor"), (EntityPlayerMP)player);
             int overhaulAddedAspects = 0;
-            for (int i = 0; i < Aspect.getCompoundAspects().size(); ++i) {
-                Aspect a = Aspect.getCompoundAspects().get(i);
+            for (int i = 0; i < Aspect.getCompoundAspects()
+                .size(); ++i) {
+                Aspect a = Aspect.getCompoundAspects()
+                    .get(i);
                 if (a == Aspect.TAINT) {
                     TBUtils.addAspectToKnowledgePool(player, a, (short) 8);
                     TBUtils.addWarpToPlayer(player, 2, 0);

@@ -58,20 +58,21 @@ public class ItemHerobrinesScythe extends ItemSword implements IRepairable, IWar
     public void onUpdate(ItemStack stk, World w, Entity entity, int slot, boolean held) {
         super.onUpdate(stk, w, entity, slot, held);
         if ((stk.isItemDamaged()) && (entity != null)
-                && (entity.ticksExisted % 20 == 0)
-                && ((entity instanceof EntityLivingBase)))
-            stk.damageItem(-1, (EntityLivingBase) entity);
+            && (entity.ticksExisted % 20 == 0)
+            && ((entity instanceof EntityLivingBase))) stk.damageItem(-1, (EntityLivingBase) entity);
     }
 
     @SuppressWarnings("unchecked")
     public static void attack(EntityPlayer attacker, List<EntityLivingBase> doNotAttack, EntityLivingBase attacked) {
-        AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(
+        AxisAlignedBB aabb = AxisAlignedBB
+            .getBoundingBox(
                 attacked.posX - 1,
                 attacked.posY - 1,
                 attacked.posZ - 1,
                 attacked.posX + 1,
                 attacked.posY + 1,
-                attacked.posZ + 1).expand(6, 6, 6);
+                attacked.posZ + 1)
+            .expand(6, 6, 6);
 
         List<EntityLivingBase> mobs = attacked.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, aabb);
 
@@ -82,23 +83,23 @@ public class ItemHerobrinesScythe extends ItemSword implements IRepairable, IWar
         if (!mobs.isEmpty()) {
             while (!mobs.isEmpty()) {
                 int index = rnd.nextInt(mobs.size());
-                if (mobs.get(index) != null && mobs.get(index).isEntityAlive()
-                        && mobs.get(index) instanceof IMob
-                        && !(mobs.get(index) instanceof EntityPlayer)) {
+                if (mobs.get(index) != null && mobs.get(index)
+                    .isEntityAlive() && mobs.get(index) instanceof IMob && !(mobs.get(index) instanceof EntityPlayer)) {
                     performPlayerAttackAt(attacker, mobs.get(index));
 
                     TBCore.proxy.lightning(
-                            attacker.worldObj,
-                            attacked.posX,
-                            attacked.posY + rnd.nextDouble() * attacked.getEyeHeight(),
-                            attacked.posZ,
-                            mobs.get(index).posX,
-                            mobs.get(index).posY + rnd.nextDouble() * mobs.get(index).getEyeHeight(),
-                            mobs.get(index).posZ,
-                            20,
-                            2F,
-                            10,
-                            0);
+                        attacker.worldObj,
+                        attacked.posX,
+                        attacked.posY + rnd.nextDouble() * attacked.getEyeHeight(),
+                        attacked.posZ,
+                        mobs.get(index).posX,
+                        mobs.get(index).posY + rnd.nextDouble() * mobs.get(index)
+                            .getEyeHeight(),
+                        mobs.get(index).posZ,
+                        20,
+                        2F,
+                        10,
+                        0);
                     attacker.worldObj.playSoundAtEntity(mobs.get(index), "thaumcraft:zap", 1F, 0.8F);
 
                     doNotAttack.add(mobs.get(index));
@@ -137,7 +138,8 @@ public class ItemHerobrinesScythe extends ItemSword implements IRepairable, IWar
 
         if (p_71059_1_.canAttackWithItem()) {
             if (!p_71059_1_.hitByEntity(p)) {
-                float f = (float) p.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+                float f = (float) p.getEntityAttribute(SharedMonsterAttributes.attackDamage)
+                    .getAttributeValue();
                 int i = 0;
                 float f1 = 0.0F;
 
@@ -152,11 +154,11 @@ public class ItemHerobrinesScythe extends ItemSword implements IRepairable, IWar
 
                 if (f > 0.0F || f1 > 0.0F) {
                     boolean flag = p.fallDistance > 0.0F && !p.onGround
-                            && !p.isOnLadder()
-                            && !p.isInWater()
-                            && !p.isPotionActive(Potion.blindness)
-                            && p.ridingEntity == null
-                            && p_71059_1_ instanceof EntityLivingBase;
+                        && !p.isOnLadder()
+                        && !p.isInWater()
+                        && !p.isPotionActive(Potion.blindness)
+                        && p.ridingEntity == null
+                        && p_71059_1_ instanceof EntityLivingBase;
 
                     if (flag && f > 0.0F) {
                         f *= 1.5F;
@@ -176,11 +178,9 @@ public class ItemHerobrinesScythe extends ItemSword implements IRepairable, IWar
                     if (flag2) {
                         if (i > 0) {
                             p_71059_1_.addVelocity(
-                                    (double) (-MathHelper.sin(p.rotationYaw * (float) Math.PI / 180.0F) * (float) i
-                                            * 0.5F),
-                                    0.1D,
-                                    (double) (MathHelper.cos(p.rotationYaw * (float) Math.PI / 180.0F) * (float) i
-                                            * 0.5F));
+                                (double) (-MathHelper.sin(p.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F),
+                                0.1D,
+                                (double) (MathHelper.cos(p.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
                             p.motionX *= 0.6D;
                             p.motionZ *= 0.6D;
                             p.setSprinting(false);
@@ -250,19 +250,15 @@ public class ItemHerobrinesScythe extends ItemSword implements IRepairable, IWar
         Multimap attribs = HashMultimap.create();
 
         attribs.put(
-                SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
-                new AttributeModifier(
-                        UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF"),
-                        "Weapon modifier",
-                        14.5F,
-                        0));
+            SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+            new AttributeModifier(
+                UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF"),
+                "Weapon modifier",
+                14.5F,
+                0));
         attribs.put(
-                SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),
-                new AttributeModifier(
-                        UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CE"),
-                        "Speed modifier",
-                        0.5F,
-                        2));
+            SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),
+            new AttributeModifier(UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CE"), "Speed modifier", 0.5F, 2));
 
         return attribs;
     }

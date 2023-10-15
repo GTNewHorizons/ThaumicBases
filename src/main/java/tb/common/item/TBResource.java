@@ -19,8 +19,8 @@ public class TBResource extends Item {
     }
 
     public static final String names[] = new String[] { "nuggetthauminite", "thauminite/thauminite_ingot",
-            "thauminite/wand_cap_thauminite", "thaumium_wand_core", "void_wand_core", "aurelia_petal", "briar_seedbag",
-            "tobacco_leaves", "bloodycloth" };
+        "thauminite/wand_cap_thauminite", "thaumium_wand_core", "void_wand_core", "aurelia_petal", "briar_seedbag",
+        "tobacco_leaves", "bloodycloth" };
 
     public static IIcon[] icons = new IIcon[names.length];
 

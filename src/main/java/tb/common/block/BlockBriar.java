@@ -106,9 +106,12 @@ public class BlockBriar extends BlockBush implements IGrowable {
     }
 
     public boolean canBlockStay(World w, int x, int y, int z) {
-        return !w.isAirBlock(x, y - 1, z) && (w.getBlock(x, y - 1, z).isReplaceableOreGen(w, x, y - 1, z, Blocks.grass)
-                || w.getBlock(x, y - 1, z).isReplaceableOreGen(w, x, y, z, Blocks.dirt)
-                || w.getBlock(x, y - 1, z).canSustainPlant(w, x, y - 1, z, ForgeDirection.UP, this));
+        return !w.isAirBlock(x, y - 1, z) && (w.getBlock(x, y - 1, z)
+            .isReplaceableOreGen(w, x, y - 1, z, Blocks.grass)
+            || w.getBlock(x, y - 1, z)
+                .isReplaceableOreGen(w, x, y, z, Blocks.dirt)
+            || w.getBlock(x, y - 1, z)
+                .canSustainPlant(w, x, y - 1, z, ForgeDirection.UP, this));
     }
 
     public boolean isTopBlock(int meta) {

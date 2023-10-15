@@ -69,9 +69,9 @@ public class ContainerVoidAnvil extends ContainerRepair {
 
             public boolean canTakeStack(EntityPlayer p_82869_1_) {
                 return (p_82869_1_.capabilities.isCreativeMode
-                        || p_82869_1_.experienceLevel >= ContainerVoidAnvil.this.maximumCost)
-                        && ContainerVoidAnvil.this.maximumCost > 0
-                        && this.getHasStack();
+                    || p_82869_1_.experienceLevel >= ContainerVoidAnvil.this.maximumCost)
+                    && ContainerVoidAnvil.this.maximumCost > 0
+                    && this.getHasStack();
             }
 
             public void onPickupFromSlot(EntityPlayer p_82870_1_, ItemStack p_82870_2_) {
@@ -80,10 +80,10 @@ public class ContainerVoidAnvil extends ContainerRepair {
                 }
 
                 float breakChance = ForgeHooks.onAnvilRepair(
-                        p_82870_1_,
-                        p_82870_2_,
-                        ContainerVoidAnvil.this.inputSlots.getStackInSlot(0),
-                        ContainerVoidAnvil.this.inputSlots.getStackInSlot(1));
+                    p_82870_1_,
+                    p_82870_2_,
+                    ContainerVoidAnvil.this.inputSlots.getStackInSlot(0),
+                    ContainerVoidAnvil.this.inputSlots.getStackInSlot(1));
 
                 ContainerVoidAnvil.this.inputSlots.setInventorySlotContents(0, (ItemStack) null);
 
@@ -91,7 +91,7 @@ public class ContainerVoidAnvil extends ContainerRepair {
                     ItemStack itemstack1 = ContainerVoidAnvil.this.inputSlots.getStackInSlot(1);
 
                     if (itemstack1 != null
-                            && itemstack1.stackSize > ContainerVoidAnvil.this.stackSizeToBeUsedInRepair) {
+                        && itemstack1.stackSize > ContainerVoidAnvil.this.stackSizeToBeUsedInRepair) {
                         itemstack1.stackSize -= ContainerVoidAnvil.this.stackSizeToBeUsedInRepair;
                         ContainerVoidAnvil.this.inputSlots.setInventorySlotContents(1, itemstack1);
                     } else {
@@ -104,8 +104,9 @@ public class ContainerVoidAnvil extends ContainerRepair {
                 ContainerVoidAnvil.this.maximumCost = 0;
 
                 if (!p_82870_1_.capabilities.isCreativeMode && !wrld.isRemote
-                        && wrld.getBlock(ax, ay, az) == TBBlocks.thaumicAnvil
-                        && p_82870_1_.getRNG().nextFloat() < breakChance) {
+                    && wrld.getBlock(ax, ay, az) == TBBlocks.thaumicAnvil
+                    && p_82870_1_.getRNG()
+                        .nextFloat() < breakChance) {
                     int i1 = wrld.getBlockMetadata(ax, ay, az);
                     int k = i1 & 3;
                     int l = i1 >> 2;
@@ -173,10 +174,11 @@ public class ContainerVoidAnvil extends ContainerRepair {
 
             if (itemstack2 != null) {
                 if (!ForgeHooks.onAnvilChange(this, itemstack, itemstack2, outputSlot, repairedItemName, k2)) return;
-                flag = itemstack2.getItem() == Items.enchanted_book
-                        && Items.enchanted_book.func_92110_g(itemstack2).tagCount() > 0;
+                flag = itemstack2.getItem() == Items.enchanted_book && Items.enchanted_book.func_92110_g(itemstack2)
+                    .tagCount() > 0;
 
-                if (itemstack1.isItemStackDamageable() && itemstack1.getItem().getIsRepairable(itemstack, itemstack2)) {
+                if (itemstack1.isItemStackDamageable() && itemstack1.getItem()
+                    .getIsRepairable(itemstack, itemstack2)) {
                     k = Math.min(itemstack1.getItemDamageForDisplay(), itemstack1.getMaxDamage() / 4);
 
                     if (k <= 0) {
@@ -195,7 +197,7 @@ public class ContainerVoidAnvil extends ContainerRepair {
                     this.stackSizeToBeUsedInRepair = l;
                 } else {
                     if (!flag
-                            && (itemstack1.getItem() != itemstack2.getItem() || !itemstack1.isItemStackDamageable())) {
+                        && (itemstack1.getItem() != itemstack2.getItem() || !itemstack1.isItemStackDamageable())) {
                         this.outputSlot.setInventorySlotContents(0, (ItemStack) null);
                         this.maximumCost = 0;
                         return;
@@ -219,13 +221,14 @@ public class ContainerVoidAnvil extends ContainerRepair {
                     }
 
                     Map map1 = EnchantmentHelper.getEnchantments(itemstack2);
-                    iterator1 = map1.keySet().iterator();
+                    iterator1 = map1.keySet()
+                        .iterator();
 
                     while (iterator1.hasNext()) {
                         i1 = ((Integer) iterator1.next()).intValue();
                         enchantment = Enchantment.enchantmentsList[i1];
                         k1 = map.containsKey(Integer.valueOf(i1)) ? ((Integer) map.get(Integer.valueOf(i1))).intValue()
-                                : 0;
+                            : 0;
                         l1 = ((Integer) map1.get(Integer.valueOf(i1))).intValue();
                         int i3;
 
@@ -244,7 +247,8 @@ public class ContainerVoidAnvil extends ContainerRepair {
                             flag1 = true;
                         }
 
-                        Iterator iterator = map.keySet().iterator();
+                        Iterator iterator = map.keySet()
+                            .iterator();
 
                         while (iterator.hasNext()) {
                             int j2 = ((Integer) iterator.next()).intValue();
@@ -322,7 +326,8 @@ public class ContainerVoidAnvil extends ContainerRepair {
 
             k = 0;
 
-            for (iterator1 = map.keySet().iterator(); iterator1.hasNext(); k2 += k + k1 * l1) {
+            for (iterator1 = map.keySet()
+                .iterator(); iterator1.hasNext(); k2 += k + k1 * l1) {
                 i1 = ((Integer) iterator1.next()).intValue();
                 enchantment = Enchantment.enchantmentsList[i1];
                 k1 = ((Integer) map.get(Integer.valueOf(i1))).intValue();
@@ -359,7 +364,8 @@ public class ContainerVoidAnvil extends ContainerRepair {
                 k2 = Math.max(1, k2 / 2);
             }
 
-            if (flag && !itemstack1.getItem().isBookEnchantable(itemstack1, itemstack2)) itemstack1 = null;
+            if (flag && !itemstack1.getItem()
+                .isBookEnchantable(itemstack1, itemstack2)) itemstack1 = null;
 
             this.maximumCost = 3;
 
@@ -416,8 +422,7 @@ public class ContainerVoidAnvil extends ContainerRepair {
 
     public boolean canInteractWith(EntityPlayer p_75145_1_) {
         return this.w.getBlock(this.x, this.y, this.z) != TBBlocks.voidAnvil ? false
-                : p_75145_1_.getDistanceSq((double) this.x + 0.5D, (double) this.y + 0.5D, (double) this.z + 0.5D)
-                        <= 64.0D;
+            : p_75145_1_.getDistanceSq((double) this.x + 0.5D, (double) this.y + 0.5D, (double) this.z + 0.5D) <= 64.0D;
     }
 
     public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_) {
@@ -461,8 +466,10 @@ public class ContainerVoidAnvil extends ContainerRepair {
     public void updateItemName(String p_82850_1_) {
         this.repairedItemName = p_82850_1_;
 
-        if (this.getSlot(2).getHasStack()) {
-            ItemStack itemstack = this.getSlot(2).getStack();
+        if (this.getSlot(2)
+            .getHasStack()) {
+            ItemStack itemstack = this.getSlot(2)
+                .getStack();
 
             if (StringUtils.isBlank(p_82850_1_)) {
                 itemstack.func_135074_t();

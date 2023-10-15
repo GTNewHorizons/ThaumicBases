@@ -14,8 +14,8 @@ import tb.common.inventory.ContainerRevolver;
 public class GuiRevolver extends GuiContainer {
 
     public static final ResourceLocation revolverTextures = new ResourceLocation(
-            "thaumicbases",
-            "textures/gui/revolver.png");
+        "thaumicbases",
+        "textures/gui/revolver.png");
     public int blockedSlot;
 
     public GuiRevolver(InventoryPlayer inv, World w, int x, int y, int z) {

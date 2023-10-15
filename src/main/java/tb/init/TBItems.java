@@ -52,99 +52,120 @@ public class TBItems {
 
     public static ToolMaterial thauminite = EnumHelper.addToolMaterial("THAUMINITE", 3, 974, 7F, 2.8F, 15);
     public static ArmorMaterial thauminiteA = EnumHelper
-            .addArmorMaterial("ATHAUMINITE", 27, new int[] { 3, 8, 6, 3 }, 17);
+        .addArmorMaterial("ATHAUMINITE", 27, new int[] { 3, 8, 6, 3 }, 17);
     public static ArmorMaterial bloodyA = EnumHelper.addArmorMaterial("TBBLOODY", 21, new int[] { 2, 6, 5, 2 }, 21);
 
     public static Item thauminiteAxe = new ItemThauminiteAxe(thauminite).setUnlocalizedName("thauminiteAxe")
-            .setTextureName("thaumicbases:thauminite/thauminiteaxe");
+        .setTextureName("thaumicbases:thauminite/thauminiteaxe");
     public static Item thauminiteHoe = new ItemThauminiteHoe(thauminite).setUnlocalizedName("thauminiteHoe")
-            .setTextureName("thaumicbases:thauminite/thauminitehoe");
+        .setTextureName("thaumicbases:thauminite/thauminitehoe");
     public static Item thauminitePickaxe = new ItemThauminitePickaxe(thauminite).setUnlocalizedName("thauminitePickaxe")
-            .setTextureName("thaumicbases:thauminite/thauminitepick");
+        .setTextureName("thaumicbases:thauminite/thauminitepick");
     public static Item thauminiteShears = new ItemThauminiteShears().setUnlocalizedName("thauminiteShears")
-            .setTextureName("thaumicbases:thauminite/thauminiteshears").setFull3D().setMaxStackSize(1)
-            .setMaxDamage(974);
+        .setTextureName("thaumicbases:thauminite/thauminiteshears")
+        .setFull3D()
+        .setMaxStackSize(1)
+        .setMaxDamage(974);
     public static Item thauminiteShovel = new ItemThauminiteShovel(thauminite).setUnlocalizedName("thauminiteShovel")
-            .setTextureName("thaumicbases:thauminite/thauminiteshovel");
+        .setTextureName("thaumicbases:thauminite/thauminiteshovel");
     public static Item thauminiteSword = new ItemThauminiteSword(thauminite).setUnlocalizedName("thauminiteSword")
-            .setTextureName("thaumicbases:thauminite/thauminitesword");
+        .setTextureName("thaumicbases:thauminite/thauminitesword");
 
     public static Item thauminiteHelmet = new ItemThauminiteArmor(thauminiteA, 0).setUnlocalizedName("thauminiteHelmet")
-            .setTextureName("thaumicbases:thauminite/thauminitehelm");
+        .setTextureName("thaumicbases:thauminite/thauminitehelm");
     public static Item thauminiteChest = new ItemThauminiteArmor(thauminiteA, 1).setUnlocalizedName("thauminiteChest")
-            .setTextureName("thaumicbases:thauminite/thauminitechest");
+        .setTextureName("thaumicbases:thauminite/thauminitechest");
     public static Item thauminiteLeggings = new ItemThauminiteArmor(thauminiteA, 2).setUnlocalizedName("thauminiteLegs")
-            .setTextureName("thaumicbases:thauminite/thauminitelegs");
+        .setTextureName("thaumicbases:thauminite/thauminitelegs");
     public static Item thauminiteBoots = new ItemThauminiteArmor(thauminiteA, 3).setUnlocalizedName("thauminiteBoots")
-            .setTextureName("thaumicbases:thauminite/thauminiteboots");
+        .setTextureName("thaumicbases:thauminite/thauminiteboots");
 
     public static Item pyroBucket = new ItemPyrofluidBucket().setUnlocalizedName("pyrofluidBucket")
-            .setTextureName("thaumicbases:bucket_blazing_fluid");
+        .setTextureName("thaumicbases:bucket_blazing_fluid");
 
     public static Item plaxSeed = new ItemSeeds(TBBlocks.plax, Blocks.farmland).setUnlocalizedName("plaxSeeds")
-            .setTextureName("thaumicbases:plax_seeds");
+        .setTextureName("thaumicbases:plax_seeds");
     public static Item metalleatSeeds = new ItemSeeds(TBBlocks.metalleat, Blocks.farmland)
-            .setUnlocalizedName("metalleatSeeds").setTextureName("thaumicbases:metalleat_seeds");
+        .setUnlocalizedName("metalleatSeeds")
+        .setTextureName("thaumicbases:metalleat_seeds");
     public static Item lucriteSeeds = new ItemSeeds(TBBlocks.lucrite, Blocks.farmland)
-            .setUnlocalizedName("lucriteSeeds").setTextureName("thaumicbases:lucrite_seeds");
+        .setUnlocalizedName("lucriteSeeds")
+        .setTextureName("thaumicbases:lucrite_seeds");
 
     // TODO ROSA
     public static Item knoseFragment = new ItemKnoseFragment().setUnlocalizedName("knoseFragment.")
-            .setTextureName("thaumicbases:knose/");
+        .setTextureName("thaumicbases:knose/");
     public static Item knoseSeed = new ItemKnoseSeeds(TBBlocks.knose, TBBlocks.crystalBlock)
-            .setUnlocalizedName("knoseSeed").setTextureName("thaumicbases:knose_seed");
+        .setUnlocalizedName("knoseSeed")
+        .setTextureName("thaumicbases:knose_seed");
 
     public static Item sweedSeeds = new ItemKnoseSeeds(TBBlocks.sweed, Blocks.grass).setUnlocalizedName("sweedSeeds")
-            .setTextureName("thaumicbases:seeds_sweed");
+        .setTextureName("thaumicbases:seeds_sweed");
     public static Item lazulliaSeeds = new ItemSeeds(TBBlocks.lazullia, Blocks.farmland)
-            .setUnlocalizedName("lazulliaSeeds").setTextureName("thaumicbases:lazullia_seeds");
+        .setUnlocalizedName("lazulliaSeeds")
+        .setTextureName("thaumicbases:lazullia_seeds");
     public static Item redlonSeeds = new ItemSeeds(TBBlocks.redlonStem, Blocks.farmland)
-            .setUnlocalizedName("redlonSeeds").setTextureName("thaumicbases:redlon_seed");
+        .setUnlocalizedName("redlonSeeds")
+        .setTextureName("thaumicbases:redlon_seed");
     public static Item glieoniaSeed = new ItemKnoseSeeds(TBBlocks.glieonia, Blocks.grass)
-            .setUnlocalizedName("glieoniaSeed").setTextureName("thaumicbases:glieonia_seed");
+        .setUnlocalizedName("glieoniaSeed")
+        .setTextureName("thaumicbases:glieonia_seed");
     public static Item rosehipSyrup = new ItemRosehipSyrup().setUnlocalizedName("rosehipSyrup")
-            .setTextureName("thaumicbases:rosehip_syrup").setMaxStackSize(16);
+        .setTextureName("thaumicbases:rosehip_syrup")
+        .setMaxStackSize(16);
     public static Item voidSeed = new ItemSeeds(TBBlocks.voidPlant, Blocks.farmland).setUnlocalizedName("voidSeed")
-            .setTextureName("thaumicbases:void_seed");
+        .setTextureName("thaumicbases:void_seed");
 
     public static Item tobaccoSeeds = new ItemSeeds(TBBlocks.tobacco, Blocks.farmland)
-            .setUnlocalizedName("tobaccoSeeds").setTextureName("thaumicbases:tobacco_seeds");
+        .setUnlocalizedName("tobaccoSeeds")
+        .setTextureName("thaumicbases:tobacco_seeds");
     public static Item mortar = new ItemMortarAndPestle().setUnlocalizedName("mortar")
-            .setTextureName("thaumicbases:mortar");
+        .setTextureName("thaumicbases:mortar");
     public static Item tobacco = new TBTobacco().setUnlocalizedName("tobacco");
     public static Item greatwoodPipe = new ItemSmokingPipe(false).setUnlocalizedName("greatwoodPipe")
-            .setTextureName("thaumicbases:smokingPipe");
+        .setTextureName("thaumicbases:smokingPipe");
     public static Item silverwoodPipe = new ItemSmokingPipe(true).setUnlocalizedName("silverwoodPipe")
-            .setTextureName("thaumicbases:smokingPipe_silverwood");
+        .setTextureName("thaumicbases:smokingPipe_silverwood");
 
     public static Item bloodyChest = new ItemBloodyArmor(bloodyA, 1).setUnlocalizedName("bloodyChest")
-            .setTextureName("thaumicbases:bloodyRobes/bloodychest");
+        .setTextureName("thaumicbases:bloodyRobes/bloodychest");
     public static Item bloodyLeggings = new ItemBloodyArmor(bloodyA, 2).setUnlocalizedName("bloodyLegs")
-            .setTextureName("thaumicbases:bloodyRobes/bloodylegs");
+        .setTextureName("thaumicbases:bloodyRobes/bloodylegs");
     public static Item bloodyBoots = new ItemBloodyArmor(bloodyA, 3).setUnlocalizedName("bloodyBoots")
-            .setTextureName("thaumicbases:bloodyRobes/bloodyboots");
+        .setTextureName("thaumicbases:bloodyRobes/bloodyboots");
 
     public static Item concentratedTaint = new ItemConcentratedTaint().setUnlocalizedName("concentratedTaint")
-            .setTextureName("thaumicbases:concentratedTaint").setMaxStackSize(1);
+        .setTextureName("thaumicbases:concentratedTaint")
+        .setMaxStackSize(1);
 
     public static Item fociActivation = new FociActivation().setUnlocalizedName("activationFoci")
-            .setTextureName("thaumicbases:foci/activation/foci");
+        .setTextureName("thaumicbases:foci/activation/foci");
     public static Item fociDrain = new FociDrain().setUnlocalizedName("drainFoci")
-            .setTextureName("thaumicbases:foci/drain/foci");
+        .setTextureName("thaumicbases:foci/drain/foci");
     public static Item fociExperience = new FociExperience().setUnlocalizedName("experienceFoci")
-            .setTextureName("thaumicbases:foci/experience/foci");
+        .setTextureName("thaumicbases:foci/experience/foci");
     public static Item fociFlux = new FociFlux().setUnlocalizedName("fluxFoci")
-            .setTextureName("thaumicbases:foci/flux/foci");
+        .setTextureName("thaumicbases:foci/flux/foci");
 
     public static Item nodeFoci = new ItemNodeFoci().setUnlocalizedName("nodeFoci.");
 
     public static Item voidShears = new ItemVoidShears().setTextureName("thaumicbases:shears")
-            .setUnlocalizedName("tb.voidShears").setFull3D().setMaxDamage(184).setFull3D().setMaxStackSize(1);
+        .setUnlocalizedName("tb.voidShears")
+        .setFull3D()
+        .setMaxDamage(184)
+        .setFull3D()
+        .setMaxStackSize(1);
     public static Item voidFAS = new ItemVoidFlintAndSteel().setTextureName("thaumicbases:flint_and_steel")
-            .setUnlocalizedName("tb.voidFAS").setFull3D().setMaxDamage(184).setFull3D().setMaxStackSize(1);
+        .setUnlocalizedName("tb.voidFAS")
+        .setFull3D()
+        .setMaxDamage(184)
+        .setFull3D()
+        .setMaxStackSize(1);
 
-    public static Item revolver = new ItemRevolver().setMaxDamage(1561).setMaxStackSize(1).setFull3D()
-            .setUnlocalizedName("tb.revolver");
+    public static Item revolver = new ItemRevolver().setMaxDamage(1561)
+        .setMaxStackSize(1)
+        .setFull3D()
+        .setUnlocalizedName("tb.revolver");
     public static Item castingBracelet = new ItemCastingBracelet().setUnlocalizedName("tb.bracelet");
 
     public static WandCap WAND_CAP_THAUMINITE;
@@ -231,22 +252,22 @@ public class TBItems {
         OreDictionary.registerOre("ingotThauminite", new ItemStack(resource, 1, 1));
 
         WAND_CAP_THAUMINITE = new WandCap("thauminite", 0.85F, new ItemStack(resource, 1, 2), 6);
-        WAND_CAP_THAUMINITE.setTexture(
-                new ResourceLocation("thaumicbases", "textures/items/thauminite/wand_cap_thauminite_uv.png"));
+        WAND_CAP_THAUMINITE
+            .setTexture(new ResourceLocation("thaumicbases", "textures/items/thauminite/wand_cap_thauminite_uv.png"));
 
         WAND_ROD_THAUMIUM = new WandRod(
-                "tbthaumium",
-                80,
-                new ItemStack(resource, 1, 3),
-                6,
-                new WandRodPrimalOnUpdate(),
-                new ResourceLocation("thaumicbases", "textures/items/wand_rod_thaumium_uv.png"));
+            "tbthaumium",
+            80,
+            new ItemStack(resource, 1, 3),
+            6,
+            new WandRodPrimalOnUpdate(),
+            new ResourceLocation("thaumicbases", "textures/items/wand_rod_thaumium_uv.png"));
         WAND_ROD_VOID = new WandRod(
-                "tbvoid",
-                160,
-                new ItemStack(resource, 1, 4),
-                16,
-                new WandRodPrimalOnUpdate(),
-                new ResourceLocation("thaumicbases", "textures/items/wand_rod_void_uv.png"));
+            "tbvoid",
+            160,
+            new ItemStack(resource, 1, 4),
+            16,
+            new WandRodPrimalOnUpdate(),
+            new ResourceLocation("thaumicbases", "textures/items/wand_rod_void_uv.png"));
     }
 }

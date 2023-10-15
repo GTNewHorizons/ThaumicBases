@@ -26,56 +26,55 @@ public class TBRecipes {
         OreDictionary.registerOre("obsidian", Blocks.obsidian);
 
         ShapelessOreRecipe qBl = new ShapelessOreRecipe(
-                new ItemStack(TBBlocks.quicksilverBlock),
-                new Object[] { "quicksilver", "quicksilver", "quicksilver", "quicksilver", "quicksilver", "quicksilver",
-                        "quicksilver", "quicksilver", "quicksilver" });
+            new ItemStack(TBBlocks.quicksilverBlock),
+            new Object[] { "quicksilver", "quicksilver", "quicksilver", "quicksilver", "quicksilver", "quicksilver",
+                "quicksilver", "quicksilver", "quicksilver" });
         ShapelessOreRecipe qSi = new ShapelessOreRecipe(
-                new ItemStack(ConfigItems.itemResource, 9, 3),
-                new Object[] { "blockQuicksilver" });
+            new ItemStack(ConfigItems.itemResource, 9, 3),
+            new Object[] { "blockQuicksilver" });
         ShapelessOreRecipe qBr = new ShapelessOreRecipe(
-                new ItemStack(TBBlocks.quicksilverBrick, 4, 0),
-                new Object[] { "blockQuicksilver", "blockQuicksilver", "blockQuicksilver", "blockQuicksilver" });
+            new ItemStack(TBBlocks.quicksilverBrick, 4, 0),
+            new Object[] { "blockQuicksilver", "blockQuicksilver", "blockQuicksilver", "blockQuicksilver" });
         ShapelessOreRecipe smB = new ShapelessOreRecipe(
-                new ItemStack(ConfigItems.itemResource, 9, 14),
-                new Object[] { "blockSalisMundus" });
+            new ItemStack(ConfigItems.itemResource, 9, 14),
+            new Object[] { "blockSalisMundus" });
         ShapelessOreRecipe tnU = new ShapelessOreRecipe(
-                new ItemStack(TBItems.resource, 9, 0),
-                new Object[] { new ItemStack(TBItems.resource, 1, 1) });
+            new ItemStack(TBItems.resource, 9, 0),
+            new Object[] { new ItemStack(TBItems.resource, 1, 1) });
         ShapelessOreRecipe tnI = new ShapelessOreRecipe(
-                new ItemStack(TBItems.resource, 1, 1),
-                new Object[] { new ItemStack(TBItems.resource, 1, 0), new ItemStack(TBItems.resource, 1, 0),
-                        new ItemStack(TBItems.resource, 1, 0), new ItemStack(TBItems.resource, 1, 0),
-                        new ItemStack(TBItems.resource, 1, 0), new ItemStack(TBItems.resource, 1, 0),
-                        new ItemStack(TBItems.resource, 1, 0), new ItemStack(TBItems.resource, 1, 0),
-                        new ItemStack(TBItems.resource, 1, 0) });
+            new ItemStack(TBItems.resource, 1, 1),
+            new Object[] { new ItemStack(TBItems.resource, 1, 0), new ItemStack(TBItems.resource, 1, 0),
+                new ItemStack(TBItems.resource, 1, 0), new ItemStack(TBItems.resource, 1, 0),
+                new ItemStack(TBItems.resource, 1, 0), new ItemStack(TBItems.resource, 1, 0),
+                new ItemStack(TBItems.resource, 1, 0), new ItemStack(TBItems.resource, 1, 0),
+                new ItemStack(TBItems.resource, 1, 0) });
         ShapelessOreRecipe tnB = new ShapelessOreRecipe(
-                new ItemStack(TBBlocks.thauminiteBlock, 1, 0),
-                new Object[] { "ingotThauminite", "ingotThauminite", "ingotThauminite", "ingotThauminite",
-                        "ingotThauminite", "ingotThauminite", "ingotThauminite", "ingotThauminite",
-                        "ingotThauminite" });
+            new ItemStack(TBBlocks.thauminiteBlock, 1, 0),
+            new Object[] { "ingotThauminite", "ingotThauminite", "ingotThauminite", "ingotThauminite",
+                "ingotThauminite", "ingotThauminite", "ingotThauminite", "ingotThauminite", "ingotThauminite" });
         ShapelessOreRecipe tiB = new ShapelessOreRecipe(
-                new ItemStack(TBItems.resource, 9, 1),
-                new Object[] { TBBlocks.thauminiteBlock });
+            new ItemStack(TBItems.resource, 9, 1),
+            new Object[] { TBBlocks.thauminiteBlock });
         ShapelessOreRecipe biP = new ShapelessOreRecipe(
-                new ItemStack(Blocks.planks, 4, 2),
-                new Object[] { new ItemStack(TBBlocks.genLogs, 1, 0) });
+            new ItemStack(Blocks.planks, 4, 2),
+            new Object[] { new ItemStack(TBBlocks.genLogs, 1, 0) });
         ShapelessOreRecipe spP = new ShapelessOreRecipe(
-                new ItemStack(Blocks.planks, 4, 1),
-                new Object[] { new ItemStack(TBBlocks.genLogs, 1, 1) });
+            new ItemStack(Blocks.planks, 4, 1),
+            new Object[] { new ItemStack(TBBlocks.genLogs, 1, 1) });
         ShapelessOreRecipe enP = new ShapelessOreRecipe(
-                new ItemStack(TBBlocks.enderPlanks, 4, 0),
-                new Object[] { new ItemStack(TBBlocks.genLogs, 1, 2) });
+            new ItemStack(TBBlocks.enderPlanks, 4, 0),
+            new Object[] { new ItemStack(TBBlocks.genLogs, 1, 2) });
 
         ShapedOreRecipe eAr = new ShapedOreRecipe(
-                new ItemStack(TBBlocks.eldritchArk, 4, 0),
-                new Object[] { "@#@", "#$#", "@#@", '@', "nuggetGold", '#', "obsidian", '$',
-                        new ItemStack(ConfigBlocks.blockCrystal, 1, 4) });
+            new ItemStack(TBBlocks.eldritchArk, 4, 0),
+            new Object[] { "@#@", "#$#", "@#@", '@', "nuggetGold", '#', "obsidian", '$',
+                new ItemStack(ConfigBlocks.blockCrystal, 1, 4) });
 
         ShapedOreRecipe iGw = new ShapedOreRecipe(
-                new ItemStack(TBBlocks.ironGreatwood, 4, 0),
-                new Object[] { "@#@", "#$#", "@#@", '@', "nuggetIron", '#',
-                        new ItemStack(ConfigBlocks.blockWoodenDevice, 1, 6), '$',
-                        new ItemStack(ConfigBlocks.blockCrystal, 1, 4) });
+            new ItemStack(TBBlocks.ironGreatwood, 4, 0),
+            new Object[] { "@#@", "#$#", "@#@", '@', "nuggetIron", '#',
+                new ItemStack(ConfigBlocks.blockWoodenDevice, 1, 6), '$',
+                new ItemStack(ConfigBlocks.blockCrystal, 1, 4) });
 
         GameRegistry.addSmelting(new ItemStack(TBBlocks.genLogs, 1, 0), new ItemStack(Items.coal, 1, 1), 0.15F);
         GameRegistry.addSmelting(new ItemStack(TBBlocks.genLogs, 1, 1), new ItemStack(Items.coal, 1, 1), 0.15F);
@@ -110,16 +109,16 @@ public class TBRecipes {
 
         for (int i = 0; i < BlockHalfSlab.parents.length; ++i) {
             ShapedOreRecipe slabRec = new ShapedOreRecipe(
-                    new ItemStack(TBBlocks.genericSlab, 6, i),
-                    new Object[] { "###", '#', BlockHalfSlab.parents[i] });
+                new ItemStack(TBBlocks.genericSlab, 6, i),
+                new Object[] { "###", '#', BlockHalfSlab.parents[i] });
             slabs.add(slabRec);
             GameRegistry.addRecipe(slabRec);
         }
 
         for (int i = 0; i < 8; ++i) {
             ShapedOreRecipe slabRec = new ShapedOreRecipe(
-                    new ItemStack(TBBlocks.crystalSlab, 6, i),
-                    new Object[] { "###", '#', new ItemStack(TBBlocks.crystalBlock, 1, i) });
+                new ItemStack(TBBlocks.crystalSlab, 6, i),
+                new Object[] { "###", '#', new ItemStack(TBBlocks.crystalBlock, 1, i) });
             slabs.add(slabRec);
             GameRegistry.addRecipe(slabRec);
         }

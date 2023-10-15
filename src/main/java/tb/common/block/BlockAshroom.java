@@ -25,12 +25,12 @@ public class BlockAshroom extends BlockTBPlant {
         if (!this.canPlaceBlockAt(p_150109_1_, p_150109_2_, p_150109_3_, p_150109_4_)) {
             if (p_150109_1_.getBlock(p_150109_2_, p_150109_3_, p_150109_4_) == this) {
                 this.dropBlockAsItem(
-                        p_150109_1_,
-                        p_150109_2_,
-                        p_150109_3_,
-                        p_150109_4_,
-                        p_150109_1_.getBlockMetadata(p_150109_2_, p_150109_3_, p_150109_4_),
-                        0);
+                    p_150109_1_,
+                    p_150109_2_,
+                    p_150109_3_,
+                    p_150109_4_,
+                    p_150109_1_.getBlockMetadata(p_150109_2_, p_150109_3_, p_150109_4_),
+                    0);
                 p_150109_1_.setBlockToAir(p_150109_2_, p_150109_3_, p_150109_4_);
             }
 
@@ -45,7 +45,11 @@ public class BlockAshroom extends BlockTBPlant {
         if (metadata >= this.growthStages - 1) {
             for (int i = 0; i < 8 + world.rand.nextInt(32); ++i) // Nerf for the shrooms
             {
-                Aspect primal = Aspect.getPrimalAspects().get(world.rand.nextInt(Aspect.getPrimalAspects().size()));
+                Aspect primal = Aspect.getPrimalAspects()
+                    .get(
+                        world.rand.nextInt(
+                            Aspect.getPrimalAspects()
+                                .size()));
                 EntityAspectOrb orb = new EntityAspectOrb(world, x, y, z, primal, 1);
                 if (!world.isRemote) world.spawnEntityInWorld(orb);
             }

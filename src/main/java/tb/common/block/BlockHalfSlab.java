@@ -20,7 +20,7 @@ import thaumcraft.api.crafting.IInfusionStabiliser;
 public class BlockHalfSlab extends BlockSlab implements IInfusionStabiliser {
 
     public static Block[] parents = new Block[] { TBBlocks.eldritchArk, TBBlocks.oldBrick, TBBlocks.oldCobble,
-            TBBlocks.oldCobbleMossy, TBBlocks.oldDiamond, TBBlocks.oldGold, TBBlocks.oldIron, TBBlocks.oldLapis };
+        TBBlocks.oldCobbleMossy, TBBlocks.oldDiamond, TBBlocks.oldGold, TBBlocks.oldIron, TBBlocks.oldLapis };
 
     public BlockHalfSlab(boolean fullBlock, Material material) {
         super(fullBlock, material);
@@ -61,6 +61,6 @@ public class BlockHalfSlab extends BlockSlab implements IInfusionStabiliser {
     public boolean canStabaliseInfusion(World world, int x, int y, int z) {
         int meta = world.getBlockMetadata(x, y, z) & 7;
         return parents[meta] instanceof IInfusionStabiliser
-                && ((IInfusionStabiliser) parents[meta]).canStabaliseInfusion(world, x, y, z);
+            && ((IInfusionStabiliser) parents[meta]).canStabaliseInfusion(world, x, y, z);
     }
 }
