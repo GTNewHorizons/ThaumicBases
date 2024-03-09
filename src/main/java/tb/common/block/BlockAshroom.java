@@ -1,9 +1,8 @@
 package tb.common.block;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 import thaumcraft.api.aspects.Aspect;
@@ -41,7 +40,7 @@ public class BlockAshroom extends BlockTBPlant {
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+    public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
         if (metadata >= this.growthStages - 1) {
             for (int i = 0; i < 8 + world.rand.nextInt(32); ++i) // Nerf for the shrooms
             {
@@ -54,6 +53,7 @@ public class BlockAshroom extends BlockTBPlant {
                 if (!world.isRemote) world.spawnEntityInWorld(orb);
             }
         }
-        return super.getDrops(world, x, y, z, metadata, fortune);
+        super.onBlockHarvested(world, x, y, z, metadata, player);
     }
+
 }
