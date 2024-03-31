@@ -1,6 +1,7 @@
 package tb.common.block;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCactus;
@@ -43,10 +44,20 @@ public class BlockRainbowCactus extends BlockCactus {
             return ret;
         }
 
-        for (int i = 0; i < 3 + world.rand.nextInt(8); ++i) {
-            ret.add(allowedDyes[world.rand.nextInt(allowedDyes.length)].copy());
-        }
+        addDyeDropsToOutput(world.rand, ret);
         return ret;
+    }
+
+    /**
+     * Separates the dye drop logic from the world for automation purposes.
+     *
+     * @param rand The random source used to generate the dyes.
+     * @param ret  The output list to append to, 1 new stack per dye drop, merge them on your own time.
+     */
+    public void addDyeDropsToOutput(Random rand, ArrayList<ItemStack> ret) {
+        for (int i = 0; i < 3 + rand.nextInt(8); ++i) {
+            ret.add(allowedDyes[rand.nextInt(allowedDyes.length)].copy());
+        }
     }
 
     public static ItemStack[] allowedDyes;
