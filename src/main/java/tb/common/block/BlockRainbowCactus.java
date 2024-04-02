@@ -64,12 +64,14 @@ public class BlockRainbowCactus extends BlockCactus {
 
     public static void loadColors() {
         if (Loader.isModLoaded("gregtech")) {
+            // The fact all dyes have the same probability of dropping when gregtech is installed is intended.
             allowedDyes = new ItemStack[] { ItemList.Color_00.get(1), ItemList.Color_01.get(1),
                 ItemList.Color_02.get(1), ItemList.Color_03.get(1), ItemList.Color_04.get(1), ItemList.Color_05.get(1),
                 ItemList.Color_06.get(1), ItemList.Color_07.get(1), ItemList.Color_08.get(1), ItemList.Color_09.get(1),
                 ItemList.Color_10.get(1), ItemList.Color_11.get(1), ItemList.Color_12.get(1), ItemList.Color_13.get(1),
                 ItemList.Color_14.get(1), ItemList.Color_15.get(1), };
         } else {
+            // Normally it drops more green dyes.
             allowedDyes = new ItemStack[] { new ItemStack(Items.dye, 1, 1), new ItemStack(Items.dye, 1, 2),
                 new ItemStack(Items.dye, 1, 5), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.dye, 1, 6),
                 new ItemStack(Items.dye, 1, 7), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.dye, 1, 8),

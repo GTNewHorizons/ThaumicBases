@@ -2804,7 +2804,10 @@ public class TBThaumonomicon {
                 2,
                 new ItemStack(TBBlocks.rainbowCactus, 1, 0)).setParents("TB.Metalleat")
                     .setConcealed()
-                    .setPages(new ResearchPage("tb.rec.rainCacti.page.0"), new ResearchPage(rainbowCactiRec))
+                    .setPages(
+                        new ResearchPage(
+                            Loader.isModLoaded("gregtech") ? "tb.rec.rainCacti.page.0.gt" : "tb.rec.rainCacti.page.0"),
+                        new ResearchPage(rainbowCactiRec))
                     .registerResearchItem();
 
             new ResearchItem(
