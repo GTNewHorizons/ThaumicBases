@@ -207,4 +207,8 @@ public class BlockRedlonStem extends BlockStem {
     public int getRenderColor(int p_149741_1_) {
         return 0xffffff;
     }
+
+    public Block getCropBlock() {
+        return field_149877_a;
+    }
 }

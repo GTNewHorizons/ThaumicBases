@@ -1,5 +1,6 @@
 package tb.common.block;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,14 +43,14 @@ public class BlockAshroom extends BlockTBPlant {
     @Override
     public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
         if (metadata >= this.growthStages - 1) {
-            for (int i = 0; i < 8 + world.rand.nextInt(32); ++i) // Nerf for the shrooms
+            // should be close enough to the rate of the old logic.
+            int dropCount = 8 + (int) Math.round(world.rand.nextDouble() * 11.76742);
+            ArrayList<Aspect> primals = Aspect.getPrimalAspects();
+            for (int i = 0; i < dropCount; ++i) // Nerf for the shrooms
             {
-                Aspect primal = Aspect.getPrimalAspects()
-                    .get(
-                        world.rand.nextInt(
-                            Aspect.getPrimalAspects()
-                                .size()));
-                EntityAspectOrb orb = new EntityAspectOrb(world, x, y, z, primal, 1);
+                // We should probably cluster orbs of the same aspect instead of spawning them individually.
+                Aspect aspect = primals.get(world.rand.nextInt(primals.size()));
+                EntityAspectOrb orb = new EntityAspectOrb(world, x, y, z, aspect, 1);
                 if (!world.isRemote) world.spawnEntityInWorld(orb);
             }
         }

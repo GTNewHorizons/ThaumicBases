@@ -30,10 +30,8 @@ public class BlockSweed extends BlockTBPlant {
             int newX = x + dir.offsetX;
             int newZ = z + dir.offsetZ;
             int newY = findSutableY(w, newX, y, newZ);
-            if (canPlaceBlockOn(w.getBlock(newX, newY - 1, newZ)) && w.isAirBlock(newX, newY, newZ)) // fix for the
-                                                                                                     // Sweeds
-                                                                                                     // destroying
-                                                                                                     // blocks
+            // fix for the Sweeds destroying blocks
+            if (canPlaceBlockOn(w.getBlock(newX, newY - 1, newZ)) && w.isAirBlock(newX, newY, newZ))
                 w.setBlock(newX, newY, newZ, this, 0, 3);
         }
     }
@@ -53,7 +51,9 @@ public class BlockSweed extends BlockTBPlant {
         if (metadata >= growthStages - 1) {
             if (world.rand.nextInt(growthStages) <= metadata) if (dropSeed != null) ret.add(dropSeed.copy());
 
-            for (int i = 0; i < 3 + fortune; ++i) if (world.rand.nextBoolean()) ret.add(new ItemStack(Items.sugar));
+            // should preserve drop rates
+            int sugarDropCount = world.rand.nextInt(4 + fortune);
+            if (sugarDropCount > 0) ret.add(new ItemStack(Items.sugar, sugarDropCount));
 
             if (world.rand.nextBoolean()) ret.add(new ItemStack(Items.reeds));
 

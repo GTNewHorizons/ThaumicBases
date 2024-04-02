@@ -159,12 +159,37 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
-        if (metadata >= growthStages - 1) {
-            for (int i = 0; i < 1 + world.rand.nextInt(fortune + 1); ++i) // Change for the resource drop
-            {
-                if (world.rand.nextInt(growthStages) <= metadata) {
-                    if (dropItem != null) ret.add(dropItem.copy());
+        if (this.dropItem != null && metadata >= growthStages - 1) {
+            // You can approximate the fortune bonus by diving https://oeis.org/A000169 with https://oeis.org/A000435
+            // I can't figure out a good efficient way to compute those without melting my brain so if you feel
+            // like you can approximate it well enough, feel free to do so. For now, I'm just capping it at 3 drops
+            // with a linear function since fortune levels above 3 aren't very common, and I don't want some poor lad
+            // crashing their pc with max int fortune int.
+            //
+            // Average bonuses for each fortune level:
+            // F1 = 0.5 -> 0.5 (stayed the same)
+            // F2 = 0.88888 -> 0.9 (slight buff)
+            // F3 = 1.21875 -> 1.3 (slight buff)
+            // The EIG doesn't use fortune levels, so it shouldn't be affected anyway.
+            int roundCount = 1;
+            if (fortune > 0) {
+                roundCount += (int) Math.min(3, Math.round(world.rand.nextDouble() * (1 + 0.8d * (fortune - 1))));
+            }
+            int dropCount = 0;
+            if (growthStages <= metadata) {
+                // we can just skip the random calls if we are at max growth.
+                dropCount = roundCount;
+            } else {
+                for (int i = 0; i < roundCount; ++i) {
+                    if (world.rand.nextInt(growthStages) <= metadata) {
+                        dropCount++;
+                    }
                 }
+            }
+            if (dropCount > 0) {
+                ItemStack drop = dropItem.copy();
+                drop.stackSize = dropCount;
+                ret.add(drop);
             }
         }
         if (dropSeed != null) ret.add(dropSeed.copy());
