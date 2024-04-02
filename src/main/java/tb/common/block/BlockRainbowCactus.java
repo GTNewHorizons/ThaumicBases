@@ -55,7 +55,9 @@ public class BlockRainbowCactus extends BlockCactus {
      * @param ret  The output list to append to, 1 new stack per dye drop, merge them on your own time.
      */
     public void addDyeDropsToOutput(Random rand, ArrayList<ItemStack> ret) {
-        for (int i = 0; i < 3 + rand.nextInt(8); ++i) {
+        // Should be roughly equivalent to the old bonus rates
+        int dropCount = 3 + (int) Math.round(rand.nextDouble() * 4.91662);
+        for (int i = 0; i < dropCount; ++i) {
             ret.add(allowedDyes[rand.nextInt(allowedDyes.length)].copy());
         }
     }

@@ -51,8 +51,8 @@ public class BlockSweed extends BlockTBPlant {
         if (metadata >= growthStages - 1) {
             if (world.rand.nextInt(growthStages) <= metadata) if (dropSeed != null) ret.add(dropSeed.copy());
 
-            int sugarDropCount = 0;
-            for (int i = 0; i < 3 + fortune; ++i) if (world.rand.nextBoolean()) ++sugarDropCount;
+            // should preserve drop rates
+            int sugarDropCount = world.rand.nextInt(4 + fortune);
             if (sugarDropCount > 0) ret.add(new ItemStack(Items.sugar, sugarDropCount));
 
             if (world.rand.nextBoolean()) ret.add(new ItemStack(Items.reeds));
