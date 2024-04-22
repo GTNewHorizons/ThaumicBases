@@ -153,13 +153,13 @@ public class TileNodeLinker extends TileEntity implements IWandable {
         } else instability = 0;
     }
 
-    private static final Block STABILIZER_BLOCK = OreDictionary.doesOreNameExist("blockIchorium")
-        && !OreDictionary.getOres("blockIchorium")
-            .isEmpty() ? Block.getBlockFromItem(
-                OreDictionary.getOres("blockIchorium")
-                    .get(0)
-                    .getItem())
-                : null;
+    // Spotless messes this initialization up very badly. It is much clearer to read this way.
+    // spotless:off
+    private static final Block STABILIZER_BLOCK =
+        OreDictionary.doesOreNameExist("blockIchorium") && !OreDictionary.getOres("blockIchorium").isEmpty()
+            ? Block.getBlockFromItem(OreDictionary.getOres("blockIchorium").get(0).getItem())
+            : null;
+    // spotless:on
 
     private boolean hasStabilizerBlock() {
         return STABILIZER_BLOCK != null
@@ -171,11 +171,15 @@ public class TileNodeLinker extends TileEntity implements IWandable {
             int rnd = this.worldObj.rand.nextInt(this.instability);
             if (rnd == 49) {
                 // if a block of Ichorium is above dont explode or harm node
-                if (!hasStabilizerBlock()) instability -= explodeTransmitter();
+                if (!hasStabilizerBlock()) {
+                    instability -= explodeTransmitter();
+                }
             } else {
                 if (rnd >= 45) {
                     // if a block of Ichorium is above dont explode or harm node
-                    if (!hasStabilizerBlock()) instability -= harmTransmitter();
+                    if (!hasStabilizerBlock()) {
+                        instability -= harmTransmitter();
+                    }
                 } else {
                     if (rnd >= 31) {
                         instability -= wisp();
