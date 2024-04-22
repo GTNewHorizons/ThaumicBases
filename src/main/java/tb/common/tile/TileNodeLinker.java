@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -152,23 +153,29 @@ public class TileNodeLinker extends TileEntity implements IWandable {
         } else instability = 0;
     }
 
+    private static final Block STABILIZER_BLOCK = OreDictionary.doesOreNameExist("blockIchorium")
+        && !OreDictionary.getOres("blockIchorium")
+            .isEmpty() ? Block.getBlockFromItem(
+                OreDictionary.getOres("blockIchorium")
+                    .get(0)
+                    .getItem())
+                : null;
+
+    private boolean hasStabilizerBlock() {
+        return STABILIZER_BLOCK != null
+            && this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord) == STABILIZER_BLOCK;
+    }
+
     public boolean instabilityCheck() {
         if (this.worldObj.rand.nextInt(50) <= this.instability) {
             int rnd = this.worldObj.rand.nextInt(this.instability);
             if (rnd == 49) {
                 // if a block of Ichorium is above dont explode or harm node
-                if (!OreDictionary.doesOreNameExist("blockIchorium")
-                    || (OreDictionary.getOres("blockIchorium") != null && !(OreDictionary.getOres("blockIchorium")
-                        .contains(new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord))))))
-                    instability -= explodeTransmitter();
+                if (!hasStabilizerBlock()) instability -= explodeTransmitter();
             } else {
                 if (rnd >= 45) {
                     // if a block of Ichorium is above dont explode or harm node
-                    if (!OreDictionary.doesOreNameExist("blockIchorium")
-                        || (OreDictionary.getOres("blockIchorium") != null && !(OreDictionary.getOres("blockIchorium")
-                            .contains(
-                                new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord + 1, this.zCoord))))))
-                        instability -= harmTransmitter();
+                    if (!hasStabilizerBlock()) instability -= harmTransmitter();
                 } else {
                     if (rnd >= 31) {
                         instability -= wisp();
