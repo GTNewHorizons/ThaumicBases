@@ -167,7 +167,7 @@ public class TileNodeLinker extends TileEntity implements IWandable {
     }
 
     public boolean instabilityCheck() {
-        if (this.worldObj.rand.nextInt(50) <= this.instability) {
+        if (this.instability > 0 && this.worldObj.rand.nextInt(50) <= this.instability) {
             int rnd = this.worldObj.rand.nextInt(this.instability);
             if (rnd == 49) {
                 // if a block of Ichorium is above dont explode or harm node
