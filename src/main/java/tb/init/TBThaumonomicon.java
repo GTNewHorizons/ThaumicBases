@@ -485,8 +485,12 @@ public class TBThaumonomicon {
                 new ItemStack(ConfigItems.itemResource, 1, 14) });
 
         CrucibleRecipe[] shards = new CrucibleRecipe[6];
-        if (Loader.isModLoaded("gregtech")) {
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
 
+            // Extend the size to support the new item inputs
+            shards = new CrucibleRecipe[12];
+
+            // Ore Blocks
             shards[0] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0),
@@ -531,6 +535,54 @@ public class TBThaumonomicon {
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 5),
                 new ItemStack(GameRegistry.findBlock("gregtech", "gt.blockores"), 1, 544),
+                new AspectList().add(Aspect.MAGIC, 1)
+                    .add(Aspect.ENTROPY, 5));
+
+            // Raw Ore Item
+            shards[6] = new CrucibleRecipe(
+                "TB.OreDestruction",
+                new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0),
+                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5540),
+                new AspectList().add(Aspect.ENTROPY, 2)
+                    .add(Aspect.MAGIC, 1)
+                    .add(Aspect.AIR, 3));
+
+            shards[7] = new CrucibleRecipe(
+                "TB.OreDestruction",
+                new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 1),
+                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5541),
+                new AspectList().add(Aspect.ENTROPY, 2)
+                    .add(Aspect.MAGIC, 1)
+                    .add(Aspect.FIRE, 3));
+
+            shards[8] = new CrucibleRecipe(
+                "TB.OreDestruction",
+                new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 2),
+                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5543),
+                new AspectList().add(Aspect.ENTROPY, 2)
+                    .add(Aspect.MAGIC, 1)
+                    .add(Aspect.WATER, 3));
+
+            shards[9] = new CrucibleRecipe(
+                "TB.OreDestruction",
+                new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 3),
+                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5542),
+                new AspectList().add(Aspect.ENTROPY, 2)
+                    .add(Aspect.MAGIC, 1)
+                    .add(Aspect.EARTH, 3));
+
+            shards[10] = new CrucibleRecipe(
+                "TB.OreDestruction",
+                new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 4),
+                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5545),
+                new AspectList().add(Aspect.ENTROPY, 2)
+                    .add(Aspect.MAGIC, 1)
+                    .add(Aspect.ORDER, 3));
+
+            shards[11] = new CrucibleRecipe(
+                "TB.OreDestruction",
+                new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 5),
+                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5544),
                 new AspectList().add(Aspect.MAGIC, 1)
                     .add(Aspect.ENTROPY, 5));
         } else {
