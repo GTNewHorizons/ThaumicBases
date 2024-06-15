@@ -485,7 +485,7 @@ public class TBThaumonomicon {
                 new ItemStack(ConfigItems.itemResource, 1, 14) });
 
         CrucibleRecipe[] shards = new CrucibleRecipe[6];
-        if (Loader.isModLoaded("gregtech")) {
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
 
             // Extend the size to support the new item inputs
             shards = new CrucibleRecipe[12];
