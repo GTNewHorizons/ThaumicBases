@@ -2858,7 +2858,9 @@ public class TBThaumonomicon {
                     .setConcealed()
                     .setPages(
                         new ResearchPage(
-                                (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) ? "tb.rec.rainCacti.page.0.gt" : "tb.rec.rainCacti.page.0"),
+                            (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi"))
+                                ? "tb.rec.rainCacti.page.0.gt"
+                                : "tb.rec.rainCacti.page.0"),
                         new ResearchPage(rainbowCactiRec))
                     .registerResearchItem();
 
