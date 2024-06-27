@@ -4039,26 +4039,22 @@ public class TBThaumonomicon {
             .add(brazierRec);
 
         // TODO actual recipes
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
-            for (int i = 0; i < 12; ++i) ThaumcraftApi.getCraftingRecipes()
-                .add(shards[i]);
-        } else {
-            for (int i = 0; i < 6; ++i) ThaumcraftApi.getCraftingRecipes()
-                .add(shards[i]);
-        }
+
+        for (int i = 0; i < shards.length; ++i) ThaumcraftApi.getCraftingRecipes()
+            .add(shards[i]);
 
         for (int i = 0; i < oldRec.length; ++i) ThaumcraftApi.getCraftingRecipes()
             .add(oldRec[i]);
 
-        for (int i = 0; i < 10; ++i) ThaumcraftApi.getCraftingRecipes()
+        for (int i = 0; i < toolsRec.length; ++i) ThaumcraftApi.getCraftingRecipes()
             .add(toolsRec[i]);
 
-        for (int i = 0; i < 7; ++i) {
-            ThaumcraftApi.getCraftingRecipes()
-                .add(cBlocks[i]);
-            ThaumcraftApi.getCraftingRecipes()
-                .add(cTaintedBlocks[i]);
-        }
+        for (int i = 0; i < cBlocks.length; ++i) ThaumcraftApi.getCraftingRecipes()
+            .add(cBlocks[i]);
+
+        for (int i = 0; i < cTaintedBlocks.length; ++i) ThaumcraftApi.getCraftingRecipes()
+            .add(cTaintedBlocks[i]);
+
     }
 
     public static Aspect getPrimalForLoop(int loopInt) {
