@@ -4039,9 +4039,13 @@ public class TBThaumonomicon {
             .add(brazierRec);
 
         // TODO actual recipes
-
-        for (int i = 0; i < 6; ++i) ThaumcraftApi.getCraftingRecipes()
-            .add(shards[i]);
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+            for (int i = 0; i < 12; ++i) ThaumcraftApi.getCraftingRecipes()
+                .add(shards[i]);
+        } else {
+            for (int i = 0; i < 6; ++i) ThaumcraftApi.getCraftingRecipes()
+                .add(shards[i]);
+        }
 
         for (int i = 0; i < oldRec.length; ++i) ThaumcraftApi.getCraftingRecipes()
             .add(oldRec[i]);
