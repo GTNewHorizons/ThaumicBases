@@ -4039,7 +4039,7 @@ public class TBThaumonomicon {
             .add(brazierRec);
 
         // TODO actual recipes
-      
+
         for (int i = 0; i < shards.length; ++i) ThaumcraftApi.getCraftingRecipes()
             .add(shards[i]);
 
