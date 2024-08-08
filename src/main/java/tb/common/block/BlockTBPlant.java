@@ -8,6 +8,7 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -150,27 +151,7 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
         // check for Growth Stage
         if (aMeta >= growthStages - 1) {
             // eval fortune on rightclick
-            int fortune = 0;
-            ItemStack heldItem = aPlayer.getHeldItem();
-            if (heldItem != null) {
-                if (heldItem.getEnchantmentTagList() != null) {
-                    for (int i = 0; i < heldItem.getEnchantmentTagList()
-                        .tagCount(); ++i) {
-                        if (heldItem.getEnchantmentTagList()
-                            .getCompoundTagAt(i)
-                            .getInteger("id") == Enchantment.fortune.effectId) {
-                            fortune = heldItem.getEnchantmentTagList()
-                                .getCompoundTagAt(i)
-                                .getInteger("lvl");
-
-                            // Damage fortune item on crop break?
-                            // heldItem.setItemDamage(heldItem.getItemDamage() + 1);
-                            break;
-                        }
-                    }
-                }
-            }
-
+            int fortune = EnchantmentHelper.getFortuneModifier(aPlayer);
             this.pRightClick = true;
             this.dropBlockAsItem(aWorld, aX, aY, aZ, aMeta, fortune);
             this.pRightClick = false;
