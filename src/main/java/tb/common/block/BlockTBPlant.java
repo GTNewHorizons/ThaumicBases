@@ -7,6 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,6 +29,7 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
     public IIcon[] growthIcons;
     public ItemStack dropItem;
     public ItemStack dropSeed;
+    private boolean pRightClick = false;
 
     public BlockTBPlant(int stages, int delay, boolean isCrop) {
         super();
@@ -140,6 +143,23 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
             3);
     }
 
+    @Override
+    public boolean onBlockActivated(World aWorld, int aX, int aY, int aZ, EntityPlayer aPlayer, int aSide, float pX,
+        float pY, float pZ) {
+        int aMeta = aWorld.getBlockMetadata(aX, aY, aZ);
+        // check for Growth Stage
+        if (aMeta >= growthStages - 1) {
+            // eval fortune on rightclick
+            int fortune = EnchantmentHelper.getFortuneModifier(aPlayer);
+            this.pRightClick = true;
+            this.dropBlockAsItem(aWorld, aX, aY, aZ, aMeta, fortune);
+            this.pRightClick = false;
+
+            aWorld.setBlock(aX, aY, aZ, this, 0, 2);
+        }
+        return false;
+    }
+
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister reg) {
         growthIcons = new IIcon[growthStages];
@@ -192,7 +212,7 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
                 ret.add(drop);
             }
         }
-        if (dropSeed != null) ret.add(dropSeed.copy());
+        if (dropSeed != null && !pRightClick) ret.add(dropSeed.copy());
 
         return ret;
     }
