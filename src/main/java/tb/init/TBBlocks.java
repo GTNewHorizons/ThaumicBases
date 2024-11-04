@@ -41,7 +41,6 @@ import tb.common.block.BlockTBSapling;
 import tb.common.block.BlockThaumicAnvil;
 import tb.common.block.BlockVoid;
 import tb.common.block.BlockVoidAnvil;
-import tb.common.block.TBBlock;
 import tb.common.block.TBBlockDeco;
 import tb.common.block.TBSidedBlock;
 import tb.common.itemblock.ItemBlockCrystal;
