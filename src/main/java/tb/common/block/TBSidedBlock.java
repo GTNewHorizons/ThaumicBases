@@ -6,8 +6,9 @@ import net.minecraft.util.IIcon;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import thaumcraft.api.crafting.IInfusionStabiliser;
 
-public class TBSidedBlock extends TBBlockDeco {
+public class TBSidedBlock extends TBBlockDeco implements IInfusionStabiliser {
 
     public IIcon sideIcon;
 
