@@ -7,7 +7,7 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TBSidedBlock extends TBBlock {
+public class TBSidedBlock extends TBBlockDeco {
 
     public IIcon sideIcon;
 

@@ -61,25 +61,21 @@ public class TBBlocks {
 
     public static final Class<TBCore> core = TBCore.class;
 
-    public static Block quicksilverBlock = new TBBlock(Material.iron, false).stabilise()
-        .setBlockName("quicksilverBlock")
+    public static Block quicksilverBlock = new TBBlockDeco(Material.iron, false).setBlockName("quicksilverBlock")
         .setBlockTextureName("thaumicbases:quicksilverBlock")
         .setHardness(1F);
-    public static Block quicksilverBrick = new TBBlock(Material.rock, true).stabilise()
-        .setBlockName("quicksilverBrick")
+    public static Block quicksilverBrick = new TBBlockDeco(Material.rock, true).setBlockName("quicksilverBrick")
         .setBlockTextureName("thaumicbases:quicksilverBrick")
         .setHardness(1F);
     public static Block crystalBlock = new BlockCrystalBlock().setBlockName("crystalBlock")
         .setBlockTextureName("thaumicbases:crystal/mixed");
-    public static Block dustBlock = new TBBlock(Material.sand, false).stabilise()
-        .setStepSound(Block.soundTypeSand)
+    public static Block dustBlock = new TBBlockDeco(Material.sand, false).setStepSound(Block.soundTypeSand)
         .setBlockName("salisMundusBlock")
         .setBlockTextureName("thaumicbases:dust_block")
         .setHardness(1F);
     public static Block pyrofluid = new BlockPyrofluid().setBlockName("pyrofluid")
         .setLightLevel(1);
-    public static Block thauminiteBlock = new TBBlock(Material.iron, false).stabilise()
-        .setBlockName("thauminiteBlock")
+    public static Block thauminiteBlock = new TBBlockDeco(Material.iron, false).setBlockName("thauminiteBlock")
         .setBlockTextureName("thaumicbases:thauminiteblock")
         .setHardness(2F);
     public static Block eldritchArk = new TBBlockDeco(Material.rock, false).setBlockName("eldritchArk")
