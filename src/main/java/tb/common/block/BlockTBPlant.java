@@ -8,6 +8,7 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -52,7 +53,7 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
     }
 
     protected boolean canPlaceBlockOn(Block b) {
-        return requiresFarmland ? b == Blocks.farmland : true;
+        return !requiresFarmland || b == Blocks.farmland;
     }
 
     public void updateTick(World w, int x, int y, int z, Random rnd) {
@@ -144,6 +145,12 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
     }
 
     @Override
+    public void onBlockPlacedBy(World worldIn, int x, int y, int z, EntityLivingBase placer, ItemStack itemIn) {
+        // Prevent placement of fully grown plants
+        worldIn.setBlockMetadataWithNotify(x, y, z, 0, 2);
+    }
+
+    @Override
     public boolean onBlockActivated(World aWorld, int aX, int aY, int aZ, EntityPlayer aPlayer, int aSide, float pX,
         float pY, float pZ) {
         int aMeta = aWorld.getBlockMetadata(aX, aY, aZ);
@@ -177,7 +184,7 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> ret = new ArrayList<>();
 
         if (this.dropItem != null && metadata >= growthStages - 1) {
             // You can approximate the fortune bonus by diving https://oeis.org/A000169 with https://oeis.org/A000435
