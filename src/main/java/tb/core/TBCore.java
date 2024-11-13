@@ -40,7 +40,7 @@ import tb.utils.TBConfig;
 public class TBCore {
 
     public static final String modid = "thaumicbases";
-    public static final String version = "GRADLETOKEN_VERSION";
+    public static final String version = Tags.VERSION;
     public static final String name = "Thaumic Bases";
     public static final String serverProxy = "tb.network.proxy.TBServer";
     public static final String clientProxy = "tb.network.proxy.TBClient";
@@ -104,7 +104,7 @@ public class TBCore {
         meta.name = name;
         meta.version = version;
         meta.description = "A Thaumcraft addon, that adds more earlygame and midgame content";
-        ArrayList<String> authors = new ArrayList<String>();
+        ArrayList<String> authors = new ArrayList<>();
         authors.add("Modbder");
         authors.add("KryptonCaptain");
         authors.add("bartimaeusnek");
