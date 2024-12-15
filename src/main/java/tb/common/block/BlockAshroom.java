@@ -26,6 +26,14 @@ public class BlockAshroom extends BlockTBPlant {
         return (w.getBlock(x, y - 1, z)).isNormalCube();
     }
 
+    @Override
+    public boolean onBlockActivated(World aWorld, int aX, int aY, int aZ, EntityPlayer aPlayer, int aSide, float pX,
+        float pY, float pZ) {
+        // Do nothing when right clicked
+        return false;
+
+    }
+
     protected boolean func_150109_e(World p_150109_1_, int p_150109_2_, int p_150109_3_, int p_150109_4_) {
         if (!this.canPlaceBlockAt(p_150109_1_, p_150109_2_, p_150109_3_, p_150109_4_)) {
             if (p_150109_1_.getBlock(p_150109_2_, p_150109_3_, p_150109_4_) == this) {
