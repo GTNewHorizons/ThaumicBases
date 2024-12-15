@@ -153,6 +153,10 @@ public class BlockTBPlant extends BlockBush implements IGrowable {
     @Override
     public boolean onBlockActivated(World aWorld, int aX, int aY, int aZ, EntityPlayer aPlayer, int aSide, float pX,
         float pY, float pZ) {
+        if (aWorld.getBlock(aX, aY, aZ) instanceof BlockAshroom) {
+            // Do nothing if it's Primal Shroom
+            return false;
+        }
         int aMeta = aWorld.getBlockMetadata(aX, aY, aZ);
         // check for Growth Stage
         if (aMeta >= growthStages - 1) {
