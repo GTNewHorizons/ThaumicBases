@@ -21,6 +21,11 @@ public class BlockAshroom extends BlockTBPlant {
         w.setBlockMetadataWithNotify(x, y, z, Math.min(growthStages, meta + 1), 3);
     }
 
+    public boolean canBlockStay(World w, int x, int y, int z) {
+        // Only allow it to be placed on full Blocks
+        return (w.getBlock(x, y - 1, z)).isNormalCube();
+    }
+
     protected boolean func_150109_e(World p_150109_1_, int p_150109_2_, int p_150109_3_, int p_150109_4_) {
         if (!this.canPlaceBlockAt(p_150109_1_, p_150109_2_, p_150109_3_, p_150109_4_)) {
             if (p_150109_1_.getBlock(p_150109_2_, p_150109_3_, p_150109_4_) == this) {
