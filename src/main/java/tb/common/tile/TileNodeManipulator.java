@@ -74,7 +74,9 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
         NodeModifier nodeModifier = node.getNodeModifier();
 
         if (maxTimeRequired == 0) {
-            switch (nodeModifier) {
+            if (nodeModifier == null) {
+                maxTimeRequired = 2 * 60 * 20;
+            } else switch (nodeModifier) {
                 case BRIGHT:
                     maxTimeRequired = 60 * 20;
                     break;
@@ -85,21 +87,20 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
                     maxTimeRequired = 6 * 60 * 20;
                     break;
                 default:
-                    maxTimeRequired = 2 * 60 * 20;
                     break;
             }
         }
 
         if (workTime >= maxTimeRequired) {
-            stopManipulator();
-
             if (nodeModifier == NodeModifier.FADING) {
                 this.worldObj.setBlockToAir(xCoord, yCoord, zCoord);
                 return;
             }
 
             NodeModifier newNodeModifier;
-            switch (nodeModifier) {
+            if (nodeModifier == null) {
+                newNodeModifier = NodeModifier.PALE;
+            } else switch (nodeModifier) {
                 case BRIGHT:
                     newNodeModifier = null;
                     break;
@@ -107,10 +108,12 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
                     newNodeModifier = NodeModifier.FADING;
                     break;
                 default:
-                    newNodeModifier = NodeModifier.PALE;
+                    newNodeModifier = NodeModifier.FADING;
+                    break;
             }
 
             node.setNodeModifier(newNodeModifier);
+            stopManipulator();
             return;
         }
         increaseWorkTime();
@@ -186,36 +189,33 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
 
     private void applyStabilityEffect() {
         NodeModifier nodeModifier = node.getNodeModifier();
-        if (nodeModifier == null) {
-            changeNodeModifier(null, NodeModifier.BRIGHT, 5 * 60 * 20);
-            return;
-        }
 
-        switch (nodeModifier) {
+        if (nodeModifier == null || nodeModifier == nodeModifier.BRIGHT) {
+            switch (nodeType) {
+                case DARK:
+                    changeNodeType(NodeType.DARK, NodeType.NORMAL, 2 * 60 * 20);
+                    break;
+                case HUNGRY:
+                    changeNodeType(NodeType.HUNGRY, NodeType.NORMAL, 30 * 20);
+                    break;
+                case UNSTABLE:
+                    changeNodeType(NodeType.UNSTABLE, NodeType.NORMAL, 7 * 30 * 20);
+                    break;
+                case TAINTED:
+                    changeNodeType(NodeType.TAINTED, NodeType.NORMAL, 30 * 60 * 20);
+                    break;
+                default:
+                    break;
+            }
+        } else switch (nodeModifier) {
             case FADING:
                 changeNodeModifier(NodeModifier.FADING, NodeModifier.PALE, 5 * 60 * 20);
                 break;
             case PALE:
                 changeNodeModifier(NodeModifier.PALE, null, 10 * 60 * 20);
                 break;
-            default: {
-                switch (nodeType) {
-                    case DARK:
-                        changeNodeType(NodeType.DARK, NodeType.NORMAL, 2 * 60 * 20);
-                        break;
-                    case HUNGRY:
-                        changeNodeType(NodeType.HUNGRY, NodeType.NORMAL, 30 * 20);
-                        break;
-                    case UNSTABLE:
-                        changeNodeType(NodeType.UNSTABLE, NodeType.NORMAL, 7 * 30 * 20);
-                        break;
-                    case TAINTED:
-                        changeNodeType(NodeType.TAINTED, NodeType.NORMAL, 30 * 30 * 20);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            default:
+                break;
         }
     }
 
@@ -285,7 +285,7 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
 
                 switch (effect) {
                     case 0: // Brightness
-                        changeNodeModifier(null, NodeModifier.BRIGHT, 24000);
+                        changeNodeModifier(null, NodeModifier.BRIGHT, 20 * 60 * 20);
                         break;
                     case 1: // Destruction
                         applyDestructionEffect();
@@ -293,18 +293,18 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
                     case 2: // Efficiency
                         break;
                     case 3: // Hunger
-                        changeNodeType(NodeType.NORMAL, NodeType.HUNGRY, 6000);
+                        changeNodeType(NodeType.NORMAL, NodeType.HUNGRY, 5 * 60 * 20);
                         break;
                     case 4: // Instability
-                        changeNodeType(NodeType.NORMAL, NodeType.UNSTABLE, 8400);
+                        changeNodeType(NodeType.NORMAL, NodeType.UNSTABLE, 7 * 60 * 20);
                         break;
                     case 5: // Purity
-                        changeNodeType(NodeType.NORMAL, NodeType.PURE, 3600);
-                        changeNodeType(NodeType.TAINTED, NodeType.NORMAL, 39600);
+                        changeNodeType(NodeType.NORMAL, NodeType.PURE, 3 * 60 * 20);
+                        changeNodeType(NodeType.TAINTED, NodeType.NORMAL, 33 * 60 * 20);
                         break;
                     case 6: // Sinister
-                        changeNodeType(NodeType.NORMAL, NodeType.DARK, 7200);
-                        changeNodeType(NodeType.PURE, NodeType.NORMAL, 18000);
+                        changeNodeType(NodeType.NORMAL, NodeType.DARK, 6 * 60 * 20);
+                        changeNodeType(NodeType.PURE, NodeType.NORMAL, 15 * 60 * 20);
                         break;
                     case 7: // Speed
                         applySpeedEffect();
@@ -313,7 +313,7 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
                         applyStabilityEffect();
                         break;
                     case 9: // Taint
-                        changeNodeType(NodeType.NORMAL, NodeType.TAINTED, 7200);
+                        changeNodeType(NodeType.NORMAL, NodeType.TAINTED, 6 * 60 * 20);
                         break;
                 }
             }
