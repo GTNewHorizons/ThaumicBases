@@ -17,6 +17,9 @@ import thaumcraft.common.config.ConfigItems;
 
 public class ItemRosehipSyrup extends Item {
 
+    public final static int REMOVE_EFFECT = 1;
+    public final static int REDUCE_EFFECT = 2;
+
     public ItemStack onItemRightClick(ItemStack stack, World w, EntityPlayer player) {
         player.setItemInUse(stack, getMaxItemUseDuration(stack));
         return stack;
@@ -44,10 +47,12 @@ public class ItemRosehipSyrup extends Item {
             Collection<PotionEffect> c = player.getActivePotionEffects();
             Iterator<PotionEffect> $i = c.iterator();
             ArrayList<Integer> removeEffects = new ArrayList<Integer>();
+            ArrayList<PotionEffect> reduceEffects = new ArrayList<PotionEffect>();
             while ($i.hasNext()) {
                 PotionEffect effect = $i.next();
-                int i = processPotion(player, effect);
-                if (i != -1) removeEffects.add(i);
+                int i = processPotion(effect);
+                if (i == REMOVE_EFFECT) removeEffects.add(effect.getPotionID());
+                else if (i == REDUCE_EFFECT) reduceEffects.add(effect);
             }
 
             for (int i = 0; i < removeEffects.size(); ++i) {
@@ -58,29 +63,36 @@ public class ItemRosehipSyrup extends Item {
                     }
                 }
             }
+            for (int i = 0; i < reduceEffects.size(); ++i) {
+                PotionEffect j = reduceEffects.get(i);
+                if (j != null) {
+                    int k = j.getPotionID();
+                    if (k != -1 && k < Potion.potionTypes.length
+                        && player.getActivePotionEffect(Potion.potionTypes[k]) != null) {
+                        reflectPotionEffect(player, j);
+                    }
+                }
+            }
         }
 
         return stack.stackSize <= 0 ? new ItemStack(ConfigItems.itemEssence, 1, 0) : stack;
     }
 
-    public static int processPotion(EntityPlayer p, PotionEffect effect) {
+    public static int processPotion(PotionEffect effect) {
         if (effect != null && effect.getPotionID() < Potion.potionTypes.length
             && Potion.potionTypes[effect.getPotionID()] != null) {
-            if (isBadEffect(Potion.potionTypes[effect.getPotionID()])) return effect.getPotionID();
+            if (canRemoveEffect(Potion.potionTypes[effect.getPotionID()])) return REMOVE_EFFECT;
 
-            if (canDecreaseLevel(Potion.potionTypes[effect.getPotionID()])) {
-                if (effect.getAmplifier() == 0) return effect.getPotionID();
-                else {
-                    reflectPotionEffect(p, effect);
-                    return -1;
-                }
+            if (canDecreaseLevel(effect.getPotionID())) {
+                if (effect.getAmplifier() == 0) return REMOVE_EFFECT;
+                else return REDUCE_EFFECT;
             }
         }
 
-        return -1;
+        return 0;
     }
 
-    public static boolean isBadEffect(Potion p) {
+    public static boolean canRemoveEffect(Potion p) {
         return p != null && (p == Potion.blindness || p == Potion.confusion
             || p == Potion.digSlowdown
             || p == Potion.hunger
@@ -90,13 +102,12 @@ public class ItemRosehipSyrup extends Item {
             || p == Potion.wither);
     }
 
-    public static boolean canDecreaseLevel(Potion p) {
-        int id = p.getId();
-        return p != null && (id == Config.potionBlurredID || id == Config.potionInfVisExhaustID
+    public static boolean canDecreaseLevel(int id) {
+        return id == Config.potionBlurredID || id == Config.potionInfVisExhaustID
             || id == Config.potionTaintPoisonID
             || id == Config.potionThaumarhiaID
             || id == Config.potionUnHungerID
-            || id == Config.potionVisExhaustID);
+            || id == Config.potionVisExhaustID;
     }
 
     public static void reflectPotionEffect(EntityPlayer p, PotionEffect effect) {
@@ -104,7 +115,9 @@ public class ItemRosehipSyrup extends Item {
         int id = effect.getPotionID();
         int dur = effect.getDuration();
         boolean transparent = effect.getIsAmbient();
+        PotionEffect neweffect = new PotionEffect(id, dur, amp, transparent);
+        neweffect.setCurativeItems(effect.getCurativeItems());
         p.removePotionEffect(effect.getPotionID());
-        p.addPotionEffect(new PotionEffect(id, dur, amp, transparent));
+        p.addPotionEffect(neweffect);
     }
 }
