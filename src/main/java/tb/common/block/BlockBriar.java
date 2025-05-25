@@ -64,26 +64,22 @@ public class BlockBriar extends BlockBush implements IGrowable {
         int aMeta = aWorld.getBlockMetadata(aX, aY, aZ);
         boolean isTop = isTopBlock(aMeta);
         int lowerY = isTop ? aY - 1 : aY;
-        int upperY = isTop ? aY : aY + 1;
+        int upperY = lowerY + 1;
 
         int lowerMeta = aWorld.getBlockMetadata(aX, lowerY, aZ);
         int upperMeta = aWorld.getBlockMetadata(aX, upperY, aZ);
 
-        if (lowerMeta >= growthStages - 1 && upperMeta >= growthStages - 1 + 8) {
-            int fortune = EnchantmentHelper.getFortuneModifier(aPlayer);
+        if (lowerMeta < growthStages - 1 || upperMeta < growthStages - 1 + 8) return false;
 
-            ArrayList<ItemStack> drops = getDrops(aWorld, aX, lowerY, aZ, upperMeta, fortune);
-            for (ItemStack stack : drops) {
-                dropBlockAsItem(aWorld, aX, lowerY, aZ, stack);
-            }
-
-            aWorld.setBlockMetadataWithNotify(aX, lowerY, aZ, 0, 2);
-            aWorld.setBlockMetadataWithNotify(aX, upperY, aZ, 8, 2);
-
-            return true;
+        int fortune = EnchantmentHelper.getFortuneModifier(aPlayer);
+        for (ItemStack drop : getDrops(aWorld, aX, lowerY, aZ, upperMeta, fortune)) {
+            dropBlockAsItem(aWorld, aX, lowerY, aZ, drop);
         }
 
-        return false;
+        aWorld.setBlockMetadataWithNotify(aX, lowerY, aZ, 0, 2);
+        aWorld.setBlockMetadataWithNotify(aX, upperY, aZ, 8, 2);
+
+        return true;
     }
 
     public void setBlockBoundsBasedOnState(IBlockAccess w, int x, int y, int z) {
