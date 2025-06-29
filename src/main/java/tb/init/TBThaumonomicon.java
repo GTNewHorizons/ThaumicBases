@@ -2925,7 +2925,10 @@ public class TBThaumonomicon {
                 new ItemStack(TBBlocks.sapling, 1, 0)).setParents("TB.Briar")
                     .setParentsHidden("TB.INFUSION")
                     .setConcealed()
-                    .setPages(new ResearchPage("tb.rec.goldenOak.page.0"), new ResearchPage(goldenOakRec))
+                    .setPages(
+                        new ResearchPage("tb.rec.goldenOak.page.0"),
+                        new ResearchPage(goldenOakRec),
+                        new ResearchPage("tb.rec.goldenOak.page.1"))
                     .registerResearchItem();
 
             new ResearchItem(
