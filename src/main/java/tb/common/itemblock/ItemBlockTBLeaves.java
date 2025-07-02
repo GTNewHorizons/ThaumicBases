@@ -18,6 +18,6 @@ public class ItemBlockTBLeaves extends ItemBlock {
     }
 
     public int getMetadata(int meta) {
-        return meta;
+        return meta | 4;
     }
 }
