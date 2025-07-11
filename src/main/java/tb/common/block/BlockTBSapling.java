@@ -4,12 +4,9 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -78,9 +75,7 @@ public class BlockTBSapling extends BlockSapling {
 
     @Override
     protected boolean canPlaceBlockOn(Block block) {
-        return super.canPlaceBlockOn(block)
-                || BlockTBLeaves.isNetherBlock(block)
-                || BlockTBLeaves.isEndBlock(block);
+        return super.canPlaceBlockOn(block) || BlockTBLeaves.isNetherBlock(block) || BlockTBLeaves.isEndBlock(block);
     }
 
     @Override
