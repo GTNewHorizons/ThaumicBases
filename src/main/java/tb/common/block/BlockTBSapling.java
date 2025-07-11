@@ -27,6 +27,11 @@ public class BlockTBSapling extends BlockSapling {
     public static final String[] textures = new String[] { "thaumicbases:goldenOak/sapling",
         "thaumicbases:peacefullTree/sapling", "thaumicbases:netherTree/sapling", "thaumicbases:enderTree/sapling" };
 
+    public BlockTBSapling() {
+        super();
+        this.setStepSound(soundTypeGrass);
+    }
+
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
         return icons[meta % 8];
