@@ -269,11 +269,11 @@ public class BlockTBLeaves extends BlockLeaves {
         return false;
     }
 
-    private boolean isNetherBlock(Block b) {
+    public static boolean isNetherBlock(Block b) {
         return b instanceof BlockNetherrack || b instanceof BlockSoulSand || b == Blocks.quartz_ore;
     }
 
-    private boolean isEndBlock(Block b) {
+    public static boolean isEndBlock(Block b) {
         return b == Blocks.end_stone || b instanceof BlockObsidian;
     }
 

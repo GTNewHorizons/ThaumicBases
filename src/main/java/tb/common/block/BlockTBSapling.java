@@ -3,6 +3,7 @@ package tb.common.block;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -11,6 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.terraingen.TerrainGen;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,6 +30,11 @@ public class BlockTBSapling extends BlockSapling {
     public static final String[] textures = new String[] { "thaumicbases:goldenOak/sapling",
         "thaumicbases:peacefullTree/sapling", "thaumicbases:netherTree/sapling", "thaumicbases:enderTree/sapling" };
 
+    public BlockTBSapling() {
+        super();
+        this.setStepSound(soundTypeGrass);
+    }
+
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
         return icons[meta % 8];
@@ -36,14 +44,14 @@ public class BlockTBSapling extends BlockSapling {
     public void func_149878_d(World w, int x, int y, int z, Random rnd) {
         int meta = w.getBlockMetadata(x, y, z) % 8;
         if (w.getBlockMetadata(x, y, z) % 8 == 0) {
-            if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(w, rnd, x, y, z)) return;
+            if (!TerrainGen.saplingGrowTree(w, rnd, x, y, z)) return;
 
             w.setBlockToAir(x, y, z);
 
             new WorldGenOak(true, 5, 0, 0, false, Blocks.log, TBBlocks.genLeaves).generate(w, rnd, x, y, z);
         }
         if (w.getBlockMetadata(x, y, z) % 8 == 1) {
-            if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(w, rnd, x, y, z)) return;
+            if (!TerrainGen.saplingGrowTree(w, rnd, x, y, z)) return;
 
             w.setBlockToAir(x, y, z);
 
@@ -63,6 +71,23 @@ public class BlockTBSapling extends BlockSapling {
 
             if (!tree.generate(w, rnd, x, y, z)) w.setBlock(x, y, z, this, meta, 4);
         }
+    }
+
+    @Override
+    protected boolean canPlaceBlockOn(Block block) {
+        return super.canPlaceBlockOn(block) || BlockTBLeaves.isNetherBlock(block) || BlockTBLeaves.isEndBlock(block);
+    }
+
+    @Override
+    public boolean canBlockStay(World world, int x, int y, int z) {
+        Block below = world.getBlock(x, y - 1, z);
+        int meta = world.getBlockMetadata(x, y, z) % 4;
+
+        if ((meta == 2 && BlockTBLeaves.isNetherBlock(below)) || (meta == 3 && BlockTBLeaves.isEndBlock(below))) {
+            return true;
+        }
+
+        return below.canSustainPlant(world, x, y, z, ForgeDirection.UP, this);
     }
 
     public int damageDropped(int meta) {
