@@ -2,11 +2,11 @@
 
 dependencies {
     api('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
-    api('com.github.GTNewHorizons:DummyCore:1.19.0:dev')
+    api('com.github.GTNewHorizons:DummyCore:1.20.0:dev')
 
-    compileOnly('com.github.GTNewHorizons:GT5-Unofficial:5.09.51.368:dev') {transitive=false}
+    compileOnly('com.github.GTNewHorizons:GT5-Unofficial:5.09.51.427:dev') {transitive=false}
 
-    runtimeOnly("com.github.GTNewHorizons:NotEnoughItems:2.7.60-GTNH:dev")
+    runtimeOnly("com.github.GTNewHorizons:NotEnoughItems:2.7.72-GTNH:dev")
     runtimeOnly('com.github.GTNewHorizons:Baubles:1.0.4:dev')
-    runtimeOnly('com.github.GTNewHorizons:CodeChickenCore:1.4.3:dev') // Required to allow dummycore to run in dev
+    runtimeOnly('com.github.GTNewHorizons:CodeChickenCore:1.4.7:dev') // Required to allow dummycore to run in dev
 }
