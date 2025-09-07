@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -100,11 +99,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                             for (int i = 0; i < nbttaglist.tagCount(); ++i) {
                                 NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
                                 if (tag != null && Integer.valueOf(tag.getShort("id")) == enchId) {
-                                    tag.setShort(
-                                        "lvl",
-                                        (short) (Math.min(
-                                            Integer.valueOf(tag.getShort("lvl")) + 1,
-                                            Enchantment.enchantmentsList[enchId].getMaxLevel() + 1)));
+                                    tag.setShort("lvl", (short) (Integer.valueOf(tag.getShort("lvl")) + 1));
                                     NBTTagCompound stackTag = MiscUtils.getStackTag(inventory);
                                     if (!stackTag.hasKey("overchants")) {
                                         stackTag.setIntArray("overchants", new int[] { enchId });
