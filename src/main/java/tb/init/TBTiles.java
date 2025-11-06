@@ -1,6 +1,7 @@
 package tb.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.Loader;
 import tb.common.tile.TileAdvAlchemicalFurnace;
 import tb.common.tile.TileBrazier;
 import tb.common.tile.TileCampfire;
@@ -21,5 +22,9 @@ public class TBTiles {
         GameRegistry.registerTileEntity(TileNodeLinker.class, "tb.nodeLinker");
         GameRegistry.registerTileEntity(TileCampfire.class, "tb.campfire");
         GameRegistry.registerTileEntity(TileBrazier.class, "tb.brazier");
+    }
+
+    public static void afterSetup() {
+        TileOverchanter.automagy = Loader.isModLoaded("Automagy");
     }
 }
