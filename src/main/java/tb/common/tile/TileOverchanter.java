@@ -24,6 +24,7 @@ import DummyCore.Utils.MiscUtils;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.wands.IWandable;
 import thaumcraft.common.lib.events.EssentiaHandler;
+import tuhljin.automagy.tiles.TileEntityJarXP;
 
 public class TileOverchanter extends TileEntity implements IInventory, IWandable {
 
@@ -310,4 +311,157 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
 
     @Override
     public void onWandStoppedUsing(ItemStack wandstack, World world, EntityPlayer player, int count) {}
+
+    private int drainXPJarsInRange(int xp, int range) {
+        for(;;) {
+            if (xp < 0) return xp;
+            int[] coords = new int[3];//delete this
+            
+            for (int r=1;r<=range;++r) {
+                for (int h=0;h<=r;++h) {
+                    for (int b=0;b<=h;++b) {
+                        //delete this
+                    }
+                }
+            }
+        }
+    }
+
+    private static Iterator<int[]> cubeIterator(int range) {
+        return new Iterator<int[]>() {
+            private int range = 0;
+            private int n = 0;
+            private int l = 0;
+            private int m = 0;
+            //wow, it's just like electron orbitals. and the spin is the sign. how beautiful
+            private Iterator<int[]> init(int range) {
+                this.range = range;
+                return this;
+            }
+            public boolean hasNext() { return -n<range || -l<range || -m<range; }
+            public int[] next() {
+                /* This code here was rendered obsolete because Java forces cases to be constant. Now i'll just have to suffer the pain of nested if statements. Also watch spotlessApply fuck it up lol
+                switch (58913) { //just let me do `switch (true)` dude
+                    case m>0 ? 58913 : 0:
+                        m = -m;
+                        break;
+                    case l>0 ? 58913 : 0:
+                        m = -m;
+                        l = -l;
+                        break;
+                    case n>0 ? 58913 : 0:
+                        m = -m;
+                        l = -l;
+                        n = -n;
+                        break;
+                    default:
+                        n = -n;
+                        l = -l;
+                        m = -m;
+                        switch (58913) { //If you could sneak stuff between switch branch instructions in Java, maybe things wouldn't have to be this way
+                            case l<n && m<n ? 58913 : 0:
+                                if (m>l) {
+                                    m = l^m;
+                                    l = m^l;
+                                    m = l^m;
+                                    break;
+                                }
+                                n = n^l;
+                                l = l^n;
+                                n = n^l;
+                                break;
+                            case n<l && m<l ? 58913 : 0:
+                                if (n<m) {
+                                    n = n^m;
+                                    m = n^m;
+                                    n = n^m;
+                                    break;
+                                }
+                                m = l^m;
+                                l = m^l;
+                                m = l^m;
+                                break;
+                            case n<m && l<m ? 58913 : 0:
+                                if (n<l) {
+                                    n = n^l;
+                                    l = l^n;
+                                    n = n^l;
+                                    break;
+                                }
+                                n = n^m;
+                                m = n^m;
+                                n = n^m;
+                                if (l != m) {
+                                    ++m;
+                                    break;
+                                }
+                                m = 0;
+                                ++l;
+                                break;
+                            default:
+                                ++n;
+                                l=0;
+                                m=0;
+                        }
+                } //just let me use gotos dude
+                */
+                //this shit looks like the decompile of an obfuscated assembly but i assure you it is hand written
+                godwhy: {
+                    m = -m;
+                    if (m<0) break godwhy;
+                    l = -l;
+                    if (l<0) break godwhy;
+                    n = -n;
+                    if (n<0) break godwhy;
+                    if (l>=n || m>n) {
+                        if (m>=l) {
+                            if (n<=l) {
+                                if (m>n) {
+                                    n ^= m;
+                                    m ^= n;
+                                    n ^= m;
+                                    if (l>m) {
+                                        ++m;
+                                        break godwhy;
+                                    }
+                                    m = 0;
+                                    ++l;
+                                    break godwhy;
+                                }
+                                l = 0;
+                                m = 0;
+                                ++n;
+                                break godwhy;
+                            }
+                            n ^= l;
+                            l ^= n;
+                            n ^= l;
+                            break godwhy;
+                        }
+                        if (n<m) {
+                            n ^= m;
+                            m ^= n;
+                            n ^= m;
+                            break godwhy;
+                        }
+                        m ^= l;
+                        l ^= m;
+                        m ^= l;
+                        break godwhy;
+                    }
+                    if (l>m) {
+                        m ^= l;
+                        l ^= m;
+                        m ^= l;
+                        break godwhy;
+                    }
+                    n ^= l;
+                    l ^= n;
+                    n ^= l;
+                } //i have just found out that Java has a `when` statement, but primitive pattern matching is preview and the syntax sucks (case boolean b when a>6)
+                int[] out = {n,l,m};
+                return out; //i genuinely would rather have written this bytecode by bytecode but here we are
+            }
+        }.init(range); //what is this, JavaScript???
+    }
 }
