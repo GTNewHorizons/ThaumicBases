@@ -31,11 +31,13 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     public ItemStack inventory;
 
     public int enchantingTime;
-    public boolean xpAbsorbed;
+    public int xpToAbsorb;
     public boolean isEnchantingStarted;
     public int syncTimer;
 
     // public Lightning renderedLightning;
+
+    public static boolean automagy = false;
 
     @Override
     public int getSizeInventory() {
@@ -50,7 +52,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                 syncTimer = 100;
                 NBTTagCompound tg = new NBTTagCompound();
                 tg.setInteger("0", enchantingTime);
-                tg.setBoolean("1", xpAbsorbed);
+                tg.setInteger("1", xpToAbsorb);
                 tg.setBoolean("2", isEnchantingStarted);
                 tg.setInteger("x", xCoord);
                 tg.setInteger("y", yCoord);
@@ -61,7 +63,8 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
 
         if (this.inventory == null) {
             isEnchantingStarted = false;
-            xpAbsorbed = false;
+            xpToAbsorb = 1318;
+            // ~30 levels, and exactly 1/8 an automagy xp jar
             enchantingTime = 0;
             // renderedLightning = null;
         } else {
@@ -74,7 +77,14 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                         .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
                     if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
                         ++enchantingTime;
-                        if (enchantingTime >= 16 && !this.xpAbsorbed) {
+                        if (enchantingTime >= 16 && this.xpToAbsorb != 0) {
+                            if (automagy) {
+                                this.xpToAbsorb -= this.drainXPJarsInRange(
+                                //Is 8 too much of a range? The drainEssentia call has a range of 8
+                                //I don't know if it just does an 8x8x8 cube or a full 17x17x17 with that, but this will do 17^3-1 = 4912
+                                //Edit: looked through TC code, it does look like it does the 17x17x17 (maybe this causes lag for overchanter?)
+                                if (xpToAbsorb == 0) break;
+                            }
                             List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(
                                 EntityPlayer.class,
                                 AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
@@ -86,15 +96,14 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                         p.attackEntityFrom(DamageSource.magic, 8);
                                         this.worldObj
                                             .playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
-                                        p.experienceLevel -= 30;
-                                        xpAbsorbed = true;
+                                        p.addExperience(-this.xpToAbsorb);
                                         break;
                                     }
                                 }
                             }
                         }
 
-                        if (xpAbsorbed && enchantingTime >= 32) {
+                        if (xpToAbsorb == 0 && enchantingTime >= 32) {
                             int enchId = this.findEnchantment(inventory);
                             NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
                             for (int i = 0; i < nbttaglist.tagCount(); ++i) {
@@ -118,7 +127,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                 }
                             }
                             isEnchantingStarted = false;
-                            xpAbsorbed = false;
+                            xpToAbsorb = 1318;
                             enchantingTime = 0;
                             // renderedLightning = null;
                             this.worldObj
@@ -171,8 +180,8 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         enchantingTime = pkt.func_148857_g()
             .getInteger("0");
-        xpAbsorbed = pkt.func_148857_g()
-            .getBoolean("1");
+        xpToAbsorb = pkt.func_148857_g()
+            .getInteger("1");
         isEnchantingStarted = pkt.func_148857_g()
             .getBoolean("2");
     }
@@ -268,7 +277,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
         super.readFromNBT(tag);
 
         enchantingTime = tag.getInteger("enchTime");
-        xpAbsorbed = tag.getBoolean("xpAbsorbed");
+        xpToAbsorb = tag.getInteger("xpToAbsorb");
         isEnchantingStarted = tag.getBoolean("enchStarted");
 
         if (tag.hasKey("itm")) inventory = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("itm"));
@@ -278,7 +287,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
         super.writeToNBT(tag);
 
         tag.setInteger("enchTime", enchantingTime);
-        tag.setBoolean("xpAbsorbed", xpAbsorbed);
+        tag.setInteger("xpToAbsorb", xpToAbsorb);
         tag.setBoolean("enchStarted", isEnchantingStarted);
 
         if (inventory != null) {
@@ -313,18 +322,23 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     public void onWandStoppedUsing(ItemStack wandstack, World world, EntityPlayer player, int count) {}
 
     private int drainXPJarsInRange(int xp, int range) {
-        for(;;) {
             if (xp < 0) return xp;
-            int[] coords = new int[3];//delete this
-            
-            for (int r=1;r<=range;++r) {
-                for (int h=0;h<=r;++h) {
-                    for (int b=0;b<=h;++b) {
-                        //delete this
+            Iterator<int[]> cubeIter = cubeIterator(range);
+            while (cubeIter.hasNext()) {
+                int[] coords = cubeIter.next()
+                if (this.worldObj.getTileEntity(coords[0] + this.xCoord, coords[1] + this.yCoord, coords[2] + this.zCoord) instanceof TileEntityJarXP jar) {
+                    int jarxp = jar.getXP();
+                    if (jarxp < xp) {
+                        jar.setXP(0);
+                        xp -= jarxp;
+                        continue;
                     }
+                    jar.setXP(jarxp - xp);
+                    return 0;
                 }
             }
-        }
+            return xp;
+            //This algorithm drains each jar it comes across sequentially without regard to how full they are. If you would rather it prioritize emptying barely filled jars within a certain radius, and then emptying non-full jars, then instead have a counter sinceLastPrioJar that starts at 0 and increments each iteration, and cache the most recent "priority" jar (lowest non-full jar with jarxp > xp argument); reset that counter per each jar with jarxp under xp argument, and drain each jar with jarxp under xp argument, stopping once the counter reaches an arbitrary count of blocks searched without draining a jar, and then drain the cached lowest-filled jar. The TC EssentiaHandler would be so much better if it worked that way as well.
     }
 
     private static Iterator<int[]> cubeIterator(int range) {
@@ -340,71 +354,6 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
             }
             public boolean hasNext() { return -n<range || -l<range || -m<range; }
             public int[] next() {
-                /* This code here was rendered obsolete because Java forces cases to be constant. Now i'll just have to suffer the pain of nested if statements. Also watch spotlessApply fuck it up lol
-                switch (58913) { //just let me do `switch (true)` dude
-                    case m>0 ? 58913 : 0:
-                        m = -m;
-                        break;
-                    case l>0 ? 58913 : 0:
-                        m = -m;
-                        l = -l;
-                        break;
-                    case n>0 ? 58913 : 0:
-                        m = -m;
-                        l = -l;
-                        n = -n;
-                        break;
-                    default:
-                        n = -n;
-                        l = -l;
-                        m = -m;
-                        switch (58913) { //If you could sneak stuff between switch branch instructions in Java, maybe things wouldn't have to be this way
-                            case l<n && m<n ? 58913 : 0:
-                                if (m>l) {
-                                    m = l^m;
-                                    l = m^l;
-                                    m = l^m;
-                                    break;
-                                }
-                                n = n^l;
-                                l = l^n;
-                                n = n^l;
-                                break;
-                            case n<l && m<l ? 58913 : 0:
-                                if (n<m) {
-                                    n = n^m;
-                                    m = n^m;
-                                    n = n^m;
-                                    break;
-                                }
-                                m = l^m;
-                                l = m^l;
-                                m = l^m;
-                                break;
-                            case n<m && l<m ? 58913 : 0:
-                                if (n<l) {
-                                    n = n^l;
-                                    l = l^n;
-                                    n = n^l;
-                                    break;
-                                }
-                                n = n^m;
-                                m = n^m;
-                                n = n^m;
-                                if (l != m) {
-                                    ++m;
-                                    break;
-                                }
-                                m = 0;
-                                ++l;
-                                break;
-                            default:
-                                ++n;
-                                l=0;
-                                m=0;
-                        }
-                } //just let me use gotos dude
-                */
                 //this shit looks like the decompile of an obfuscated assembly but i assure you it is hand written
                 godwhy: {
                     m = -m;
