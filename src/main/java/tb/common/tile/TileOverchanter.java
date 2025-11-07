@@ -100,7 +100,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                             p.attackEntityFrom(DamageSource.magic, 8);
                                             this.worldObj
                                                 .playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
-                                            p.experienceTotal -= 30;
+                                            p.experienceLevel -= 30;
                                             this.xpToAbsorb = 0;
                                             // if anyone else wants to implement the exact formula for experience
                                             // draining, you can
