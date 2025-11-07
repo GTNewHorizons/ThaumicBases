@@ -63,8 +63,8 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
 
         if (this.inventory == null) {
             isEnchantingStarted = false;
-            xpToAbsorb = 659;
-            // ~30 levels, and exactly 1/16 an automagy xp jar
+            xpToAbsorb = 825;
+            // 30 levels
             enchantingTime = 0;
             // renderedLightning = null;
         } else {
@@ -80,7 +80,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                         absorbXP: {
                             if (enchantingTime >= 16 && this.xpToAbsorb != 0) {
                                 if (automagy) {
-                                    this.xpToAbsorb -= this.drainXPJarsInRange(this.xpToAbsorb, 8);
+                                    this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8);
                                     // Is 8 too much of a range? The drainEssentia call has a range of 8
                                     // I don't know if it just does an 8x8x8 cube or a full 17x17x17 with that, but this
                                     // will do 17^3-1 = 4912
@@ -137,7 +137,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                 }
                             }
                             isEnchantingStarted = false;
-                            xpToAbsorb = 1318;
+                            xpToAbsorb = 825;
                             enchantingTime = 0;
                             // renderedLightning = null;
                             this.worldObj
