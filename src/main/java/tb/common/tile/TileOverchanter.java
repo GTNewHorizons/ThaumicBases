@@ -77,27 +77,32 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                         .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
                     if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
                         ++enchantingTime;
-                        if (enchantingTime >= 16 && this.xpToAbsorb != 0) {
-                            if (automagy) {
-                                this.xpToAbsorb -= this.drainXPJarsInRange(
-                                //Is 8 too much of a range? The drainEssentia call has a range of 8
-                                //I don't know if it just does an 8x8x8 cube or a full 17x17x17 with that, but this will do 17^3-1 = 4912
-                                //Edit: looked through TC code, it does look like it does the 17x17x17 (maybe this causes lag for overchanter?)
-                                if (xpToAbsorb == 0) break;
-                            }
-                            List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(
-                                EntityPlayer.class,
-                                AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
-                                    .expand(6, 3, 6));
-                            if (!players.isEmpty()) {
-                                for (int i = 0; i < players.size(); ++i) {
-                                    EntityPlayer p = players.get(i);
-                                    if (p.experienceLevel >= 30) {
-                                        p.attackEntityFrom(DamageSource.magic, 8);
-                                        this.worldObj
-                                            .playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
-                                        p.addExperience(-this.xpToAbsorb);
-                                        break;
+                        absorbXP: {
+                            if (enchantingTime >= 16 && this.xpToAbsorb != 0) {
+                                if (automagy) {
+                                    this.xpToAbsorb -= this.drainXPJarsInRange(this.xpToAbsorb, 8);
+                                    // Is 8 too much of a range? The drainEssentia call has a range of 8
+                                    // I don't know if it just does an 8x8x8 cube or a full 17x17x17 with that, but this
+                                    // will do 17^3-1 = 4912
+                                    // Edit: looked through TC code, it does look like it does the 17x17x17 (maybe this
+                                    // causes lag for overchanter?)
+                                    if (xpToAbsorb == 0) break absorbXP;
+                                }
+                                List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(
+                                    EntityPlayer.class,
+                                    AxisAlignedBB
+                                        .getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
+                                        .expand(6, 3, 6));
+                                if (!players.isEmpty()) {
+                                    for (int i = 0; i < players.size(); ++i) {
+                                        EntityPlayer p = players.get(i);
+                                        if (p.experienceLevel >= 30) {
+                                            p.attackEntityFrom(DamageSource.magic, 8);
+                                            this.worldObj
+                                                .playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
+                                            p.addExperience(-this.xpToAbsorb);
+                                            break;
+                                        }
                                     }
                                 }
                             }
@@ -109,7 +114,9 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                             for (int i = 0; i < nbttaglist.tagCount(); ++i) {
                                 NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
                                 if (tag != null && Integer.valueOf(tag.getShort("id")) == enchId) {
-                                    tag.setShort("lvl", Math.max((short) 1, (short) (Integer.valueOf(tag.getShort("lvl")) + 1)));
+                                    tag.setShort(
+                                        "lvl",
+                                        (short) Math.max(1, (int) (short) (Integer.valueOf(tag.getShort("lvl")) + 1)));
                                     NBTTagCompound stackTag = MiscUtils.getStackTag(inventory);
                                     if (!stackTag.hasKey("overchants")) {
                                         stackTag.setIntArray("overchants", new int[] { enchId });
@@ -322,54 +329,69 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     public void onWandStoppedUsing(ItemStack wandstack, World world, EntityPlayer player, int count) {}
 
     private int drainXPJarsInRange(int xp, int range) {
-            if (xp < 0) return xp;
-            Iterator<int[]> cubeIter = cubeIterator(range);
-            while (cubeIter.hasNext()) {
-                int[] coords = cubeIter.next()
-                if (this.worldObj.getTileEntity(coords[0] + this.xCoord, coords[1] + this.yCoord, coords[2] + this.zCoord) instanceof TileEntityJarXP jar) {
-                    int jarxp = jar.getXP();
-                    if (jarxp < xp) {
-                        jar.setXP(0);
-                        xp -= jarxp;
-                        continue;
-                    }
-                    jar.setXP(jarxp - xp);
-                    return 0;
+        if (xp < 0) return xp;
+        Iterator<int[]> cubeIter = cubeIterator(range);
+        while (cubeIter.hasNext()) {
+            int[] coords = cubeIter.next();
+            if (this.worldObj.getTileEntity(
+                coords[0] + this.xCoord,
+                coords[1] + this.yCoord,
+                coords[2] + this.zCoord) instanceof TileEntityJarXP jar) {
+                int jarxp = jar.getXP();
+                if (jarxp < xp) {
+                    jar.setXP(0);
+                    xp -= jarxp;
+                    continue;
                 }
+                jar.setXP(jarxp - xp);
+                return 0;
             }
-            return xp;
-            //This algorithm drains each jar it comes across sequentially without regard to how full they are. If you would rather it prioritize emptying barely filled jars within a certain radius, and then emptying non-full jars, then instead have a counter sinceLastPrioJar that starts at 0 and increments each iteration, and cache the most recent "priority" jar (lowest non-full jar with jarxp > xp argument); reset that counter per each jar with jarxp under xp argument, and drain each jar with jarxp under xp argument, stopping once the counter reaches an arbitrary count of blocks searched without draining a jar, and then drain the cached lowest-filled jar. The TC EssentiaHandler would be so much better if it worked that way as well.
+        }
+        return xp;
+        // This algorithm drains each jar it comes across sequentially without regard to how full they are. If you would
+        // rather it prioritize emptying barely filled jars within a certain radius, and then emptying non-full jars,
+        // then instead have a counter sinceLastPrioJar that starts at 0 and increments each iteration, and cache the
+        // most recent "priority" jar (lowest non-full jar with jarxp > xp argument); reset that counter per each jar
+        // with jarxp under xp argument, and drain each jar with jarxp under xp argument, stopping once the counter
+        // reaches an arbitrary count of blocks searched without draining a jar, and then drain the cached lowest-filled
+        // jar. The TC EssentiaHandler would be so much better if it worked that way as well.
     }
 
     private static Iterator<int[]> cubeIterator(int range) {
         return new Iterator<int[]>() {
+
             private int range = 0;
             private int n = 0;
             private int l = 0;
             private int m = 0;
-            //wow, it's just like electron orbitals. and the spin is the sign. how beautiful
+
+            // wow, it's just like electron orbitals. and the spin is the sign. how beautiful
             private Iterator<int[]> init(int range) {
                 this.range = range;
                 return this;
             }
-            public boolean hasNext() { return -n<range || -l<range || -m<range; }
+
+            public boolean hasNext() {
+                return -n < range || -l < range || -m < range;
+            }
+
             public int[] next() {
-                //this shit looks like the decompile of an obfuscated assembly but i assure you it is hand written
+                // this shit looks like the decompile of an obfuscated assembly but i assure you it is hand written
                 godwhy: {
                     m = -m;
-                    if (m<0) break godwhy;
+                    if (m < 0) break godwhy;
                     l = -l;
-                    if (l<0) break godwhy;
+                    if (l < 0) break godwhy;
                     n = -n;
-                    if (n<0) break godwhy;
-                    if (l>=n || m>n) {
-                        if (m>=l) {
-                            if (n<=l) {
-                                if (m>n) {
+                    if (n < 0) break godwhy;
+                    if (l >= n || m > n) {
+                        if (m >= l) {
+                            if (n <= l) {
+                                if (m > n) {
                                     n ^= m;
                                     m ^= n;
                                     n ^= m;
-                                    if (l>m) {
+                                    if (l > m) {
                                         ++m;
                                         break godwhy;
                                     }
@@ -387,7 +409,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                             n ^= l;
                             break godwhy;
                         }
-                        if (n<m) {
+                        if (n < m) {
                             n ^= m;
                             m ^= n;
                             n ^= m;
@@ -398,7 +420,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                         m ^= l;
                         break godwhy;
                     }
-                    if (l>m) {
+                    if (l > m) {
                         m ^= l;
                         l ^= m;
                         m ^= l;
@@ -407,10 +429,11 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                     n ^= l;
                     l ^= n;
                     n ^= l;
-                } //i have just found out that Java has a `when` statement, but primitive pattern matching is preview and the syntax sucks (case boolean b when a>6)
-                int[] out = {n,l,m};
-                return out; //i genuinely would rather have written this bytecode by bytecode but here we are
+                } // i have just found out that Java has a `when` statement, but primitive pattern matching is preview
+                  // and the syntax sucks (case boolean b when a>6)
+                int[] out = { n, l, m };
+                return out; // i genuinely would rather have written this bytecode by bytecode but here we are
             }
-        }.init(range); //what is this, JavaScript???
+        }.init(range); // what is this, JavaScript???
     }
 }
