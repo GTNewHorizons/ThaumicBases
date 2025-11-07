@@ -332,7 +332,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     public void onWandStoppedUsing(ItemStack wandstack, World world, EntityPlayer player, int count) {}
 
     private int drainXPJarsInRange(int xp, int range) {
-        if (xp < 0) return xp;
+        if (xp <= 0) return xp;
         Iterator<int[]> cubeIter = cubeIterator(range);
         while (cubeIter.hasNext()) {
             int[] coords = cubeIter.next();
