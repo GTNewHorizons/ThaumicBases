@@ -96,11 +96,16 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                 if (!players.isEmpty()) {
                                     for (int i = 0; i < players.size(); ++i) {
                                         EntityPlayer p = players.get(i);
-                                        if (p.experienceLevel >= 30) {
+                                        if (p.experienceTotal > 0) {
                                             p.attackEntityFrom(DamageSource.magic, 8);
                                             this.worldObj
                                                 .playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
-                                            p.addExperience(-this.xpToAbsorb);
+                                            p.experienceTotal -= this.xpToAbsorb;
+                                            xpToAbsorb = 0;
+                                            if (p.experienceTotal < 0) {
+                                                this.xpToAbsorb = -p.experienceTotal;
+                                                p.experienceTotal = 0;
+                                            }
                                             break;
                                         }
                                     }
