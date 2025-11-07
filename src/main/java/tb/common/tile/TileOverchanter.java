@@ -434,8 +434,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                     n ^= l;
                 } // i have just found out that Java has a `when` statement, but primitive pattern matching is preview
                   // and the syntax sucks (case boolean b when a>6)
-                int[] out = { n, l, m };
-                return out; // i genuinely would rather have written this bytecode by bytecode but here we are
+                return new int[] { n, l, m }; // i genuinely would rather have written this bytecode by bytecode but here we are
             }
         }.init(range); // what is this, JavaScript???
     }
