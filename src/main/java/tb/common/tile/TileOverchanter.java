@@ -63,8 +63,8 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
 
         if (this.inventory == null) {
             isEnchantingStarted = false;
-            xpToAbsorb = 1318;
-            // ~30 levels, and exactly 1/8 an automagy xp jar
+            xpToAbsorb = 659;
+            // ~30 levels, and exactly 1/16 an automagy xp jar
             enchantingTime = 0;
             // renderedLightning = null;
         } else {
@@ -96,16 +96,14 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                 if (!players.isEmpty()) {
                                     for (int i = 0; i < players.size(); ++i) {
                                         EntityPlayer p = players.get(i);
-                                        if (p.experienceTotal > 0) {
+                                        if (p.experienceLevel >= 30) {
                                             p.attackEntityFrom(DamageSource.magic, 8);
                                             this.worldObj
                                                 .playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
-                                            p.experienceTotal -= this.xpToAbsorb;
-                                            xpToAbsorb = 0;
-                                            if (p.experienceTotal < 0) {
-                                                this.xpToAbsorb = -p.experienceTotal;
-                                                p.experienceTotal = 0;
-                                            }
+                                            p.experienceTotal -= 30;
+                                            this.xpToAbsorb = 0;
+                                            // if anyone else wants to implement the exact formula for experience
+                                            // draining, you can
                                             break;
                                         }
                                     }
