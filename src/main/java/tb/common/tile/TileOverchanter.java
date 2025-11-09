@@ -342,11 +342,11 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                 coords[2] + this.zCoord) instanceof TileEntityJarXP jar) {
                 int jarxp = jar.getXP();
                 if (jarxp < xp) {
-                    jar.setXP(0);
+                    if (!worldObj.isRemote) jar.setXP(0);
                     xp -= jarxp;
                     continue;
                 }
-                jar.setXP(jarxp - xp);
+                if (!worldObj.isRemote) jar.setXP(jarxp - xp);
                 return 0;
             }
         }
