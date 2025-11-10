@@ -369,9 +369,8 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
             private int m = 0;
 
             // wow, it's just like electron orbitals. and the spin is the sign. how beautiful
-            private Iterator<int[]> init(int range) {
+            {
                 this.range = range;
-                return this;
             }
 
             public boolean hasNext() {
