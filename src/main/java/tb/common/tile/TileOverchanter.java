@@ -361,7 +361,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     }
 
     private static Iterator<int[]> cubeIterator(int range) {
-        return new Iterator<int[]>() {
+        return new Iterator<int[]>(range) {
 
             private int range = 0;
             private int n = 0;
@@ -436,6 +436,6 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                 return new int[] { n, l, m }; // i genuinely would rather have written this bytecode by bytecode but
                                               // here we are
             }
-        }.init(range); // what is this, JavaScript???
+        }
     }
 }
