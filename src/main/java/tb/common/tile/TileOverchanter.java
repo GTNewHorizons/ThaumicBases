@@ -333,13 +333,13 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
 
     private int drainXPJarsInRange(int xp, int range) {
         if (xp <= 0) return xp;
-        Iterator<int[]> cubeIter = cubeIterator(range);
+        CubeIterator cubeIter = new CubeIterator(range);
         while (cubeIter.hasNext()) {
-            int[] coords = cubeIter.next();
+            cubeIter.next();
             if (this.worldObj.getTileEntity(
-                coords[0] + this.xCoord,
-                coords[1] + this.yCoord,
-                coords[2] + this.zCoord) instanceof TileEntityJarXP jar) {
+                cubeIter.n + this.xCoord,
+                cubeIter.l + this.yCoord,
+                cubeIter.m + this.zCoord) instanceof TileEntityJarXP jar) {
                 int jarxp = jar.getXP();
                 if (jarxp < xp) {
                     if (!worldObj.isRemote) jar.setXP(0);
@@ -360,82 +360,80 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
         // jar. The TC EssentiaHandler would be so much better if it worked that way as well.
     }
 
-    private static Iterator<int[]> cubeIterator(int range) {
-        return new Iterator<int[]>(range) {
+    private static class CubeIterator implements Iterator<Void> {
 
-            private int range = 0;
-            private int n = 0;
-            private int l = 0;
-            private int m = 0;
+        public int range = 0;
 
-            // wow, it's just like electron orbitals. and the spin is the sign. how beautiful
-            {
-                this.range = range;
-            }
+        // wow, it's just like electron orbitals. and the spin is the sign. how beautiful
+        public int n = 0;
+        public int l = 0;
+        public int m = 0;
 
-            public boolean hasNext() {
-                return -n < range || -l < range || -m < range;
-            }
+        CubeIterator(int range) {
+            this.range = range;
+        }
 
-            public int[] next() {
-                // this shit looks like the decompile of an obfuscated assembly but i assure you it is hand written
-                godwhy: {
-                    m = -m;
-                    if (m < 0) break godwhy;
-                    l = -l;
-                    if (l < 0) break godwhy;
-                    n = -n;
-                    if (n < 0) break godwhy;
-                    if (l >= n || m > n) {
-                        if (m >= l) {
-                            if (n <= l) {
-                                if (m > n) {
-                                    n ^= m;
-                                    m ^= n;
-                                    n ^= m;
-                                    if (l > m) {
-                                        ++m;
-                                        break godwhy;
-                                    }
-                                    m = 0;
-                                    ++l;
-                                    break godwhy;
-                                }
-                                l = 0;
-                                m = 0;
-                                ++n;
-                                break godwhy;
-                            }
-                            n ^= l;
-                            l ^= n;
-                            n ^= l;
-                            break godwhy;
-                        }
-                        if (n < m) {
+        // maybe i could put this in next() and make it an Iterator<Boolean>?
+        public boolean hasNext() {
+            return -n < range || -l < range || -m < range;
+        }
+
+        public Void next() {
+            // this shit looks like the decompile of an obfuscated assembly but i assure you it is hand written
+            m = -m;
+            if (m < 0) return null;
+            l = -l;
+            if (l < 0) return null;
+            n = -n;
+            if (n < 0) return null;
+            if (l >= n || m > n) {
+                if (m >= l) {
+                    if (n <= l) {
+                        if (m > n) {
                             n ^= m;
                             m ^= n;
                             n ^= m;
-                            break godwhy;
+                            if (l > m) {
+                                ++m;
+                                return null;
+                            }
+                            m = 0;
+                            ++l;
+                            return null;
                         }
-                        m ^= l;
-                        l ^= m;
-                        m ^= l;
-                        break godwhy;
-                    }
-                    if (l > m) {
-                        m ^= l;
-                        l ^= m;
-                        m ^= l;
-                        break godwhy;
+                        l = 0;
+                        m = 0;
+                        ++n;
+                        return null;
                     }
                     n ^= l;
                     l ^= n;
                     n ^= l;
-                } // i have just found out that Java has a `when` statement, but primitive pattern matching is preview
-                  // and the syntax sucks (case boolean b when a>6)
-                return new int[] { n, l, m }; // i genuinely would rather have written this bytecode by bytecode but
-                                              // here we are
+                    return null;
+                }
+                if (n < m) {
+                    n ^= m;
+                    m ^= n;
+                    n ^= m;
+                    return null;
+                }
+                m ^= l;
+                l ^= m;
+                m ^= l;
+                return null;
             }
-        }
+            if (l > m) {
+                m ^= l;
+                l ^= m;
+                m ^= l;
+                return null;
+            }
+            n ^= l;
+            l ^= n;
+            n ^= l;
+            return null;
+        } // i have just found out that Java has a `when` statement, but primitive pattern matching is preview
+          // and the syntax sucks (case boolean b when a>6)
+        // i genuinely would rather have written this bytecode by bytecode but here we are
     }
 }
