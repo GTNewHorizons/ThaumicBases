@@ -94,13 +94,17 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                         .getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
                                         .expand(6, 3, 6));
                                 if (!players.isEmpty()) {
+                                    int lvlsleft = Math.ceil(xpToAbsorb > 255 ?
+                                        (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 :
+                                        xpToAbsorb / 17d);
+                                    // it's a double in the second branch so that both branches use the same Math.sqrt
                                     for (int i = 0; i < players.size(); ++i) {
                                         EntityPlayer p = players.get(i);
-                                        if (p.experienceLevel >= 30) {
+                                        if (p.experienceLevel >= lvlsleft) {
                                             p.attackEntityFrom(DamageSource.magic, 8);
                                             this.worldObj
                                                 .playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
-                                            p.experienceLevel -= 30;
+                                            p.experienceLevel -= lvlsleft;
                                             this.xpToAbsorb = 0;
                                             // if anyone else wants to implement the exact formula for experience
                                             // draining, you can
