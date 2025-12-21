@@ -95,8 +95,8 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                         .expand(6, 3, 6));
                                 if (!players.isEmpty()) {
                                     int lvlsleft = (int) Math.ceil(xpToAbsorb > 255 ?
-                                        (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 :
-                                        xpToAbsorb / 17d);
+                                        (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6
+                                            : xpToAbsorb / 17d);
                                     // it's a double in the second branch so that both branches use the same Math.sqrt
                                     for (int i = 0; i < players.size(); ++i) {
                                         EntityPlayer p = players.get(i);
