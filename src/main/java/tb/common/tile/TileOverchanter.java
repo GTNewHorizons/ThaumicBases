@@ -21,6 +21,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import DummyCore.Utils.MathUtils;
 import DummyCore.Utils.MiscUtils;
+import crazypants.enderio.machine.obelisk.xp.TileExperienceObelisk;
+import crazypants.enderio.xp.ExperienceContainer;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.wands.IWandable;
 import thaumcraft.common.lib.events.EssentiaHandler;
@@ -38,6 +40,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     // public Lightning renderedLightning;
 
     public static boolean automagy = false;
+    public static boolean eio = false;
 
     @Override
     public int getSizeInventory() {
@@ -86,6 +89,10 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                     // will do 17^3-1 = 4912
                                     // Edit: looked through TC code, it does look like it does the 17x17x17 (maybe this
                                     // causes lag for overchanter?)
+                                    if (xpToAbsorb == 0) break absorbXP;
+                                }
+                                if (eio) {
+                                    this.xpToAbsorb = this.drainEIOObelisksInRange(this.xpToAbsorb, 8);
                                     if (xpToAbsorb == 0) break absorbXP;
                                 }
                                 List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(
@@ -362,6 +369,30 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
         // with jarxp under xp argument, and drain each jar with jarxp under xp argument, stopping once the counter
         // reaches an arbitrary count of blocks searched without draining a jar, and then drain the cached lowest-filled
         // jar. The TC EssentiaHandler would be so much better if it worked that way as well.
+    }
+
+    // EIO version (separated so that it prioritizes the magic jars, feel free to switch this to being in sync instead)
+    private int drainEIOObelisksInRange(int xp, int range) {
+        if (xp <= 0) return xp;
+        CubeIterator cubeIter = new CubeIterator(range);
+        while (cubeIter.hasNext()) {
+            cubeIter.next();
+            if (this.worldObj.getTileEntity(
+                cubeIter.n + this.xCoord,
+                cubeIter.l + this.yCoord,
+                cubeIter.m + this.zCoord) instanceof TileExperienceObelisk obelisk) {
+                ExperienceContainer cont = obelisk.getContainer();
+                int jarxp = cont.getExperienceTotal();
+                // goddamn private fields with no good setters
+                cont.drain(null, Integer.MAX_VALUE, true);
+                cont.addExperience(Math.max(0, jarxp - xp));
+                // if this causes desyncs, wrap the above two lines in a !worldObj.isRemote test
+                xp -= jarxp;
+                if (xp <= 0) return 0;
+                // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
+            }
+        }
+        return xp;
     }
 
     private static class CubeIterator implements Iterator<Void> {
