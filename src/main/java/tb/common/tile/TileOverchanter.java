@@ -438,6 +438,6 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
             return null;
         } // i have just found out that Java has a `when` statement, but primitive pattern matching is preview
           // and the syntax sucks (case boolean b when a>6)
-        // i genuinely would rather have written this bytecode by bytecode but here we are
+          // i genuinely would rather have written this bytecode by bytecode but here we are
     }
 }
