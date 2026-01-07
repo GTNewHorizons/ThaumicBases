@@ -26,5 +26,6 @@ public class TBTiles {
 
     public static void afterSetup() {
         TileOverchanter.automagy = Loader.isModLoaded("Automagy");
+        TileOverchanter.eio = Loader.isModLoaded("EnderIO");
     }
 }
