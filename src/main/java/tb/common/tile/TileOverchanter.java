@@ -123,7 +123,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                 if (tag != null && Integer.valueOf(tag.getShort("id")) == enchId) {
                                     tag.setShort(
                                         "lvl",
-                                        (short) Math.max(1, (int) (short) (Integer.valueOf(tag.getShort("lvl")) + 1)));
+                                        (short) Math.max(1, Math.min(tag.getShort("lvl") + 1, Short.MAX_VALUE)));
                                     NBTTagCompound stackTag = MiscUtils.getStackTag(inventory);
                                     if (!stackTag.hasKey("overchants")) {
                                         stackTag.setIntArray("overchants", new int[] { enchId });
