@@ -489,7 +489,7 @@ tb.rec.enchantments.page.0=Any thaumaturge may have already came across some new
 tb.rec.enchantments.ewisdom=Weapons enchanted with Elder Wisdom have a chance to provide the thaumaturge using them with some knowledge aspects of creatures slain.
 tb.rec.enchantments.ebane=Weapons enchanted with Eldritch bane will deal more damage to endermen and eldritch creatures.
 tb.rec.enchantments.magictouch=Weapons enchanted with Magic Touched will cause more aspect orbs to be dropped from slain creatures.
-tb.rec.enchantments.vaporize=Weapons enchanted with Vaporizing enchantment have a chance to drop corresponding crystallised essentia of creatures slain by it.
+tb.rec.enchantments.vaporise=Weapons enchanted with Vaporising enchantment have a chance to drop corresponding crystallised essentia of creatures slain by it.
 tb.rec.enchantments.taint=Weapons infused with Taint will deal additional tainted damage upon hit. It will also apply Taint Poison to the target. This is less effective against tainted creatures. 
 
 #1.1 researches
@@ -532,8 +532,8 @@ tc.research_name.TB.EldritchBane=Eldritch Bane
 tc.research_text.TB.EldritchBane=You'll show them all
 tc.research_name.TB.MagicTouch=Magic Touch
 tc.research_text.TB.MagicTouch=Touch them with magic
-tc.research_name.TB.Vaporizing=Vaporizing
-tc.research_text.TB.Vaporizing=Portable Crystalliser
+tc.research_name.TB.Vaporising=Vaporizing
+tc.research_text.TB.Vaporising=Portable Crystalliser
 tc.research_name.TB.Tainted=Tainted
 tc.research_text.TB.Tainted=Blight on these lands!
 
