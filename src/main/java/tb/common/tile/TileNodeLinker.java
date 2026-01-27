@@ -100,14 +100,14 @@ public class TileNodeLinker extends TileEntity implements IWandable {
                                 (float) eZ);
 
                             if (syncTimer % 10 == 0 && !this.worldObj.isRemote) {
-                                TileNode reciever = (TileNode) this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+                                TileNode receiver = (TileNode) this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
                                 TileNode transmitter = (TileNode) this.worldObj.getTileEntity(x, y - 1, z);
                                 boolean isPushPerm = this.worldObj.rand.nextDouble() < 0.3D ? true
                                     : transmitter.getAspects()
                                         .visSize() > 0 ? false : true;
                                 AspectList pullFrom = isPushPerm ? transmitter.getAspectsBase()
                                     : transmitter.getAspects();
-                                AspectList pushTo = isPushPerm ? reciever.getAspectsBase() : reciever.getAspects();
+                                AspectList pushTo = isPushPerm ? receiver.getAspectsBase() : receiver.getAspects();
                                 if (pullFrom.visSize() <= 0) {
                                     this.worldObj.setBlockToAir(x, y - 1, z);
                                     return;
@@ -118,7 +118,7 @@ public class TileNodeLinker extends TileEntity implements IWandable {
                                         if (this.worldObj.rand.nextDouble() <= 0.7D) {
                                             if (instabilityCheck()) {
                                                 pushTo.add(randomAspect, 1);
-                                                reciever.getAspects()
+                                                receiver.getAspects()
                                                     .add(randomAspect, 1);
                                             }
                                             pullFrom.reduce(randomAspect, 1);
@@ -128,7 +128,7 @@ public class TileNodeLinker extends TileEntity implements IWandable {
                                         ++instability;
                                     } else {
                                         if (pushTo.getAmount(randomAspect) > 0
-                                            && pushTo.getAmount(randomAspect) <= reciever.getAspectsBase()
+                                            && pushTo.getAmount(randomAspect) <= receiver.getAspectsBase()
                                                 .getAmount(randomAspect)) {
                                             if (instabilityCheck()) pushTo.add(randomAspect, 1);
 
@@ -140,7 +140,7 @@ public class TileNodeLinker extends TileEntity implements IWandable {
                                     }
 
                                     transmitter.markDirty();
-                                    reciever.markDirty();
+                                    receiver.markDirty();
                                     this.worldObj.markBlockForUpdate(x, y - 1, z);
                                     this.worldObj.markBlockForUpdate(xCoord, yCoord - 1, zCoord);
                                 }
@@ -364,7 +364,7 @@ public class TileNodeLinker extends TileEntity implements IWandable {
                 paramItemStack.getTagCompound()
                     .removeTag("linkCoordZ");
                 if (paramWorld.isRemote) paramEntityPlayer
-                    .addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tb.txt.linkEstabilished")));
+                    .addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tb.txt.linkEstablished")));
 
                 return paramItemStack;
             }
