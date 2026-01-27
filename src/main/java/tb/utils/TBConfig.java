@@ -93,7 +93,7 @@ public class TBConfig implements IDummyConfig {
             "Allow the mod to register it's enchantments in the Thaumic Tinkerer's enchanter? Set to false if Thaumic Tinkerer is crashing you.");
 
         shardsFromOre = cfg
-            .getInt("shardsFromOre", "General", 8, 1, 64, "Amount of shards recieved from crucible ore processing");
+            .getInt("shardsFromOre", "General", 8, 1, 64, "Amount of shards received from crucible ore processing");
 
         brightFociRequiresPrimordialPearl = cfg.getBoolean(
             "brightFociRequiresPrimordialPearl",
