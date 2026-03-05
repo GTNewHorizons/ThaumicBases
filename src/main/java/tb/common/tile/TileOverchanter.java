@@ -1,5 +1,8 @@
 package tb.common.tile;
 
+import static tb.core.TBCore.isAutomagyLoaded;
+import static tb.core.TBCore.isEioLoaded;
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,9 +41,6 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     public int syncTimer;
 
     // public Lightning renderedLightning;
-
-    public static boolean automagy = false;
-    public static boolean eio = false;
 
     @Override
     public int getSizeInventory() {
@@ -82,7 +82,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                         ++enchantingTime;
                         absorbXP: {
                             if (enchantingTime >= 16 && this.xpToAbsorb != 0) {
-                                if (automagy) {
+                                if (isAutomagyLoaded) {
                                     this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8);
                                     // Is 8 too much of a range? The drainEssentia call has a range of 8
                                     // I don't know if it just does an 8x8x8 cube or a full 17x17x17 with that, but this
@@ -91,7 +91,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                     // causes lag for overchanter?)
                                     if (xpToAbsorb == 0) break absorbXP;
                                 }
-                                if (eio) {
+                                if (isEioLoaded) {
                                     this.xpToAbsorb = this.drainEIOObelisksInRange(this.xpToAbsorb, 8);
                                     if (xpToAbsorb == 0) break absorbXP;
                                 }
