@@ -82,6 +82,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                         ++enchantingTime;
                         absorbXP: {
                             if (enchantingTime >= 16 && this.xpToAbsorb != 0) {
+                                // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
                                 if (isAutomagyLoaded) {
                                     this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8);
                                     // Is 8 too much of a range? The drainEssentia call has a range of 8
@@ -389,7 +390,6 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                 // if this causes desyncs, wrap the above two lines in a !worldObj.isRemote test
                 xp -= jarxp;
                 if (xp <= 0) return 0;
-                // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
             }
         }
         return xp;
