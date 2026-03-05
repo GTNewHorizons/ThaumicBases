@@ -60,7 +60,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                 tg.setInteger("y", yCoord);
                 tg.setInteger("z", zCoord);
                 MiscUtils.syncTileEntity(tg, 0);
-            } else--syncTimer;
+            } else--syncTimer; // how the hell does spotless allow this and not forgetting a space on comments
         }
 
         if (this.inventory == null) {
@@ -78,38 +78,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                         .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
                     if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
                         ++enchantingTime;
-                        absorbXP: {
-                            if (enchantingTime < 16 || this.xpToAbsorb == 0) break absorbXP;
-                            // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
-                            if (isAutomagyLoaded) {
-                                this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8);
-                                // This scans a 17x17x17 cube centered around the TE (radius 8), matching the range of Thaumcraft's Infusion Altar
-                                // It prioritizes coordinates closest to the controller to avoid it from "stealing" from far jars
-                                if (xpToAbsorb == 0) break absorbXP;
-                            }
-                            if (isEioLoaded) {
-                                this.xpToAbsorb = this.drainEIOObelisksInRange(this.xpToAbsorb, 8);
-                                if (xpToAbsorb == 0) break absorbXP;
-                            }
-                            List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(6, 3, 6));
-                            if (!players.isEmpty()) {
-                                int lvlsleft = (int) Math.ceil(xpToAbsorb > 255 ? (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 : xpToAbsorb / 17d);
-                                // it's a double in the second branch so that both branches use the same Math.sqrt
-                                for (int i = 0; i < players.size(); ++i) {
-                                    EntityPlayer p = players.get(i);
-                                    if (p.experienceLevel >= lvlsleft) {
-                                        p.attackEntityFrom(DamageSource.magic, 8);
-                                        this.worldObj.playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
-                                        p.experienceLevel -= lvlsleft;
-                                        this.xpToAbsorb = 0;
-                                        // if anyone else wants to implement the exact formula for experience
-                                        // draining, you can
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-
+                        if (enchantingTime < 16 || this.xpToAbsorb != 0 && absorbXP()) break;
                         if (xpToAbsorb == 0 && enchantingTime >= 32) {
                             int enchId = this.findEnchantment(inventory);
                             NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
@@ -329,7 +298,39 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     @Override
     public void onWandStoppedUsing(ItemStack wandstack, World world, EntityPlayer player, int count) {}
 
-    private int drainXPJarsInRange(int xp, int range) {
+    public boolean absorbXP() {
+        // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
+        if (isAutomagyLoaded) {
+            this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8);
+            // This scans a 17x17x17 cube centered around the TE (radius 8), matching the range of Thaumcraft's Infusion Altar
+            // It prioritizes coordinates closest to the controller to avoid it from "stealing" from far jars
+            if (xpToAbsorb == 0) return false;
+        }
+        if (isEioLoaded) {
+            this.xpToAbsorb = this.drainEIOObelisksInRange(this.xpToAbsorb, 8);
+            if (xpToAbsorb == 0) return false;
+        }
+        List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(6, 3, 6));
+        if (!players.isEmpty()) {
+            int lvlsleft = (int) Math.ceil(xpToAbsorb > 255 ? (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 : xpToAbsorb / 17d);
+            // it's a double in the second branch so that both branches use the same Math.sqrt
+            for (int i = 0; i < players.size(); ++i) {
+                EntityPlayer p = players.get(i);
+                if (p.experienceLevel >= lvlsleft) {
+                    p.attackEntityFrom(DamageSource.magic, 8);
+                    this.worldObj.playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
+                    p.experienceLevel -= lvlsleft;
+                    this.xpToAbsorb = 0;
+                    // if anyone else wants to implement the exact formula for experience
+                    // draining, you can
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public int drainXPJarsInRange(int xp, int range) {
         if (xp <= 0) return xp;
         CubeIterator cubeIter = new CubeIterator(range);
         while (cubeIter.hasNext()) {
@@ -359,7 +360,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     }
 
     // EIO version (separated so that it prioritizes the magic jars, feel free to switch this to being in sync instead)
-    private int drainEIOObelisksInRange(int xp, int range) {
+    public int drainEIOObelisksInRange(int xp, int range) {
         if (xp <= 0) return xp;
         CubeIterator cubeIter = new CubeIterator(range);
         while (cubeIter.hasNext()) {
@@ -381,7 +382,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
         return xp;
     }
 
-    private static final class CubeIterator {
+    public static final class CubeIterator {
 
         public int range = 0;
 
