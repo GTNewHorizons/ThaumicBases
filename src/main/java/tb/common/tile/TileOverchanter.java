@@ -3,6 +3,7 @@ package tb.common.tile;
 import static tb.core.TBCore.isAutomagyLoaded;
 import static tb.core.TBCore.isEioLoaded;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
