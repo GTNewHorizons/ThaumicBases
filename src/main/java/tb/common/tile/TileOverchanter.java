@@ -3,7 +3,6 @@ package tb.common.tile;
 import static tb.core.TBCore.isAutomagyLoaded;
 import static tb.core.TBCore.isEioLoaded;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
@@ -395,7 +394,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
         return xp;
     }
 
-    private static class CubeIterator implements Iterator<Void> {
+    private static class CubeIterator {
 
         public int range = 0;
 
@@ -413,14 +412,14 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
             return -n < range || -l < range || -m < range;
         }
 
-        public Void next() {
+        public void next() {
             // this shit looks like the decompile of an obfuscated assembly but i assure you it is hand written
             m = -m;
-            if (m < 0) return null;
+            if (m < 0) return;
             l = -l;
-            if (l < 0) return null;
+            if (l < 0) return;
             n = -n;
-            if (n < 0) return null;
+            if (n < 0) return;
             if (l >= n || m > n) {
                 if (m >= l) {
                     if (n <= l) {
@@ -430,43 +429,43 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                             n ^= m;
                             if (l > m) {
                                 ++m;
-                                return null;
+                                return;
                             }
                             m = 0;
                             ++l;
-                            return null;
+                            return;
                         }
                         l = 0;
                         m = 0;
                         ++n;
-                        return null;
+                        return;
                     }
                     n ^= l;
                     l ^= n;
                     n ^= l;
-                    return null;
+                    return;
                 }
                 if (n < m) {
                     n ^= m;
                     m ^= n;
                     n ^= m;
-                    return null;
+                    return;
                 }
                 m ^= l;
                 l ^= m;
                 m ^= l;
-                return null;
+                return;
             }
             if (l > m) {
                 m ^= l;
                 l ^= m;
                 m ^= l;
-                return null;
+                return;
             }
             n ^= l;
             l ^= n;
             n ^= l;
-            return null;
+            return;
         } // i have just found out that Java has a `when` statement, but primitive pattern matching is preview
           // and the syntax sucks (case boolean b when a>6)
           // i genuinely would rather have written this bytecode by bytecode but here we are
