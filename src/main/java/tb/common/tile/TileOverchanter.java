@@ -394,7 +394,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
         return xp;
     }
 
-    private static class CubeIterator {
+    private static final class CubeIterator {
 
         public int range = 0;
 
