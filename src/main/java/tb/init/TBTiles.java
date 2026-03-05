@@ -24,8 +24,4 @@ public class TBTiles {
         GameRegistry.registerTileEntity(TileBrazier.class, "tb.brazier");
     }
 
-    public static void afterSetup() {
-        TileOverchanter.automagy = Loader.isModLoaded("Automagy");
-        TileOverchanter.eio = Loader.isModLoaded("EnderIO");
-    }
 }
