@@ -65,8 +65,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
 
         if (this.inventory == null) {
             isEnchantingStarted = false;
-            xpToAbsorb = 825;
-            // 30 levels
+            xpToAbsorb = 825; // 30 levels
             enchantingTime = 0;
             // renderedLightning = null;
         } else {
@@ -84,11 +83,8 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                                 // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
                                 if (isAutomagyLoaded) {
                                     this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8);
-                                    // Is 8 too much of a range? The drainEssentia call has a range of 8
-                                    // I don't know if it just does an 8x8x8 cube or a full 17x17x17 with that, but this
-                                    // will do 17^3-1 = 4912
-                                    // Edit: looked through TC code, it does look like it does the 17x17x17 (maybe this
-                                    // causes lag for overchanter?)
+                                    // This scans a 17x17x17 cube centered around the TE (radius 8), matching the range of Thaumcraft's Infusion Altar
+                                    // It prioritizes coordinates closest to the controller to avoid it from "stealing" from far jars
                                     if (xpToAbsorb == 0) break absorbXP;
                                 }
                                 if (isEioLoaded) {
