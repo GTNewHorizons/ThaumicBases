@@ -82,7 +82,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                     .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
                 if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
                     ++enchantingTime;
-                    if (enchantingTime < 16 || this.xpToAbsorb != 0 && absorbXP()) break;
+                    if (enchantingTime < 16 || this.xpToAbsorb != 0 && absorbXP()) return;
                     if (xpToAbsorb == 0 && enchantingTime >= 32) {
                         int enchId = this.findEnchantment(inventory);
                         NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
