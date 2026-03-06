@@ -373,9 +373,11 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                 ExperienceContainer cont = obelisk.getContainer();
                 int jarxp = cont.getExperienceTotal();
                 // goddamn private fields with no good setters
-                cont.drain(null, Integer.MAX_VALUE, true);
-                cont.addExperience(Math.max(0, jarxp - xp));
-                // if this causes desyncs, wrap the above two lines in a !worldObj.isRemote test
+                if (!worldObj.isRemote) {
+                    cont.drain(null, Integer.MAX_VALUE, true);
+                    cont.addExperience(Math.max(0, jarxp - xp));
+                }
+                // if this causes desyncs, remove the !worldObj.isRemote test or add an additional multiplayer test
                 xp -= jarxp;
                 if (xp <= 0) return 0;
             }
