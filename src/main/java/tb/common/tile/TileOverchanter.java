@@ -73,48 +73,48 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
             // renderedLightning = null;
             return;
         }
-        if (this.isEnchantingStarted
-            && this.worldObj.getTotalWorldTime() % 20 == 0) {
-                // renderedLightning = new Lightning(this.worldObj.rand, new Coord3D(0,0,0), new
-                // Coord3D(MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50),
-                // 0.3F, 1,0,1);
-                this.worldObj
-                    .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
-                if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
-                    ++enchantingTime;
-                    if (enchantingTime < 16 || this.xpToAbsorb != 0 && absorbXP()) return;
-                    if (xpToAbsorb == 0 && enchantingTime >= 32) {
-                        int enchId = this.findEnchantment(inventory);
-                        NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
-                        for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-                            NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
-                            if (tag != null && Integer.valueOf(tag.getShort("id")) == enchId) {
-                                tag.setShort("lvl", (short) Math.max(1, Math.min(tag.getShort("lvl") + 1, Short.MAX_VALUE)));
-                                NBTTagCompound stackTag = MiscUtils.getStackTag(inventory);
-                                if (!stackTag.hasKey("overchants")) {
-                                    stackTag.setIntArray("overchants", new int[] { enchId });
-                                } else {
-                                    int[] arrayInt = stackTag.getIntArray("overchants");
-                                    int[] newArrayInt = new int[arrayInt.length + 1];
-                                    for (int j = 0; j < arrayInt.length; ++j) {
-                                        newArrayInt[j] = arrayInt[j];
-                                    }
-                                    newArrayInt[newArrayInt.length - 1] = enchId;
-
-                                    stackTag.setIntArray("overchants", newArrayInt);
+        if (this.isEnchantingStarted && this.worldObj.getTotalWorldTime() % 20 == 0) {
+            // renderedLightning = new Lightning(this.worldObj.rand, new Coord3D(0,0,0), new
+            // Coord3D(MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50),
+            // 0.3F, 1,0,1);
+            this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
+            if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
+                ++enchantingTime;
+                if (enchantingTime < 16 || this.xpToAbsorb != 0 && absorbXP()) return;
+                if (xpToAbsorb == 0 && enchantingTime >= 32) {
+                    int enchId = this.findEnchantment(inventory);
+                    NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
+                    for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+                        NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
+                        if (tag != null && Integer.valueOf(tag.getShort("id")) == enchId) {
+                            tag.setShort(
+                                "lvl",
+                                (short) Math.max(1, Math.min(tag.getShort("lvl") + 1, Short.MAX_VALUE)));
+                            NBTTagCompound stackTag = MiscUtils.getStackTag(inventory);
+                            if (!stackTag.hasKey("overchants")) {
+                                stackTag.setIntArray("overchants", new int[] { enchId });
+                            } else {
+                                int[] arrayInt = stackTag.getIntArray("overchants");
+                                int[] newArrayInt = new int[arrayInt.length + 1];
+                                for (int j = 0; j < arrayInt.length; ++j) {
+                                    newArrayInt[j] = arrayInt[j];
                                 }
-                                break;
-                            }
-                        }
-                        isEnchantingStarted = false;
-                        xpToAbsorb = 825;
-                        enchantingTime = 0;
-                        // renderedLightning = null;
-                        this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);
-                    }
+                                newArrayInt[newArrayInt.length - 1] = enchId;
 
-                } else {
-                    --enchantingTime;
+                                stackTag.setIntArray("overchants", newArrayInt);
+                            }
+                            break;
+                        }
+                    }
+                    isEnchantingStarted = false;
+                    xpToAbsorb = 825;
+                    enchantingTime = 0;
+                    // renderedLightning = null;
+                    this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);
+                }
+
+            } else {
+                --enchantingTime;
             }
         }
     }
@@ -302,7 +302,8 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
         // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
         if (isAutomagyLoaded) {
             this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8);
-            // This scans a 17x17x17 cube centered around the TE (radius 8), matching the range of Thaumcraft's Infusion Altar
+            // This scans a 17x17x17 cube centered around the TE (radius 8), matching the range of Thaumcraft's Infusion
+            // Altar
             // It prioritizes coordinates closest to the controller to avoid it from "stealing" from far jars
             if (xpToAbsorb == 0) return false;
         }
@@ -310,9 +311,13 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
             this.xpToAbsorb = this.drainEIOObelisksInRange(this.xpToAbsorb, 8);
             if (xpToAbsorb == 0) return false;
         }
-        List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(6, 3, 6));
+        List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(
+            EntityPlayer.class,
+            AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
+                .expand(6, 3, 6));
         if (!players.isEmpty()) {
-            int lvlsleft = (int) Math.ceil(xpToAbsorb > 255 ? (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 : xpToAbsorb / 17d);
+            int lvlsleft = (int) Math
+                .ceil(xpToAbsorb > 255 ? (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 : xpToAbsorb / 17d);
             // it's a double in the second branch so that both branches use the same Math.sqrt
             for (int i = 0; i < players.size(); ++i) {
                 EntityPlayer p = players.get(i);

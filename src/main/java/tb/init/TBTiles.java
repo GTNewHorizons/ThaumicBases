@@ -1,6 +1,5 @@
 package tb.init;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import tb.common.tile.TileAdvAlchemicalFurnace;
 import tb.common.tile.TileBrazier;
