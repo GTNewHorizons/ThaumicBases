@@ -108,7 +108,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                         xpToAbsorb = 825;
                         enchantingTicks = 0;
                         // renderedLightning = null;
-                        this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);.
+                        this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);
                         return;
                     }
 
