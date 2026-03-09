@@ -56,7 +56,7 @@ public class BlockOverchanter extends BlockContainer {
     @Override
     public void onNeighborBlockChange(World worldIn, int x, int y, int z, Block neighbor) {
         boolean powered = worldIn.isBlockIndirectlyGettingPowered(x, y, z)
-            || worldIn.isBlockIndirectlyGettingPowered(x, y + 1, z);
+            || worldIn.isBlockIndirectlyGettingPowered(x, y - 1, z);
         int meta = worldIn.getBlockMetadata(x, y, z);
         boolean metaUnpowered = (meta & 8) == 0;
 
