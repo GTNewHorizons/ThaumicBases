@@ -113,6 +113,8 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
             }
 
             node.setNodeModifier(newNodeModifier);
+            node.markDirty();
+            worldObj.markBlockForUpdate(xCoord, yCoord - 1, zCoord);
             stopManipulator();
             return;
         }
@@ -229,6 +231,8 @@ public class TileNodeManipulator extends TileEntity implements IWandable {
 
             if (workTime >= maxTimeRequired) {
                 node.setNodeModifier(toModifierNode);
+                node.markDirty();
+                worldObj.markBlockForUpdate(xCoord, yCoord - 1, zCoord);
                 stopManipulator();
             } else increaseWorkTime();
         }
