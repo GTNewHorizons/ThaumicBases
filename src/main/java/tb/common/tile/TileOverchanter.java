@@ -340,13 +340,14 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     public int drainXPJarsInRange(int xp, int range) {
         if (xp <= 0) return xp;
         CubeIterator cubeIter = new CubeIterator(range);
+        int jarxp;
         while (cubeIter.hasNext()) {
             cubeIter.next();
             if (this.worldObj.getTileEntity(
                 cubeIter.n + this.xCoord,
                 cubeIter.l + this.yCoord,
                 cubeIter.m + this.zCoord) instanceof TileEntityJarXP jar) {
-                int jarxp = jar.getXP();
+                jarxp = jar.getXP();
                 if (jarxp < xp) {
                     if (!worldObj.isRemote) jar.setXP(0);
                     xp -= jarxp;
@@ -370,6 +371,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     public int drainEIOObelisksInRange(int xp, int range) {
         if (xp <= 0) return xp;
         CubeIterator cubeIter = new CubeIterator(range);
+        int jarxp;
         while (cubeIter.hasNext()) {
             cubeIter.next();
             if (this.worldObj.getTileEntity(
@@ -377,7 +379,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                 cubeIter.l + this.yCoord,
                 cubeIter.m + this.zCoord) instanceof TileExperienceObelisk obelisk) {
                 ExperienceContainer cont = obelisk.getContainer();
-                int jarxp = cont.getExperienceTotal();
+                jarxp = cont.getExperienceTotal();
                 // goddamn private fields with no good setters
                 if (!worldObj.isRemote) {
                     cont.drain(null, Integer.MAX_VALUE, true);
