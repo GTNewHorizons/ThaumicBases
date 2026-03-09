@@ -66,6 +66,7 @@ public class BlockOverchanter extends BlockContainer {
                 teo.syncTimer = 0;
                 worldIn.playSoundEffect(x, y, z, "thaumcraft:craftstart", 0.5F, 1.0F);
             }
+            worldIn.scheduleBlockUpdate(x, y, z, this, tickRate(worldIn));
             worldIn.setBlockMetadataWithNotify(x, y, z, meta | 8, 4);
             return;
         }
