@@ -248,8 +248,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stk) {
-        // return stk.hasTagCompound() && stk.getEnchantmentTagList() != null;
-        return false;
+        return stk.hasTagCompound() && stk.getEnchantmentTagList() != null;
     }
 
     public void readFromNBT(NBTTagCompound tag) {
