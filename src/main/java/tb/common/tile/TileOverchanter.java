@@ -81,8 +81,7 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                 this.worldObj
                     .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
                 if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
-                    if (enchantingTicks < 320 || this.xpToAbsorb != 0 && absorbXP()) return;
-                    if (xpToAbsorb == 0 && enchantingTicks >= 620) {
+                    if ((enchantingTicks >= 320 && xpToAbsorb != 0 && absorbXP() || xpToAbsorb == 0) && enchantingTicks >= 620) {
                         int enchId = this.findEnchantment(inventory);
                         NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
                         for (int i = 0; i < nbttaglist.tagCount(); ++i) {
@@ -307,11 +306,11 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
             // This scans a 17x17x17 cube centered around the TE (radius 8), matching the range of Thaumcraft's Infusion
             // Altar
             // It prioritizes coordinates closest to the controller to avoid it from "stealing" from far jars
-            if (xpToAbsorb == 0) return false;
+            if (xpToAbsorb == 0) return true;
         }
         if (isEioLoaded) {
             this.xpToAbsorb = this.drainEIOObelisksInRange(this.xpToAbsorb, 8);
-            if (xpToAbsorb == 0) return false;
+            if (xpToAbsorb == 0) return true;
         }
         List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(
             EntityPlayer.class,
@@ -330,11 +329,11 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                     this.xpToAbsorb = 0;
                     // if anyone else wants to implement the exact formula for experience
                     // draining, you can
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     public int drainXPJarsInRange(int xp, int range) {
