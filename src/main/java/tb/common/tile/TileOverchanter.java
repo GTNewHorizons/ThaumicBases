@@ -78,7 +78,8 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
                 // renderedLightning = new Lightning(this.worldObj.rand, new Coord3D(0,0,0), new
                 // Coord3D(MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50),
                 // 0.3F, 1,0,1);
-                this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
+                this.worldObj
+                    .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
                 if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
                     if (enchantingTicks < 320 || this.xpToAbsorb != 0 && absorbXP()) return;
                     if (xpToAbsorb == 0 && enchantingTicks >= 620) {
@@ -301,15 +302,17 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
 
     @Override
     public void onNeighborBlockChange(World worldIn, int x, int y, int z, Block neighbor) {
-        boolean powered = worldIn.isBlockIndirectlyGettingPowered(x, y, z) || worldIn.isBlockIndirectlyGettingPowered(x, y + 1, z);
+        boolean powered = worldIn.isBlockIndirectlyGettingPowered(x, y, z)
+            || worldIn.isBlockIndirectlyGettingPowered(x, y + 1, z);
         int meta = worldIn.getBlockMetadata(x, y, z);
-        boolean metaUnpowered = meta&8==0;
+        boolean metaUnpowered = meta & 8 == 0;
 
         if (meta && metaUnpowered) {
             if (canStartEnchanting()) {
                 isEnchantingStarted = true;
                 syncTimer = 0;
-                this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:craftstart", 0.5F, 1.0F);
+                this.worldObj
+                    .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:craftstart", 0.5F, 1.0F);
             }
             worldIn.setBlockMetadataWithNotify(x, y, z, l | 8, 4);
             return;
