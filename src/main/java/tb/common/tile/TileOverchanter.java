@@ -10,7 +10,7 @@ import java.util.Set;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -31,7 +31,7 @@ import thaumcraft.api.wands.IWandable;
 import thaumcraft.common.lib.events.EssentiaHandler;
 import tuhljin.automagy.tiles.TileEntityJarXP;
 
-public class TileOverchanter extends TileEntity implements IInventory, IWandable {
+public class TileOverchanter extends TileEntity implements ISidedInventory, IWandable {
 
     public ItemStack inventory;
 
