@@ -300,27 +300,6 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     @Override
     public void onWandStoppedUsing(ItemStack wandstack, World world, EntityPlayer player, int count) {}
 
-    @Override
-    public void onNeighborBlockChange(World worldIn, int x, int y, int z, Block neighbor) {
-        boolean powered = worldIn.isBlockIndirectlyGettingPowered(x, y, z)
-            || worldIn.isBlockIndirectlyGettingPowered(x, y + 1, z);
-        int meta = worldIn.getBlockMetadata(x, y, z);
-        boolean metaUnpowered = meta & 8 == 0;
-
-        if (meta && metaUnpowered) {
-            if (canStartEnchanting()) {
-                isEnchantingStarted = true;
-                syncTimer = 0;
-                this.worldObj
-                    .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:craftstart", 0.5F, 1.0F);
-            }
-            worldIn.setBlockMetadataWithNotify(x, y, z, l | 8, 4);
-            return;
-        }
-        if (meta || metaUnpowered) return;
-        worldIn.setBlockMetadataWithNotify(x, y, z, l & -9, 4);
-    }
-
     public boolean absorbXP() {
         // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
         if (isAutomagyLoaded) {
