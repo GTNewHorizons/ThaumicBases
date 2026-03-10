@@ -258,7 +258,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
     }
 
     @Override
-    public boolean canInsertItem(int slot, ItemStack item, int side {
+    public boolean canInsertItem(int slot, ItemStack item, int side) {
         return isItemValidForSlot(0, item);
     }
 
