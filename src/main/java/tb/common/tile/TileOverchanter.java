@@ -257,6 +257,16 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
         return !isItemValidForSlot(0, item);
     }
 
+    @Override
+    public boolean canInsertItem(int slot, ItemStack item, int side {
+        return isItemValidForSlot(0, item);
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int side) {
+        return new int[] { 0 };
+    }
+
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
 
