@@ -53,6 +53,26 @@ public class BlockOverchanter extends BlockContainer {
         return new TileOverchanter();
     }
 
+    @Override
+    public void onNeighborBlockChange(World worldIn, int x, int y, int z, Block neighbor) {
+        boolean powered = worldIn.isBlockIndirectlyGettingPowered(x, y, z)
+            || worldIn.isBlockIndirectlyGettingPowered(x, y - 1, z);
+        int meta = worldIn.getBlockMetadata(x, y, z);
+        boolean metaUnpowered = (meta & 8) == 0;
+
+        if (powered && metaUnpowered) {
+            if (worldIn.getTileEntity(x, y, z) instanceof TileOverchanter teo && teo.canStartEnchanting()) {
+                teo.isEnchantingStarted = true;
+                teo.syncTimer = 0;
+                worldIn.playSoundEffect(x, y, z, "thaumcraft:craftstart", 0.5F, 1.0F);
+            }
+            worldIn.setBlockMetadataWithNotify(x, y, z, meta | 8, 4);
+            return;
+        }
+        if (powered || metaUnpowered) return;
+        worldIn.setBlockMetadataWithNotify(x, y, z, meta & -9, 4);
+    }
+
     public void breakBlock(World w, int x, int y, int z, Block b, int meta) {
         MiscUtils.dropItemsOnBlockBreak(w, x, y, z, b, meta);
     }

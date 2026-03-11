@@ -1,5 +1,8 @@
 package tb.common.tile;
 
+import static tb.core.TBCore.isAutomagyLoaded;
+import static tb.core.TBCore.isEioLoaded;
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -7,7 +10,7 @@ import java.util.Set;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -21,16 +24,19 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import DummyCore.Utils.MathUtils;
 import DummyCore.Utils.MiscUtils;
+import crazypants.enderio.machine.obelisk.xp.TileExperienceObelisk;
+import crazypants.enderio.xp.ExperienceContainer;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.wands.IWandable;
 import thaumcraft.common.lib.events.EssentiaHandler;
+import tuhljin.automagy.tiles.TileEntityJarXP;
 
-public class TileOverchanter extends TileEntity implements IInventory, IWandable {
+public class TileOverchanter extends TileEntity implements ISidedInventory, IWandable {
 
     public ItemStack inventory;
 
-    public int enchantingTime;
-    public boolean xpAbsorbed;
+    public int enchantingTicks;
+    public int xpToAbsorb;
     public boolean isEnchantingStarted;
     public int syncTimer;
 
@@ -48,87 +54,70 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
             if (syncTimer <= 0) {
                 syncTimer = 100;
                 NBTTagCompound tg = new NBTTagCompound();
-                tg.setInteger("0", enchantingTime);
-                tg.setBoolean("1", xpAbsorbed);
+                tg.setInteger("0", enchantingTicks);
+                tg.setInteger("1", xpToAbsorb);
                 tg.setBoolean("2", isEnchantingStarted);
                 tg.setInteger("x", xCoord);
                 tg.setInteger("y", yCoord);
                 tg.setInteger("z", zCoord);
                 MiscUtils.syncTileEntity(tg, 0);
-            } else--syncTimer;
+            } else {
+                --syncTimer;
+            }
         }
 
         if (this.inventory == null) {
             isEnchantingStarted = false;
-            xpAbsorbed = false;
-            enchantingTime = 0;
+            xpToAbsorb = 825; // 30 levels
+            enchantingTicks = 0;
             // renderedLightning = null;
-        } else {
-            if (this.isEnchantingStarted) {
-                if (this.worldObj.getTotalWorldTime() % 20 == 0) {
-                    // renderedLightning = new Lightning(this.worldObj.rand, new Coord3D(0,0,0), new
-                    // Coord3D(MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50),
-                    // 0.3F, 1,0,1);
-                    this.worldObj
-                        .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
-                    if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
-                        ++enchantingTime;
-                        if (enchantingTime >= 16 && !this.xpAbsorbed) {
-                            List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(
-                                EntityPlayer.class,
-                                AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
-                                    .expand(6, 3, 6));
-                            if (!players.isEmpty()) {
-                                for (int i = 0; i < players.size(); ++i) {
-                                    EntityPlayer p = players.get(i);
-                                    if (p.experienceLevel >= 30) {
-                                        p.attackEntityFrom(DamageSource.magic, 8);
-                                        this.worldObj
-                                            .playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
-                                        p.experienceLevel -= 30;
-                                        xpAbsorbed = true;
-                                        break;
-                                    }
+            return;
+        }
+        if (this.isEnchantingStarted) {
+            if (enchantingTicks % 20 == 0) {
+                // renderedLightning = new Lightning(this.worldObj.rand, new Coord3D(0,0,0), new
+                // Coord3D(MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50),
+                // 0.3F, 1,0,1);
+                this.worldObj
+                    .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
+                if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
+                    if ((enchantingTicks >= 320 && xpToAbsorb != 0 && absorbXP() || xpToAbsorb == 0)
+                        && enchantingTicks >= 620) {
+                        int enchId = this.findEnchantment(inventory);
+                        NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
+                        for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+                            NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
+                            if (tag != null && Integer.valueOf(tag.getShort("id")) == enchId) {
+                                tag.setShort(
+                                    "lvl",
+                                    (short) Math.max(1, Math.min(tag.getShort("lvl") + 1, Short.MAX_VALUE)));
+                                NBTTagCompound stackTag = MiscUtils.getStackTag(inventory);
+                                if (!stackTag.hasKey("overchants")) {
+                                    stackTag.setIntArray("overchants", new int[] { enchId });
+                                } else {
+                                    int[] arrayInt = stackTag.getIntArray("overchants");
+                                    int[] newArrayInt = new int[arrayInt.length + 1];
+                                    for (int j = 0; j < arrayInt.length; ++j) newArrayInt[j] = arrayInt[j];
+                                    newArrayInt[newArrayInt.length - 1] = enchId;
+
+                                    stackTag.setIntArray("overchants", newArrayInt);
                                 }
+                                break;
                             }
                         }
-
-                        if (xpAbsorbed && enchantingTime >= 32) {
-                            int enchId = this.findEnchantment(inventory);
-                            NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
-                            for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-                                NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
-                                if (tag != null && Integer.valueOf(tag.getShort("id")) == enchId) {
-                                    tag.setShort("lvl", (short) (Integer.valueOf(tag.getShort("lvl")) + 1));
-                                    NBTTagCompound stackTag = MiscUtils.getStackTag(inventory);
-                                    if (!stackTag.hasKey("overchants")) {
-                                        stackTag.setIntArray("overchants", new int[] { enchId });
-                                    } else {
-                                        int[] arrayInt = stackTag.getIntArray("overchants");
-                                        int[] newArrayInt = new int[arrayInt.length + 1];
-                                        for (int j = 0; j < arrayInt.length; ++j) {
-                                            newArrayInt[j] = arrayInt[j];
-                                        }
-                                        newArrayInt[newArrayInt.length - 1] = enchId;
-
-                                        stackTag.setIntArray("overchants", newArrayInt);
-                                    }
-                                    break;
-                                }
-                            }
-                            isEnchantingStarted = false;
-                            xpAbsorbed = false;
-                            enchantingTime = 0;
-                            // renderedLightning = null;
-                            this.worldObj
-                                .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);
-                        }
-
-                    } else {
-                        --enchantingTime;
+                        isEnchantingStarted = false;
+                        xpToAbsorb = 825;
+                        enchantingTicks = 0;
+                        // renderedLightning = null;
+                        this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);
+                        return;
                     }
+
+                } else {
+                    enchantingTicks -= 20;
                 }
             }
+            enchantingTicks += 1;
         }
     }
 
@@ -168,10 +157,10 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     }
 
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        enchantingTime = pkt.func_148857_g()
+        enchantingTicks = pkt.func_148857_g()
             .getInteger("0");
-        xpAbsorbed = pkt.func_148857_g()
-            .getBoolean("1");
+        xpToAbsorb = pkt.func_148857_g()
+            .getInteger("1");
         isEnchantingStarted = pkt.func_148857_g()
             .getBoolean("2");
     }
@@ -259,15 +248,32 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stk) {
-        // return stk.hasTagCompound() && stk.getEnchantmentTagList() != null;
-        return false;
+        return stk.hasTagCompound() && stk.getEnchantmentTagList() != null
+            && stk.getEnchantmentTagList()
+                .tagCount() > 0
+            && findEnchantment(stk) != -1;
+    }
+
+    @Override
+    public boolean canExtractItem(int slot, ItemStack item, int side) {
+        return !isItemValidForSlot(0, item);
+    }
+
+    @Override
+    public boolean canInsertItem(int slot, ItemStack item, int side) {
+        return isItemValidForSlot(0, item);
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int side) {
+        return new int[] { 0 };
     }
 
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
 
-        enchantingTime = tag.getInteger("enchTime");
-        xpAbsorbed = tag.getBoolean("xpAbsorbed");
+        enchantingTicks = tag.getInteger("enchTime");
+        xpToAbsorb = tag.getInteger("xpToAbsorb");
         isEnchantingStarted = tag.getBoolean("enchStarted");
 
         if (tag.hasKey("itm")) inventory = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("itm"));
@@ -276,8 +282,8 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
 
-        tag.setInteger("enchTime", enchantingTime);
-        tag.setBoolean("xpAbsorbed", xpAbsorbed);
+        tag.setInteger("enchTime", enchantingTicks);
+        tag.setInteger("xpToAbsorb", xpToAbsorb);
         tag.setBoolean("enchStarted", isEnchantingStarted);
 
         if (inventory != null) {
@@ -310,4 +316,174 @@ public class TileOverchanter extends TileEntity implements IInventory, IWandable
 
     @Override
     public void onWandStoppedUsing(ItemStack wandstack, World world, EntityPlayer player, int count) {}
+
+    public boolean absorbXP() {
+        // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
+        if (isAutomagyLoaded) {
+            this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8);
+            // This scans a 17x17x17 cube centered around the TE (radius 8), matching the range of Thaumcraft's Infusion
+            // Altar
+            // It prioritizes coordinates closest to the controller to avoid it from "stealing" from far jars
+            if (xpToAbsorb == 0) return true;
+        }
+        if (isEioLoaded) {
+            this.xpToAbsorb = this.drainEIOObelisksInRange(this.xpToAbsorb, 8);
+            if (xpToAbsorb == 0) return true;
+        }
+        List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(
+            EntityPlayer.class,
+            AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
+                .expand(6, 3, 6));
+        if (!players.isEmpty()) {
+            int lvlsleft = (int) Math
+                .round(xpToAbsorb > 255 ? (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 : xpToAbsorb / 17d);
+            // it's a double in the second branch so that both branches use the same Math.sqrt
+            for (int i = 0; i < players.size(); ++i) {
+                EntityPlayer p = players.get(i);
+                if (p.experienceLevel >= lvlsleft) {
+                    p.attackEntityFrom(DamageSource.magic, 8);
+                    this.worldObj.playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
+                    p.experienceLevel -= lvlsleft;
+                    this.xpToAbsorb = 0;
+                    // if anyone else wants to implement the exact formula for experience
+                    // draining, you can
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int drainXPJarsInRange(int xp, int range) {
+        if (xp <= 0) return xp;
+        CubeIterator cubeIter = new CubeIterator(range);
+        int jarxp;
+        while (cubeIter.hasNext()) {
+            cubeIter.next();
+            if (this.worldObj.getTileEntity(
+                cubeIter.n + this.xCoord,
+                cubeIter.l + this.yCoord,
+                cubeIter.m + this.zCoord) instanceof TileEntityJarXP jar) {
+                jarxp = jar.getXP();
+                if (jarxp < xp) {
+                    if (!worldObj.isRemote) jar.setXP(0);
+                    xp -= jarxp;
+                    continue;
+                }
+                if (!worldObj.isRemote) jar.setXP(jarxp - xp);
+                return 0;
+            }
+        }
+        return xp;
+        // This algorithm drains each jar it comes across sequentially without regard to how full they are. If you would
+        // rather it prioritize emptying barely filled jars within a certain radius, and then emptying non-full jars,
+        // then instead have a counter sinceLastPrioJar that starts at 0 and increments each iteration, and cache the
+        // most recent "priority" jar (lowest non-full jar with jarxp > xp argument); reset that counter per each jar
+        // with jarxp under xp argument, and drain each jar with jarxp under xp argument, stopping once the counter
+        // reaches an arbitrary count of blocks searched without draining a jar, and then drain the cached lowest-filled
+        // jar. The TC EssentiaHandler would be so much better if it worked that way as well.
+    }
+
+    // EIO version (separated so that it prioritizes the magic jars, feel free to switch this to being in sync instead)
+    public int drainEIOObelisksInRange(int xp, int range) {
+        if (xp <= 0) return xp;
+        CubeIterator cubeIter = new CubeIterator(range);
+        int jarxp;
+        while (cubeIter.hasNext()) {
+            cubeIter.next();
+            if (this.worldObj.getTileEntity(
+                cubeIter.n + this.xCoord,
+                cubeIter.l + this.yCoord,
+                cubeIter.m + this.zCoord) instanceof TileExperienceObelisk obelisk) {
+                ExperienceContainer cont = obelisk.getContainer();
+                jarxp = cont.getExperienceTotal();
+                // goddamn private fields with no good setters
+                if (!worldObj.isRemote) {
+                    cont.drain(null, Integer.MAX_VALUE, true);
+                    cont.addExperience(Math.max(0, jarxp - xp));
+                }
+                // if this causes desyncs, remove the !worldObj.isRemote test or add an additional multiplayer test
+                xp -= jarxp;
+                if (xp <= 0) return 0;
+            }
+        }
+        return xp;
+    }
+
+    public static final class CubeIterator {
+
+        public int range = 0;
+
+        // wow, it's just like electron orbitals. and the spin is the sign. how beautiful
+        public int n = 0;
+        public int l = 0;
+        public int m = 0;
+
+        CubeIterator(int range) {
+            this.range = range;
+        }
+
+        // maybe i could put this in next() and make it an Iterator<Boolean>?
+        public boolean hasNext() {
+            return -n < range || -l < range || -m < range;
+        }
+
+        public void next() {
+            // this shit looks like the decompile of an obfuscated assembly but i assure you it is hand written
+            m = -m;
+            if (m < 0) return;
+            l = -l;
+            if (l < 0) return;
+            n = -n;
+            if (n < 0) return;
+            if (l >= n || m > n) {
+                if (m >= l) {
+                    if (n <= l) {
+                        if (m > n) {
+                            n ^= m;
+                            m ^= n;
+                            n ^= m;
+                            if (l > m) {
+                                ++m;
+                                return;
+                            }
+                            m = 0;
+                            ++l;
+                            return;
+                        }
+                        l = 0;
+                        m = 0;
+                        ++n;
+                        return;
+                    }
+                    n ^= l;
+                    l ^= n;
+                    n ^= l;
+                    return;
+                }
+                if (n < m) {
+                    n ^= m;
+                    m ^= n;
+                    n ^= m;
+                    return;
+                }
+                m ^= l;
+                l ^= m;
+                m ^= l;
+                return;
+            }
+            if (l > m) {
+                m ^= l;
+                l ^= m;
+                m ^= l;
+                return;
+            }
+            n ^= l;
+            l ^= n;
+            n ^= l;
+            return;
+        } // i have just found out that Java has a `when` statement, but primitive pattern matching is preview
+          // and the syntax sucks (case boolean b when a>6)
+          // i genuinely would rather have written this bytecode by bytecode but here we are
+    }
 }

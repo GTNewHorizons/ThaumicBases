@@ -22,4 +22,5 @@ public class TBTiles {
         GameRegistry.registerTileEntity(TileCampfire.class, "tb.campfire");
         GameRegistry.registerTileEntity(TileBrazier.class, "tb.brazier");
     }
+
 }
