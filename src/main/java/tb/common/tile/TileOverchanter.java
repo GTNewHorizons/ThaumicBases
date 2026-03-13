@@ -338,8 +338,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
             int lvlsleft = (int) Math
                 .round(xpToAbsorb > 255 ? (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 : xpToAbsorb / 17d);
             // it's a double in the second branch so that both branches use the same Math.sqrt
-            for (int i = 0; i < players.size(); ++i) {
-                EntityPlayer p = players.get(i);
+            for (EntityPlayer p : players) {
                 if (p.experienceLevel >= lvlsleft) {
                     p.attackEntityFrom(DamageSource.magic, 8);
                     this.worldObj.playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
