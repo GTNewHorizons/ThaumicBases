@@ -97,7 +97,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
                                 } else {
                                     int[] arrayInt = stackTag.getIntArray("overchants");
                                     int[] newArrayInt = new int[arrayInt.length + 1];
-                                    for (int j = 0; j < arrayInt.length; ++j) newArrayInt[j] = arrayInt[j];
+                                    System.arraycopy(arrayInt, 0, newArrayInt, 0, arrayInt.length);
                                     newArrayInt[newArrayInt.length - 1] = enchId;
 
                                     stackTag.setIntArray("overchants", newArrayInt);
