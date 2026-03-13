@@ -87,7 +87,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
                         NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
                         for (int i = 0; i < nbttaglist.tagCount(); ++i) {
                             NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
-                            if (tag != null && Integer.valueOf(tag.getShort("id")) == enchId) {
+                            if (tag != null && tag.getShort("id") == enchId) {
                                 tag.setShort(
                                     "lvl",
                                     (short) Math.max(1, Math.min(tag.getShort("lvl") + 1, Short.MAX_VALUE)));
