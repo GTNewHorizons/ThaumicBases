@@ -24,6 +24,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import DummyCore.Utils.MathUtils;
 import DummyCore.Utils.MiscUtils;
+import com.gtnewhorizon.gtnhlib.geometry.CubeIterator;
 import crazypants.enderio.machine.obelisk.xp.TileExperienceObelisk;
 import crazypants.enderio.xp.ExperienceContainer;
 import thaumcraft.api.aspects.Aspect;
@@ -409,7 +410,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
         return xp;
     }
 
-    public static final class CubeIterator {
+    /*public static final class CubeIterator {
 
         public int range = 0;
 
@@ -484,5 +485,5 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
         } // i have just found out that Java has a `when` statement, but primitive pattern matching is preview
           // and the syntax sucks (case boolean b when a>6)
           // i genuinely would rather have written this bytecode by bytecode but here we are
-    }
+    }*/
 }
