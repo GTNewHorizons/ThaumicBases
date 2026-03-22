@@ -22,9 +22,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.gtnewhorizon.gtnhlib.geometry.CubeIterator;
+
 import DummyCore.Utils.MathUtils;
 import DummyCore.Utils.MiscUtils;
-import com.gtnewhorizon.gtnhlib.geometry.CubeIterator;
 import crazypants.enderio.machine.obelisk.xp.TileExperienceObelisk;
 import crazypants.enderio.xp.ExperienceContainer;
 import thaumcraft.api.aspects.Aspect;
