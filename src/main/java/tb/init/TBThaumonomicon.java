@@ -1394,6 +1394,7 @@ public class TBThaumonomicon {
                     new ResearchPage("tb.rec.overchanter.page.0"),
                     new ResearchPage("tb.rec.overchanter.page.1"),
                     new ResearchPage("tb.rec.overchanter.page.2"),
+                    new ResearchPage("tb.rec.overchanter.page.3"),
                     new ResearchPage(overchanterRec))
                 .registerResearchItem();
 
