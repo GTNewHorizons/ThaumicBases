@@ -115,7 +115,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
                             enchantingTicks = 0;
                             // renderedLightning = null;
                             this.worldObj
-                                    .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);
+                                .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);
                             return;
                         }
                     }
