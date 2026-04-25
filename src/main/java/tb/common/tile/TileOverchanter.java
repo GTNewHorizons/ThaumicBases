@@ -42,6 +42,8 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
     public boolean isEnchantingStarted;
     public int syncTimer;
 
+    public static final int xp30lv = 825;
+
     // public Lightning renderedLightning;
 
     @Override
@@ -70,7 +72,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
 
         if (this.inventory == null) {
             isEnchantingStarted = false;
-            xpToAbsorb = 825; // 30 levels
+            xpToAbsorb = xp30lv; // 30 levels
             enchantingTicks = 0;
             // renderedLightning = null;
             return;
@@ -275,7 +277,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
         super.readFromNBT(tag);
 
         enchantingTicks = tag.getInteger("enchTime");
-        xpToAbsorb = tag.getInteger("xpToAbsorb");
+        xpToAbsorb = tag.hasKey("xpToAbsorb") ? tag.getInteger("xpToAbsorb") : xp30lv;
         isEnchantingStarted = tag.getBoolean("enchStarted");
 
         if (tag.hasKey("itm")) inventory = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("itm"));
@@ -339,7 +341,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
         if (!players.isEmpty()) {
             int lvlsleft = (int) Math
                 .round(xpToAbsorb > 255 ? (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 : xpToAbsorb / 17d);
-            // it's a double in the second branch so that both branches use the same Math.sqrt
+            // it's a double in the second branch so that float division is used
             for (EntityPlayer p : players) {
                 if (p.experienceLevel >= lvlsleft) {
                     p.attackEntityFrom(DamageSource.magic, 8);
