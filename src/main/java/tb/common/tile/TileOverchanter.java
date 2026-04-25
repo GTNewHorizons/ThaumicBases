@@ -85,6 +85,8 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
                 this.worldObj
                     .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
                 if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
+                    // >=320 ticks = second 17 and greater, >=620 ticks = 32+ seconds (so that 32 prae is drained)
+                    // the modulo from earlier ensures that it only actually checks on the second so it'll be 32 full seconds minimum
                     if (enchantingTicks >= 320) {
                         if (xpToAbsorb != 0) absorbXP();
                         if (enchantingTicks >= 620 && xpToAbsorb == 0) {
@@ -341,6 +343,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
             EntityPlayer.class,
             AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
                 .expand(6, 3, 6));
+        // XP math, see minecraft wiki on experience under the legacy formula
         if (!players.isEmpty()) {
             int lvlsleft = (int) Math
                 .round(xpToAbsorb > 255 ? (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 : xpToAbsorb / 17d);
