@@ -85,11 +85,10 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
                 this.worldObj
                     .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
                 if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
-                    // >=320 ticks = second 17 and greater, >=620 ticks = 32+ seconds (so that 32 prae is drained)
-                    // the modulo from earlier ensures that it only actually checks on the second so it'll be 32 full seconds minimum
-                    if (enchantingTicks >= 320) {
+                    // the values being checked against are the second milestones in the enchanting process
+                    if (enchantingTicks / 20 >= 16) {
                         if (xpToAbsorb != 0) absorbXP();
-                        if (enchantingTicks >= 620 && xpToAbsorb == 0) {
+                        if (enchantingTicks / 20 >= 32 && xpToAbsorb == 0) {
                             int enchId = this.findEnchantment(inventory);
                             NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
                             for (int i = 0; i < nbttaglist.tagCount(); ++i) {
@@ -329,7 +328,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
     public boolean absorbXP() {
         // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
         if (isAutomagyLoaded) {
-            this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8);
+            this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8); // second arg = radius
             // This scans a 17x17x17 cube centered around the TE (radius 8), matching the range of Thaumcraft's Infusion
             // Altar
             // It prioritizes coordinates closest to the controller to avoid it from "stealing" from far jars
