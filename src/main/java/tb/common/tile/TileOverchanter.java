@@ -85,36 +85,38 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
                 this.worldObj
                     .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
                 if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
-                    if ((enchantingTicks >= 320 && xpToAbsorb != 0 && absorbXP() || xpToAbsorb == 0)
-                        && enchantingTicks >= 620) {
-                        int enchId = this.findEnchantment(inventory);
-                        NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
-                        for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-                            NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
-                            if (tag != null && tag.getShort("id") == enchId) {
-                                tag.setShort(
-                                    "lvl",
-                                    (short) Math.max(1, Math.min(tag.getShort("lvl") + 1, Short.MAX_VALUE)));
-                                NBTTagCompound stackTag = MiscUtils.getStackTag(inventory);
-                                if (!stackTag.hasKey("overchants")) {
-                                    stackTag.setIntArray("overchants", new int[] { enchId });
-                                } else {
-                                    int[] arrayInt = stackTag.getIntArray("overchants");
-                                    int[] newArrayInt = new int[arrayInt.length + 1];
-                                    System.arraycopy(arrayInt, 0, newArrayInt, 0, arrayInt.length);
-                                    newArrayInt[newArrayInt.length - 1] = enchId;
+                    if (enchantingTicks >= 320) {
+                        if (xpToAbsorb != 0) absorbXP();
+                        if (enchantingTicks >= 620 && xpToAbsorb == 0) {
+                            int enchId = this.findEnchantment(inventory);
+                            NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
+                            for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+                                NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
+                                if (tag != null && tag.getShort("id") == enchId) {
+                                    tag.setShort(
+                                        "lvl",
+                                        (short) Math.max(1, Math.min(tag.getShort("lvl") + 1, Short.MAX_VALUE)));
+                                    NBTTagCompound stackTag = MiscUtils.getStackTag(inventory);
+                                    if (!stackTag.hasKey("overchants")) {
+                                        stackTag.setIntArray("overchants", new int[] { enchId });
+                                    } else {
+                                        int[] arrayInt = stackTag.getIntArray("overchants");
+                                        int[] newArrayInt = new int[arrayInt.length + 1];
+                                        System.arraycopy(arrayInt, 0, newArrayInt, 0, arrayInt.length);
+                                        newArrayInt[newArrayInt.length - 1] = enchId;
 
-                                    stackTag.setIntArray("overchants", newArrayInt);
+                                        stackTag.setIntArray("overchants", newArrayInt);
+                                    }
+                                    break;
                                 }
-                                break;
                             }
+                            isEnchantingStarted = false;
+                            xpToAbsorb = 825;
+                            enchantingTicks = 0;
+                            // renderedLightning = null;
+                            this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);
+                            return;
                         }
-                        isEnchantingStarted = false;
-                        xpToAbsorb = 825;
-                        enchantingTicks = 0;
-                        // renderedLightning = null;
-                        this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);
-                        return;
                     }
 
                 } else {
