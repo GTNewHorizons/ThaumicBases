@@ -44,8 +44,6 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
 
     public static final int xp30lv = 825;
 
-    // public Lightning renderedLightning;
-
     @Override
     public int getSizeInventory() {
         return 1;
@@ -74,14 +72,10 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
             isEnchantingStarted = false;
             xpToAbsorb = xp30lv; // 30 levels
             enchantingTicks = 0;
-            // renderedLightning = null;
             return;
         }
         if (this.isEnchantingStarted) {
             if (enchantingTicks % 20 == 0) {
-                // renderedLightning = new Lightning(this.worldObj.rand, new Coord3D(0,0,0), new
-                // Coord3D(MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50,MathUtils.randomDouble(this.worldObj.rand)/50),
-                // 0.3F, 1,0,1);
                 this.worldObj
                     .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:infuserstart", 1F, 1.0F);
                 if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, ForgeDirection.UNKNOWN, 8, false)) {
@@ -114,7 +108,6 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
                             isEnchantingStarted = false;
                             xpToAbsorb = xp30lv;
                             enchantingTicks = 0;
-                            // renderedLightning = null;
                             this.worldObj
                                 .playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "thaumcraft:wand", 1F, 1F);
                             return;
@@ -211,11 +204,6 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
             return null;
         }
     }
-    /*
-     * @Override public ItemStack decrStackSize(int i, int j) { if (inventory != null) { ItemStack stackAt; if
-     * (inventory.stackSize <= j) { stackAt = inventory; inventory = null; return stackAt; } else { stackAt =
-     * inventory.splitStack(j); if (inventory.stackSize == 0) inventory = null; return stackAt; } } return null; }
-     */
 
     @Override
     public ItemStack getStackInSlotOnClosing(int slot) {
