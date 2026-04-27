@@ -48,6 +48,9 @@ public class TBCore {
 
     public static final TBConfig cfg = new TBConfig();
 
+    public static final boolean isAutomagyLoaded = cpw.mods.fml.common.Loader.isModLoaded("Automagy");
+    public static final boolean isEioLoaded = cpw.mods.fml.common.Loader.isModLoaded("EnderIO");
+
     @SidedProxy(serverSide = serverProxy, clientSide = clientProxy)
     public static TBServer proxy;
 
