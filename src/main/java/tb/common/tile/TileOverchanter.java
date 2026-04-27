@@ -313,41 +313,37 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
     @Override
     public void onWandStoppedUsing(ItemStack wandstack, World world, EntityPlayer player, int count) {}
 
-    public boolean absorbXP() {
-        // note that the drain functions shouldnt be in a non remote test b/c of player damage fallback
+    public void absorbXP() {
+        // Note that the drain functions shouldn't be in a non-remote test because of player damage fallback
         if (isAutomagyLoaded) {
-            this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8); // second arg = radius
-            // This scans a 17x17x17 cube centered around the TE (radius 8), matching the range of Thaumcraft's Infusion
-            // Altar
-            // It prioritizes coordinates closest to the controller to avoid it from "stealing" from far jars
-            if (xpToAbsorb == 0) return true;
+            // This scans a 17x17x17 cube centered around the TE, prioritizing the closest sources
+            this.xpToAbsorb = this.drainXPJarsInRange(this.xpToAbsorb, 8);
+            if (xpToAbsorb == 0) return;
         }
         if (isEioLoaded) {
             this.xpToAbsorb = this.drainEIOObelisksInRange(this.xpToAbsorb, 8);
-            if (xpToAbsorb == 0) return true;
+            if (xpToAbsorb == 0) return;
         }
         List<EntityPlayer> players = this.worldObj.getEntitiesWithinAABB(
             EntityPlayer.class,
             AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1)
                 .expand(6, 3, 6));
-        // XP math, see minecraft wiki on experience under the legacy formula
         if (!players.isEmpty()) {
+            // See https://minecraft.wiki/w/Experience#Values_from_Java_Edition_1.3.1_to_1.8_(14w02a) for XP math
+            // Uses a double in the second branch so that float division is used
             int lvlsleft = (int) Math
                 .round(xpToAbsorb > 255 ? (59 + Math.sqrt(24 * xpToAbsorb - 5159)) / 6 : xpToAbsorb / 17d);
-            // it's a double in the second branch so that float division is used
             for (EntityPlayer p : players) {
                 if (p.experienceLevel >= lvlsleft) {
                     p.attackEntityFrom(DamageSource.magic, 8);
                     this.worldObj.playSoundEffect(p.posX, p.posY, p.posZ, "thaumcraft:zap", 1F, 1.0F);
                     p.experienceLevel -= lvlsleft;
                     this.xpToAbsorb = 0;
-                    // if anyone else wants to implement the exact formula for experience
-                    // draining, you can
-                    return true;
+                    // If anyone else wants to implement the exact formula for experience draining, you can
+                    return;
                 }
             }
         }
-        return false;
     }
 
     public int drainXPJarsInRange(int xp, int range) {
