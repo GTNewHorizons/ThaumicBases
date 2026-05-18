@@ -63,7 +63,7 @@ public class TBBlocks {
     public static Block quicksilverBlock = new TBBlockDeco(Material.iron, false).setBlockName("quicksilverBlock")
         .setBlockTextureName("thaumicbases:quicksilverBlock")
         .setHardness(1F);
-    public static Block quicksilverBrick = new TBBlockDeco(Material.rock, true).setBlockName("quicksilverBrick")
+    public static Block quicksilverBrick = new TBBlockDeco(Material.rock, false).setBlockName("quicksilverBrick")
         .setBlockTextureName("thaumicbases:quicksilverBrick")
         .setHardness(1F);
     public static Block crystalBlock = new BlockCrystalBlock().setBlockName("crystalBlock")
