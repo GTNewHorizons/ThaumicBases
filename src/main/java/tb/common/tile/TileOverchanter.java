@@ -136,7 +136,7 @@ public class TileOverchanter extends TileEntity implements ISidedInventory, IWan
 
     @SuppressWarnings("unchecked")
     public int findEnchantment(ItemStack enchanted) {
-        NBTTagCompound stackTag = MiscUtils.getStackTag(inventory);
+        NBTTagCompound stackTag = MiscUtils.getStackTag(enchanted);
         LinkedHashMap<Integer, Integer> ench = (LinkedHashMap<Integer, Integer>) EnchantmentHelper
             .getEnchantments(enchanted);
         Set<Integer> keys = ench.keySet();
