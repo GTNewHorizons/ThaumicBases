@@ -61,10 +61,8 @@ public class BlockOverchanter extends BlockContainer {
         boolean metaUnpowered = (meta & 8) == 0;
 
         if (powered && metaUnpowered) {
-            if (worldIn.getTileEntity(x, y, z) instanceof TileOverchanter teo && teo.canStartEnchanting()) {
-                teo.isEnchantingStarted = true;
-                teo.syncTimer = 0;
-                worldIn.playSoundEffect(x, y, z, "thaumcraft:craftstart", 0.5F, 1.0F);
+            if (worldIn.getTileEntity(x, y, z) instanceof TileOverchanter teo) {
+                teo.tryStartEnchanting();
             }
             worldIn.setBlockMetadataWithNotify(x, y, z, meta | 8, 4);
             return;
