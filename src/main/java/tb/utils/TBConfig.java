@@ -40,6 +40,8 @@ public class TBConfig implements IDummyConfig {
     public static int speedMultiplierForFurnace;
     public static boolean makeRequireAlumentum;
 
+    public static boolean modernAnvilGui;
+
     @Override
     public void load(Configuration config) {
         cfg = config;
@@ -142,5 +144,12 @@ public class TBConfig implements IDummyConfig {
             .getInt("minBlazePowderFromPyrofluid", "Pyrofluid", 5, 0, Integer.MAX_VALUE, "");
         maxBlazePowderFromPyrofluid = cfg
             .getInt("maxBlazePowderFromPyrofluid", "Pyrofluid", 5 + 32, 0, Integer.MAX_VALUE, "");
+
+        // client
+        modernAnvilGui = cfg.getBoolean(
+            "modernAnvilGui",
+            "Client",
+            false,
+            "If set to true the Void Anvil and Thaumic Anvil GUIs use the modern vanilla anvil style (Inventory label and a translucent box behind the repair cost)");
     }
 }
