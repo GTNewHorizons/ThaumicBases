@@ -81,7 +81,7 @@ public class GuiThaumicAnvil extends GuiContainer implements ICrafting {
         this.fontRendererObj.drawString(I18n.format("container.repair", new Object[0]), 60, 6, 4210752);
 
         if (TBConfig.modernAnvilGui) {
-            this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 94, 4210752);
+            this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 94, 0x404040);
         }
 
         if (this.field_147092_v.maximumCost > 0) {
