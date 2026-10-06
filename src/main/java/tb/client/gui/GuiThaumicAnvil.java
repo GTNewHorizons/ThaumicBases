@@ -78,6 +78,7 @@ public class GuiThaumicAnvil extends GuiContainer implements ICrafting {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_BLEND);
         this.fontRendererObj.drawString(I18n.format("container.repair", new Object[0]), 60, 6, 4210752);
+        this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 94, 4210752);
 
         if (this.field_147092_v.maximumCost > 0) {
             int k = 8453920;
@@ -97,20 +98,9 @@ public class GuiThaumicAnvil extends GuiContainer implements ICrafting {
                     }
 
             if (flag) {
-                int l = -16777216 | (k & 16579836) >> 2 | k & -16777216;
-                int i1 = this.xSize - 8 - this.fontRendererObj.getStringWidth(s);
-                byte b0 = 67;
-
-                if (this.fontRendererObj.getUnicodeFlag()) {
-                    drawRect(i1 - 3, b0 - 2, this.xSize - 7, b0 + 10, -16777216);
-                    drawRect(i1 - 2, b0 - 1, this.xSize - 8, b0 + 9, -12895429);
-                } else {
-                    this.fontRendererObj.drawString(s, i1, b0 + 1, l);
-                    this.fontRendererObj.drawString(s, i1 + 1, b0, l);
-                    this.fontRendererObj.drawString(s, i1 + 1, b0 + 1, l);
-                }
-
-                this.fontRendererObj.drawString(s, i1, b0, k);
+                int x = this.xSize - 10 - this.fontRendererObj.getStringWidth(s);
+                drawRect(x - 2, 67, this.xSize - 8, 79, 0x4F000000);
+                this.fontRendererObj.drawStringWithShadow(s, x, 69, k);
             }
         }
 
