@@ -12,7 +12,6 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
 import tb.api.RevolverUpgrade;
 import tb.utils.RevolverInfusionRecipe;
 import tb.utils.TBConfig;
@@ -494,7 +493,7 @@ public class TBThaumonomicon {
             shards[0] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0),
-                new ItemStack(GameRegistry.findBlock("gregtech", "gt.blockores"), 1, 540),
+                "oreInfusedAir",
                 new AspectList().add(Aspect.ENTROPY, 2)
                     .add(Aspect.MAGIC, 1)
                     .add(Aspect.AIR, 3));
@@ -502,7 +501,7 @@ public class TBThaumonomicon {
             shards[1] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 1),
-                new ItemStack(GameRegistry.findBlock("gregtech", "gt.blockores"), 1, 541),
+                "oreInfusedFire",
                 new AspectList().add(Aspect.ENTROPY, 2)
                     .add(Aspect.MAGIC, 1)
                     .add(Aspect.FIRE, 3));
@@ -510,7 +509,7 @@ public class TBThaumonomicon {
             shards[2] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 2),
-                new ItemStack(GameRegistry.findBlock("gregtech", "gt.blockores"), 1, 543),
+                "oreInfusedWater",
                 new AspectList().add(Aspect.ENTROPY, 2)
                     .add(Aspect.MAGIC, 1)
                     .add(Aspect.WATER, 3));
@@ -518,7 +517,7 @@ public class TBThaumonomicon {
             shards[3] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 3),
-                new ItemStack(GameRegistry.findBlock("gregtech", "gt.blockores"), 1, 542),
+                "oreInfusedEarth",
                 new AspectList().add(Aspect.ENTROPY, 2)
                     .add(Aspect.MAGIC, 1)
                     .add(Aspect.EARTH, 3));
@@ -526,7 +525,7 @@ public class TBThaumonomicon {
             shards[4] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 4),
-                new ItemStack(GameRegistry.findBlock("gregtech", "gt.blockores"), 1, 545),
+                "oreInfusedOrder",
                 new AspectList().add(Aspect.ENTROPY, 2)
                     .add(Aspect.MAGIC, 1)
                     .add(Aspect.ORDER, 3));
@@ -534,7 +533,7 @@ public class TBThaumonomicon {
             shards[5] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 5),
-                new ItemStack(GameRegistry.findBlock("gregtech", "gt.blockores"), 1, 544),
+                "oreInfusedEntropy",
                 new AspectList().add(Aspect.MAGIC, 1)
                     .add(Aspect.ENTROPY, 5));
 
@@ -542,7 +541,7 @@ public class TBThaumonomicon {
             shards[6] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 0),
-                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5540),
+                "rawOreInfusedAir",
                 new AspectList().add(Aspect.ENTROPY, 2)
                     .add(Aspect.MAGIC, 1)
                     .add(Aspect.AIR, 3));
@@ -550,7 +549,7 @@ public class TBThaumonomicon {
             shards[7] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 1),
-                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5541),
+                "rawOreInfusedFire",
                 new AspectList().add(Aspect.ENTROPY, 2)
                     .add(Aspect.MAGIC, 1)
                     .add(Aspect.FIRE, 3));
@@ -558,7 +557,7 @@ public class TBThaumonomicon {
             shards[8] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 2),
-                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5543),
+                "rawOreInfusedWater",
                 new AspectList().add(Aspect.ENTROPY, 2)
                     .add(Aspect.MAGIC, 1)
                     .add(Aspect.WATER, 3));
@@ -566,7 +565,7 @@ public class TBThaumonomicon {
             shards[9] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 3),
-                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5542),
+                "rawOreInfusedEarth",
                 new AspectList().add(Aspect.ENTROPY, 2)
                     .add(Aspect.MAGIC, 1)
                     .add(Aspect.EARTH, 3));
@@ -574,7 +573,7 @@ public class TBThaumonomicon {
             shards[10] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 4),
-                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5545),
+                "rawOreInfusedOrder",
                 new AspectList().add(Aspect.ENTROPY, 2)
                     .add(Aspect.MAGIC, 1)
                     .add(Aspect.ORDER, 3));
@@ -582,7 +581,7 @@ public class TBThaumonomicon {
             shards[11] = new CrucibleRecipe(
                 "TB.OreDestruction",
                 new ItemStack(ConfigItems.itemShard, TBConfig.shardsFromOre, 5),
-                new ItemStack(GameRegistry.findItem("gregtech", "gt.metaitem.03"), 1, 5544),
+                "rawOreInfusedEntropy",
                 new AspectList().add(Aspect.MAGIC, 1)
                     .add(Aspect.ENTROPY, 5));
         } else {
