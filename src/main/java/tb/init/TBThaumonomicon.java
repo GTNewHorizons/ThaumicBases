@@ -1261,7 +1261,9 @@ public class TBThaumonomicon {
         new ResearchItem(
             "TB.Tainted",
             catName,
-            new AspectList().add(Aspect.TAINT, 16),
+            new AspectList().add(Aspect.TAINT, 16)
+                .add(Aspect.MAGIC, 8)
+                .add(Aspect.WEAPON, 8),
             -3,
             9,
             1,
@@ -1394,6 +1396,7 @@ public class TBThaumonomicon {
                     new ResearchPage("tb.rec.overchanter.page.0"),
                     new ResearchPage("tb.rec.overchanter.page.1"),
                     new ResearchPage("tb.rec.overchanter.page.2"),
+                    new ResearchPage("tb.rec.overchanter.page.3"),
                     new ResearchPage(overchanterRec))
                 .registerResearchItem();
 

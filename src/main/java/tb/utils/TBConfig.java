@@ -40,6 +40,8 @@ public class TBConfig implements IDummyConfig {
     public static int speedMultiplierForFurnace;
     public static boolean makeRequireAlumentum;
 
+    public static boolean modernAnvilGui;
+
     @Override
     public void load(Configuration config) {
         cfg = config;
@@ -93,7 +95,7 @@ public class TBConfig implements IDummyConfig {
             "Allow the mod to register it's enchantments in the Thaumic Tinkerer's enchanter? Set to false if Thaumic Tinkerer is crashing you.");
 
         shardsFromOre = cfg
-            .getInt("shardsFromOre", "General", 8, 1, 64, "Amount of shards recieved from crucible ore processing");
+            .getInt("shardsFromOre", "General", 8, 1, 64, "Amount of shards received from crucible ore processing");
 
         brightFociRequiresPrimordialPearl = cfg.getBoolean(
             "brightFociRequiresPrimordialPearl",
@@ -142,5 +144,12 @@ public class TBConfig implements IDummyConfig {
             .getInt("minBlazePowderFromPyrofluid", "Pyrofluid", 5, 0, Integer.MAX_VALUE, "");
         maxBlazePowderFromPyrofluid = cfg
             .getInt("maxBlazePowderFromPyrofluid", "Pyrofluid", 5 + 32, 0, Integer.MAX_VALUE, "");
+
+        // client
+        modernAnvilGui = cfg.getBoolean(
+            "modernAnvilGui",
+            "Client",
+            false,
+            "If set to true the Void Anvil and Thaumic Anvil GUIs use the modern vanilla anvil style (Inventory label and a translucent box behind the repair cost)");
     }
 }

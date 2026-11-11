@@ -22,6 +22,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import tb.common.inventory.ContainerThaumicAnvil;
+import tb.utils.TBConfig;
 
 @SideOnly(Side.CLIENT)
 public class GuiThaumicAnvil extends GuiContainer implements ICrafting {
@@ -79,6 +80,10 @@ public class GuiThaumicAnvil extends GuiContainer implements ICrafting {
         GL11.glDisable(GL11.GL_BLEND);
         this.fontRendererObj.drawString(I18n.format("container.repair", new Object[0]), 60, 6, 4210752);
 
+        if (TBConfig.modernAnvilGui) {
+            this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 94, 0x404040);
+        }
+
         if (this.field_147092_v.maximumCost > 0) {
             int k = 8453920;
             boolean flag = true;
@@ -96,7 +101,11 @@ public class GuiThaumicAnvil extends GuiContainer implements ICrafting {
                         k = 16736352;
                     }
 
-            if (flag) {
+            if (flag && TBConfig.modernAnvilGui) {
+                int x = this.xSize - 10 - this.fontRendererObj.getStringWidth(s);
+                drawRect(x - 2, 67, this.xSize - 8, 79, 0x4F000000);
+                this.fontRendererObj.drawStringWithShadow(s, x, 69, k);
+            } else if (flag) {
                 int l = -16777216 | (k & 16579836) >> 2 | k & -16777216;
                 int i1 = this.xSize - 8 - this.fontRendererObj.getStringWidth(s);
                 byte b0 = 67;

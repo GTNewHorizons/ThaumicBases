@@ -18,7 +18,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import DummyCore.Utils.MathUtils;
-import DummyCore.Utils.MiscUtils;
 import tb.utils.TBUtils;
 import thaumcraft.api.damagesource.DamageSourceThaumcraft;
 import thaumcraft.api.entities.ITaintedMob;
@@ -32,6 +31,7 @@ import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.playerdata.PacketResearchComplete;
 import thaumcraft.common.lib.research.ResearchManager;
+import thaumcraft.common.lib.utils.Utils;
 import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
 
 public class ItemConcentratedTaint extends Item {
@@ -55,7 +55,7 @@ public class ItemConcentratedTaint extends Item {
             int dX = x + MathHelper.floor_double(MathUtils.randomDouble(w.rand) * 16);
             int dZ = z + MathHelper.floor_double(MathUtils.randomDouble(w.rand) * 16);
             int dY = y + w.rand.nextInt(2) - w.rand.nextInt(2);
-            MiscUtils.changeBiome(w, ThaumcraftWorldGenerator.biomeTaint, dX, dZ);
+            Utils.setBiomeAt(w, dX, dZ, ThaumcraftWorldGenerator.biomeTaint);
             if (w.isBlockNormalCubeDefault(dX, dY - 1, dZ, false) && w.getBlock(dX, dY, dZ)
                 .isReplaceable(w, dX, dY, dZ)) {
                 w.setBlock(dX, dY, dZ, ConfigBlocks.blockTaintFibres, 0, 3);
